@@ -31,15 +31,21 @@ This Hardening depends on a list :
   - iCloud
     - [3000] Disable the iCloud password for local accounts
     - [3001] Enable Find my mac
+  - Bluetooth
+    - [3100] Disable Bluetooth
 - Protections
   - Systeme intergrity protection
     - [4000] Enable Systeme intergrity protection
   - Gatekeeper
     - [4100] Enable Gatekeeper
 - Encryption
-  - [5000] Enable FileVault
-- Firewall
-  - [6000] Enable Firewall
+  - FileVault
+    - [5000] Enable FileVault
+- Network
+  - Firewall
+    - [6000] Enable Firewall
+  - Remote Management
+    - [6100] Disable remote management
 
 
 
@@ -163,17 +169,17 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
   - source : https://developer.apple.com/documentation/devicemanagement/userpreferences
 
 - Enable Find my mac
-  - ID : 3000
+  - ID : 3001
   - checking command : `defaults read com.apple.FindMyMac FMMEnabled`
   - setting command : `defaults write com.apple.FindMyMac FMMEnabled 1`
   - DefaultValue : 0
   - RecommendedValue : 1
   - source :
 
-## Bluetooth
+### Bluetooth
 
 - Disable Bluetooth
-  - ID : 4000
+  - ID : 3100
   - checking command : `defaults read /Library/Preferences/com.apple.Bluetooth ControllerPowerState`
   - setting command : `defaults write /Library/Preferences/com.apple.Bluetooth AutoUpdate true`
   - DefaultValue : false
@@ -205,6 +211,8 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
 
 ## Encryption
 
+### FileVault
+
 - Enable FileVault
   - ID : 6000
   - checking command : `fdesetup status`
@@ -226,8 +234,9 @@ source : https://developer.apple.com/documentation/devicemanagement/appstore
   - source :
 
 
+## Network
 
-## Firewall
+### Firewall
 
 - Enable Firewall
   - ID : 7000
@@ -237,7 +246,15 @@ source : https://developer.apple.com/documentation/devicemanagement/appstore
   - RecommendedValue : 1
   - source : https://raymii.org/s/snippets/OS_X_-_Turn_firewall_on_or_off_from_the_command_line.html
 
+### Remote Management
 
+- Disable Remote Management
+  - ID : 6100
+  - checking command :
+  - setting command : `/System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart -deactivate`
+  - DefaultValue : 0
+  - RecommendedValue : `-desactive`
+  - source : https://support.apple.com/fr-fr/guide/remote-desktop/apd8b1c65bd/mac
 
 
 ## Cache

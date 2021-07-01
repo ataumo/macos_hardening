@@ -1,5 +1,8 @@
 #!/bin/bash
 
+RED='\033[0;31m'
+NC='\033[0m' # No Color
+
 ####################### functions
 function Usage() {
   echo "Script usage :"
@@ -16,10 +19,10 @@ function PrintResult() {
   # If an error happens
   if [[ $ReturnedExit == 1 ]]; then
     #Error
-    echo '[-]' $ID ':' $Name '; Error to read this policy'
+    echo -e "${RED}[!] $ID : $Name ; Error to read this policy${NC}"
   else
     #No error
-    echo '[-]' $ID ':' $Name '; ActualValue =' $ReturnedValue
+    echo "[-] $ID : $Name ; ActualValue = $ReturnedValue"
   fi
 }
 
@@ -36,7 +39,6 @@ esac
 
 ### Global varibles
 PRECEDENT_CATEGORY=''
-
 
 ## Getting CSV File configuration ##
 INPUT=list.csv
@@ -67,8 +69,7 @@ do
       PRECEDENT_CATEGORY=$Category
     fi
 
-
-
+    ## Read Mode Command
     if [[ $PARAMETER == '-r' ]]; then
       ReturnedValue=$(defaults read $RegistryPath $RegistryItem)
     fi

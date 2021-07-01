@@ -1,4 +1,8 @@
-Apple documentation : https://developer.apple.com/documentation/devicemanagement/profile-specific_payload_keys
+# Welcome to the macOS Hardening project
+
+This project was inspired by [macOS_Hardening from beerisgood](https://github.com/beerisgood/macOS_Hardening) and [MacOS-Hardening-Script from ayethatsright](https://github.com/ayethatsright/MacOS-Hardening-Script) (Thanks for your good work !)
+
+Also, I use this Apple documentation : https://developer.apple.com/documentation/devicemanagement/profile-specific_payload_keys.
 
 
 Before, you have to login to your iCloud account

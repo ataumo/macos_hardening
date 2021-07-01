@@ -7,6 +7,42 @@ Also, I use this Apple documentation : https://developer.apple.com/documentation
 
 Before, you have to login to your iCloud account
 
+This Hardening depends on a list :
+
+- Updates
+  - Software Update
+    - [1000] Automatically check new software updates
+    - [1001] Automatically download new software updates
+    - [1002] Automatically install new critical updates
+    - [1003] Automatically install macOS updates
+    - [1004] Restrict SoftwareUpdate require Admin to install
+  - AppStore
+    - [1100] Automatically keep apps up to date from app store
+- Login
+  - Console
+    - [2000] Disable console logon from the logon screen
+  - Screen saver
+    - [2100] Enable prompt for a password on screen saver
+  - Policy Banner
+    - [2200] Enable Policy Banner
+  - Logout
+    - [2300] Set Logout delay
+- User Preferences
+  - iCloud
+    - [3000] Disable the iCloud password for local accounts
+    - [3001] Enable Find my mac
+- Protections
+  - Systeme intergrity protection
+    - [4000] Enable Systeme intergrity protection
+  - Gatekeeper
+    - [4100] Enable Gatekeeper
+- Encryption
+  - [5000] Enable FileVault
+- Firewall
+  - [6000] Enable Firewall
+
+
+
 ## Updates
 
 ### Software Update

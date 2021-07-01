@@ -1,0 +1,8 @@
+ID,Category,Name,Method,MethodArgument,RegistryPath,RegistryItem,ClassName,Namespace,Property,DefaultValue,RecommendedValue,Operator,Severity
+1000,Updates,Software Update : Automatically check new software updates,Registry,,/Library/Preferences/com.apple.SoftwareUpdate,AutomaticCheckEnabled,,,,,1,=,Medium
+1001,Updates,Software Update : Automatically download new software updates,Registry,,/Library/Preferences/com.apple.SoftwareUpdate,AutomaticDownload,,,,,1,=,Medium
+1002,Updates,Software Update : Automatically install new critical updates,Registry,,/Library/Preferences/com.apple.SoftwareUpdate,CriticalUpdateInstall,,,,,1,=,Medium
+1003,Updates,Software Update : Automatically install macOS updates,Registry,,/Library/Preferences/com.apple.SoftwareUpdate,AutomaticallyInstallMacOSUpdates,,,,,1,=,Medium
+1004,Updates,Software Update : Restrict SoftwareUpdate require Admin to install,Registry,,/Library/Preferences/com.apple.SoftwareUpdate,restrict-software-update-require-admin-to-install,,,,,1,=,Medium
+1100,Updates,AppStore : Automatically keep apps up to date from app store,Registry,,/Library/Preferences/com.apple.commerce,AutoUpdate,,,,,1,=,Medium
+2000,Login,Console : Diable console logon from the logon screen,Registry,,/Library/Preferences/com.apple.loginwindow,DisableConsoleAccess,,,,,1,=,Medium

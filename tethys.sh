@@ -30,6 +30,11 @@ function AlertMessage() {
   echo -e "${RED} $STRING ${NC}"
 }
 
+function SuccessMessage() {
+  STRING=$1
+  echo -e "${GREEN} $STRING ${NC}"
+}
+
 function FirstPrint() {
   echo "User name : $USER"
   echo "Mode to apply : $MODE"
@@ -95,7 +100,7 @@ function PrintReinforce() {
     else
       COLOR=$RED
     fi
-    echo -e "${COLOR}[-] $ID : $Name ; ActualValue = $ReturnedValue ; RecommendedValue = $RecommendedValue${NC}"
+    SuccessMessage "[-] $ID : $Name ; Successfully modified"
       ;;
     1 )#Error Exec
     AlertMessage "[x] $ID, $Name, Error : The execution caused an error."

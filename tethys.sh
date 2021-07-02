@@ -20,6 +20,16 @@ function Usage() {
   echo "  -h : help method"
 }
 
+function WarningMessage() {
+  STRING=$1
+  echo -e "${YELLOW} $STRING ${NC}"
+}
+
+function AlertMessage() {
+  STRING=$1
+  echo -e "${RED} $STRING ${NC}"
+}
+
 function FirstPrint() {
   echo "User name : $USER"
   echo "Mode to apply : $MODE"
@@ -69,6 +79,29 @@ function PrintAudit() {
     26 )#Error exist policy
     echo -e "${LIGHTGRAY}[!] $ID, $Name${NC}"
     echo -e "${YELLOW}-> Warning : $ID policy does not exist yet${NC}"
+      ;;
+  esac
+}
+
+function PrintReinforce() {
+  ID=$1
+  Name=$2
+  ReturnedExit=$3
+
+  case $ReturnedExit in
+    0 )#No Error
+    if [[ "$RecommendedValue" == "$ReturnedValue" ]]; then
+      COLOR=$GREEN
+    else
+      COLOR=$RED
+    fi
+    echo -e "${COLOR}[-] $ID : $Name ; ActualValue = $ReturnedValue ; RecommendedValue = $RecommendedValue${NC}"
+      ;;
+    1 )#Error Exec
+    AlertMessage "[x] $ID, $Name, Error : The execution caused an error."
+      ;;
+    13 )#Error Gatekeeper needs Recovery OS
+    WarningMessage "[!] $ID, $Name, This tool needs to be executed from Recovery OS."
       ;;
   esac
 }
@@ -159,20 +192,22 @@ do
 
     PARAMETER=$1
 
-    ## Print category
-    if [[ $PRECEDENT_CATEGORY != $Category ]]; then
-      echo #new line
-      DateValue=$(date +"%D %X")
-      echo "[*] $DateValue Starting Category $Category"
-      PRECEDENT_CATEGORY=$Category
-    fi
-
     #
     #
-    # STATUS MODE
+    # STATUS AND AUDIT MODE
     #
     #
     if [[ $MODE == "STATUS" || $MODE == "AUDIT" ]]; then
+      #
+      # Print category
+      #
+      if [[ $PRECEDENT_CATEGORY != $Category ]]; then
+        echo #new line
+        DateValue=$(date +"%D %X")
+        echo "[*] $DateValue Starting Category $Category"
+        PRECEDENT_CATEGORY=$Category
+      fi
+
       #
       # Registry
       #
@@ -197,7 +232,7 @@ do
           fi
         fi
       #
-      # csrutil
+      # csrutil (Intergrity Protection)
       #
       elif [[ $Method == "csrutil" ]]; then
         ReturnedValue=$(csrutil status 2>/dev/null)
@@ -207,7 +242,7 @@ do
           ReturnedValue="disable"
         fi
       #
-      # spctl
+      # spctl (Gatekeeper)
       #
       elif [[ $Method == "spctl" ]]; then
         ReturnedValue=$(spctl --status 2>/dev/null)
@@ -217,7 +252,7 @@ do
           ReturnedValue="disable"
         fi
       #
-      # spctl
+      # fdesetup (FileVault)
       #
       elif [[ $Method == "fdesetup" ]]; then
         ReturnedValue=$(fdesetup status 2>/dev/null)
@@ -227,7 +262,74 @@ do
           ReturnedValue="enable"
         fi
       fi
+    fi
 
+    #
+    #
+    # REINFORCE MODE
+    #
+    #
+    if [[ $MODE == "REINFORCE" ]]; then
+      #
+      # Sudo checking
+      #
+      if [[ $UID -ne 0 ]]; then
+      	echo "You have to run this script as root (with sudo)"
+      	exit 1
+      fi
+
+      #
+      # Print category
+      #
+      if [[ $PRECEDENT_CATEGORY != $Category ]]; then
+        echo #new line
+        DateValue=$(date +"%D %X")
+        echo "[*] $DateValue Starting Category $Category"
+        PRECEDENT_CATEGORY=$Category
+      fi
+
+      #
+      # Registry
+      #
+      if [[ $Method == "Registry" ]]; then
+        ## Test if file exist
+        if [[ ! -f "$RegistryPath.plist" ]]; then
+          ReturnedExit=26
+        else
+          # throw away stderr
+          ReturnedValue=$(defaults write $RegistryPath $RegistryItem 2>/dev/null)
+          ReturnedExit=$?
+          # if an error occurs, it's caused by non-existance of the couple (file,item)
+          # we will not consider this as an error, but as an warning
+          if [[ $ReturnedExit == 1 ]]; then
+            ReturnedExit=26
+          fi
+          if [[ $ReturnedValue == "true" ]]; then
+            ReturnedValue=1
+          fi
+          if [[ $ReturnedValue == "false" ]]; then
+            ReturnedValue=0
+          fi
+        fi
+      #
+      # csrutil (Integrity Protection)
+      #
+      elif [[ $Method == "csrutil" ]]; then
+        # "This tool needs to be executed from Recovery OS."
+        ReturnedExit=13
+      #
+      # spctl (Gatekeeper)
+      #
+      elif [[ $Method == "spctl" ]]; then
+        ReturnedValue=$(spctl --$RecommendedValue 2>/dev/null)
+        ReturnedExit=$?
+      #
+      # fdesetup (FileVault)
+      #
+      elif [[ $Method == "fdesetup" ]]; then
+        ReturnedValue=$(fdesetup $RecommendedValue 2>/dev/null)
+        ReturnedExit=$?
+      fi
     fi
 
     ## Result printing

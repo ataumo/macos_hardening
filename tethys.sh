@@ -95,11 +95,6 @@ function PrintReinforce() {
 
   case $ReturnedExit in
     0 )#No Error
-    if [[ "$RecommendedValue" == "$ReturnedValue" ]]; then
-      COLOR=$GREEN
-    else
-      COLOR=$RED
-    fi
     SuccessMessage "[-] $ID : $Name ; Successfully modified"
       ;;
     1 )#Error Exec

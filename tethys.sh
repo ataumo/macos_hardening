@@ -293,8 +293,7 @@ do
       # Registry
       #
       if [[ $Method == "Registry" ]]; then
-        ## Test if file exist
-        ReturnedValue=$(defaults write $RegistryPath $RegistryItem 2>/dev/null)
+        ReturnedValue=$(defaults write $RegistryPath $RegistryItem $RecommendedValue 2>/dev/null)
         ReturnedExit=$?
       #
       # csrutil (Integrity Protection)

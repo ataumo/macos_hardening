@@ -293,24 +293,8 @@ do
       #
       if [[ $Method == "Registry" ]]; then
         ## Test if file exist
-        if [[ ! -f "$RegistryPath.plist" ]]; then
-          ReturnedExit=26
-        else
-          # throw away stderr
-          ReturnedValue=$(defaults write $RegistryPath $RegistryItem 2>/dev/null)
-          ReturnedExit=$?
-          # if an error occurs, it's caused by non-existance of the couple (file,item)
-          # we will not consider this as an error, but as an warning
-          if [[ $ReturnedExit == 1 ]]; then
-            ReturnedExit=26
-          fi
-          if [[ $ReturnedValue == "true" ]]; then
-            ReturnedValue=1
-          fi
-          if [[ $ReturnedValue == "false" ]]; then
-            ReturnedValue=0
-          fi
-        fi
+        ReturnedValue=$(defaults write $RegistryPath $RegistryItem 2>/dev/null)
+        ReturnedExit=$?
       #
       # csrutil (Integrity Protection)
       #

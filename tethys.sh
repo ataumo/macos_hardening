@@ -337,7 +337,8 @@ do
       PrintResult "$ID" "$Name" "$ReturnedExit" "$ReturnedValue"
     elif [[ $MODE == "AUDIT" ]]; then
       PrintAudit "$ID" "$Name" "$ReturnedExit" "$ReturnedValue" "$RecommendedValue"
-    fi
+    elif [[ $MODE == "REINFORCE" ]]; then
+      PrintReinforce "$ID" "$Name" "$ReturnedExit"
 
 
   fi

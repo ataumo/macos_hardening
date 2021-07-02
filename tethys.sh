@@ -40,7 +40,7 @@ function PrintResult() {
       ;;
     26 )#Error exist policy
     echo -e "${LIGHTGRAY}[!] $ID, $Name${NC}"
-    echo -e "${YELLOW}Warning : This policy does not exist yet${NC}"
+    echo -e "${YELLOW}-> Warning : $ID policy does not exist yet${NC}"
       ;;
   esac
 }
@@ -134,7 +134,6 @@ do
     ## Print category
     if [[ $PRECEDENT_CATEGORY != $Category ]]; then
       echo #new line
-      echo "-----------------------------"
       DateValue=$(date +"%D %X")
       echo "[*] $DateValue Starting Category $Category"
       PRECEDENT_CATEGORY=$Category
@@ -146,17 +145,52 @@ do
     #
     #
     if [[ $MODE == "STATUS" ]]; then
-      ## Test if file exist
-      if [[ ! -f "$RegistryPath.plist" ]]; then
-        ReturnedExit=26
-      else
-        # throw away stderr
-        ReturnedValue=$(defaults read $RegistryPath $RegistryItem 2>/dev/null)
-        ReturnedExit=$?
-        # if an error occurs, it's caused by non-existance of the couple (file,item)
-        # we will not consider this as an error, but as an warning
-        if [[ $ReturnedExit == 1 ]]; then
+      #
+      # Registry
+      #
+      if [[ $Method == "Registry" ]]; then
+        ## Test if file exist
+        if [[ ! -f "$RegistryPath.plist" ]]; then
           ReturnedExit=26
+        else
+          # throw away stderr
+          ReturnedValue=$(defaults read $RegistryPath $RegistryItem 2>/dev/null)
+          ReturnedExit=$?
+          # if an error occurs, it's caused by non-existance of the couple (file,item)
+          # we will not consider this as an error, but as an warning
+          if [[ $ReturnedExit == 1 ]]; then
+            ReturnedExit=26
+          fi
+        fi
+      #
+      # csrutil
+      #
+      elif [[ $Method == "csrutil" ]]; then
+        ReturnedValue=$(csrutil status 2>/dev/null)
+        if [[ $ReturnedValue == "System Integrity Protection status: enabled." ]]; then
+          ReturnedValue="enable"
+        else
+          ReturnedValue="disable"
+        fi
+      #
+      # spctl
+      #
+      elif [[ $Method == "spctl" ]]; then
+        ReturnedValue=$(spctl --status 2>/dev/null)
+        if [[ $ReturnedValue == "assessments enabled" ]]; then
+          ReturnedValue="enable"
+        else
+          ReturnedValue="disable"
+        fi
+      #
+      # spctl
+      #
+      elif [[ $Method == "fdesetup" ]]; then
+        ReturnedValue=$(fdesetup status 2>/dev/null)
+        if [[ $ReturnedValue == "FileVault is Off." ]]; then
+          ReturnedValue="disable"
+        else
+          ReturnedValue="enable"
         fi
       fi
 

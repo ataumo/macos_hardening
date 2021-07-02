@@ -36,7 +36,7 @@ function PrintResult() {
     echo "[-] $ID : $Name ; ActualValue = $ReturnedValue"
       ;;
     1 )#Error Exec
-    echo -e "${YELLOW}[x] $ID : $Name ; Error : The execution caused an error${NC}"
+    echo -e "${RED}[x] $ID : $Name ; Error : The execution caused an error${NC}"
       ;;
     26 )#Error exist policy
     echo -e "${LIGHTGRAY}[!] $ID, $Name${NC}"

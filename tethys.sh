@@ -2,6 +2,7 @@
 
 RED='\033[0;31m'
 YELLOW='\033[0;33m'
+GREEN='\033[0;32m'
 LIGHTGRAY='\033[0;37m'
 NC='\033[0m' # No Color
 
@@ -34,6 +35,33 @@ function PrintResult() {
   case $ReturnedExit in
     0 )#No Error
     echo "[-] $ID : $Name ; ActualValue = $ReturnedValue"
+      ;;
+    1 )#Error Exec
+    echo -e "${RED}[x] $ID : $Name ; Error : The execution caused an error${NC}"
+      ;;
+    26 )#Error exist policy
+    echo -e "${LIGHTGRAY}[!] $ID, $Name${NC}"
+    echo -e "${YELLOW}-> Warning : $ID policy does not exist yet${NC}"
+      ;;
+  esac
+}
+
+function PrintAudit() {
+  ID=$1
+  Name=$2
+  ReturnedExit=$3
+  ReturnedValue=$4
+  RecommendedValue=$5
+
+  case $ReturnedExit in
+    0 )#No Error
+    if [[ "$RecommendedValue" == "$ReturnedValue" ]]; then
+      COLOR=$GREEN
+    else
+      COLOR=$RED
+    fi
+    echo -e "${COLOR}[-] $ID : $Name ; ActualValue = $ReturnedValue ; RecommendedValue = $RecommendedValue${NC}"
+
       ;;
     1 )#Error Exec
     echo -e "${RED}[x] $ID : $Name ; Error : The execution caused an error${NC}"
@@ -144,7 +172,7 @@ do
     # STATUS MODE
     #
     #
-    if [[ $MODE == "STATUS" ]]; then
+    if [[ $MODE == "STATUS" || $MODE == "AUDIT" ]]; then
       #
       # Registry
       #
@@ -197,7 +225,12 @@ do
     fi
 
     ## Result printing
-    PrintResult "$ID" "$Name" "$ReturnedExit" "$ReturnedValue"
+    if [[ $MODE == "STATUS" ]]; then
+      PrintResult "$ID" "$Name" "$ReturnedExit" "$ReturnedValue"
+    elif [[ $MODE == "AUDIT" ]]; then
+      PrintAudit "$ID" "$Name" "$ReturnedExit" "$ReturnedValue" "$RecommendedValue"
+    fi
+
 
   fi
 done < $INPUT

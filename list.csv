@@ -15,4 +15,4 @@ ID,Category,Name,Method,MethodArgument,RegistryPath,RegistryItem,ClassName,Names
 4000,Protections,Systeme intergrity protection : Enable Systeme intergrity protection,csrutil,,,,,,,enable,enable,=,Hight
 4100,Protections,Gatekeeper : Enable Gatekeeper,spctl,,,,,,,enable,enable ,=,Hight
 5000,Encryption,FileVault : Enable FileVault,fdesetup,,,,,,,disable,enable,=,Medium
-6000,Network,Firewall : Enable Firewall,Registry,,/Library/Preferences/com.apple.alf.plist,globalstate,,,,0,1,>=,Hight
+6000,Network,Firewall : Enable Firewall,Registry,,/Library/Preferences/com.apple.alf,globalstate,,,,0,1,>=,Hight

@@ -95,6 +95,7 @@ function PrintReinforce() {
 
   case $ReturnedExit in
     0 )#No Error
+    echo "----->OK"
     SuccessMessage "[-] $ID : $Name ; Successfully modified"
       ;;
     1 )#Error Exec

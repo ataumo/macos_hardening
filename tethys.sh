@@ -274,7 +274,7 @@ do
       # Sudo checking
       #
       if [[ $UID -ne 0 ]]; then
-      	echo "You have to run this script as root (with sudo)"
+      	AlertMessage "You have to run this script as root (with sudo)"
       	exit 1
       fi
 

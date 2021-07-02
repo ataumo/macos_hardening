@@ -129,14 +129,6 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
   - RecommendedValue : true
   - source : https://developer.apple.com/documentation/devicemanagement/screensaver
 
-- Enable prompt for a password on screen saver
-  - ID : 2101
-  - checking command : `defaults read com.apple.screensaver askForPassword`
-  - setting command : `defaults write com.apple.screensaver askForPassword 1`
-  - DefaultValue : false
-  - RecommendedValue : true
-  - source : https://developer.apple.com/documentation/devicemanagement/screensaver
-
 ### Policy banner
 
 - Enable Policy Banner
@@ -192,7 +184,7 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
 ### Systeme intergrity protection
 
 - Enable Systeme intergrity protection
-  - ID : 5000
+  - ID : 4000
   - checking command : `csrutil status`
   - setting command : `csrutil enable`
   - DefaultValue : enable
@@ -202,7 +194,7 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
 ### Gatekeeper
 
 - Enable Gatekeeper
-  - ID : 5100
+  - ID : 4100
   - checking command : `spctl --status`
   - setting command : `sudo spctl --master-enable`
   - DefaultValue : --master-enable
@@ -214,32 +206,19 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
 ### FileVault
 
 - Enable FileVault
-  - ID : 6000
+  - ID : 5000
   - checking command : `fdesetup status`
   - setting command : `sudo fdesetup enable`
   - DefaultValue : disable
   - RecommendedValue : enable
   - source :
 
-## AppStore
-
-source : https://developer.apple.com/documentation/devicemanagement/appstore
-
-- Enable FileVault
-  - ID : 6000
-  - checking command : `fdesetup status`
-  - setting command : sudo fdesetup enable
-  - DefaultValue : disable
-  - RecommendedValue : enable
-  - source :
-
-
 ## Network
 
 ### Firewall
 
 - Enable Firewall
-  - ID : 7000
+  - ID : 6000
   - checking command : `defaults read /Library/Preferences/com.apple.alf.plist globalstate`
   - setting command : `defaults write /Library/Preferences/com.apple.alf.plist globalstate -int 1`
   - DefaultValue : 0

@@ -58,11 +58,7 @@ function PrintAudit() {
     if [[ "$RecommendedValue" == "$ReturnedValue" ]]; then
       COLOR=$GREEN
     else
-      if [[ ("$ReturnedValue"=="1" && "$RecommendedValue"=="true") || ("$ReturnedValue"=="0" && "$RecommendedValue"=="false") ]]; then
-        COLOR=$GREEN
-      else
-        COLOR=$RED
-      fi
+      COLOR=$RED
     fi
     echo -e "${COLOR}[-] $ID : $Name ; ActualValue = $ReturnedValue ; RecommendedValue = $RecommendedValue${NC}"
 
@@ -192,6 +188,12 @@ do
           # we will not consider this as an error, but as an warning
           if [[ $ReturnedExit == 1 ]]; then
             ReturnedExit=26
+          fi
+          if [[ $ReturnedValue == "true" ]]; then
+            ReturnedValue=1
+          fi
+          if [[ $ReturnedValue == "false" ]]; then
+            ReturnedValue=0
           fi
         fi
       #

@@ -339,6 +339,7 @@ do
       PrintAudit "$ID" "$Name" "$ReturnedExit" "$ReturnedValue" "$RecommendedValue"
     elif [[ $MODE == "REINFORCE" ]]; then
       PrintReinforce "$ID" "$Name" "$ReturnedExit"
+    fi
 
 
   fi

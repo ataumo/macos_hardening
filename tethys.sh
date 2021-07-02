@@ -58,8 +58,8 @@ function PrintAudit() {
     if [[ "$RecommendedValue" == "$ReturnedValue" ]]; then
       COLOR=$GREEN
     else
-      if [[ "$ReturnedValue"=="1" && "$RecommendedValue"=="true" ] || [ "$ReturnedValue"=="0" && "$RecommendedValue"=="false" ]]; then
-        #statements
+      if [[ ("$ReturnedValue"=="1" && "$RecommendedValue"=="true") || ("$ReturnedValue"=="0" && "$RecommendedValue"=="false") ]]; then
+        COLOR=$GREEN
       else
         COLOR=$RED
       fi

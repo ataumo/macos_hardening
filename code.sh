@@ -2,14 +2,27 @@
 
 RED='\033[0;31m'
 YELLOW='\033[0;33m'
+LIGHTGRAY='\033[0;37m'
 NC='\033[0m' # No Color
 
-####################### functions
+################################################################################
+#                                                                              #
+#                                 FUNCTIONS                                    #
+#                                                                              #
+################################################################################
+
 function Usage() {
   echo "Script usage :"
-  echo "  -r : read method to read configuration"
-  echo "  -a : audit method to audit configuration"
+  echo "  -s (--status)   : read method to read configuration"
+  echo "  -a (-audit)     : audit method to audit configuration"
+  echo "  -r (-reinforce) : apply a configuration)"
   echo "  -h : help method"
+}
+
+function FirstPrint() {
+  echo "User name : $USER"
+  echo "Mode to apply : $MODE"
+  echo "CSV File configuration : $INPUT"
 }
 
 function PrintResult() {
@@ -26,27 +39,80 @@ function PrintResult() {
     echo -e "${YELLOW}[x] $ID : $Name ; Error : The execution caused an error${NC}"
       ;;
     26 )#Error exist policy
-    echo -e "${YELLOW}[!] $ID : $Name ; Warning : This policy does not exist yet${NC}"
+    echo -e "${LIGHTGRAY}[!] $ID, $Name${NC}"
+    echo -e "${YELLOW}Warning : This policy does not exist yet${NC}"
       ;;
   esac
 }
 
-#####################
+################################################################################
+#                                                                              #
+#                                  OPTIONS                                     #
+#                                                                              #
+################################################################################
 
-## Getting option ##
-case $1 in
-  '-h' )
-  Usage
-  exit 1
-    ;;
-esac
+POSITIONAL=()
+while [[ $# -gt 0 ]]; do
+  key="$1"
 
+  case $key in
+    -h|--help)
+      Usage
+      exit 1
+      ;;
+    -a|--audit)
+      INPUT="$2"
+      MODE="AUDIT"
+      shift # past argument
+      shift # past value
+      ;;
+    -s|--status)
+      INPUT="$2"
+      MODE="STATUS"
+      shift # past argument
+      shift # past value
+      ;;
+    -r|--reinforce)
+      INPUT="$2"
+      MODE="REINFORCE"
+      shift # past argument
+      shift # past value
+      ;;
+    -b|--backup)
+      INPUT="$2"
+      MODE="BACKUP"
+      shift # past argument
+      shift # past value
+      ;;
+    --default)
+      DEFAULT=YES
+      shift # past argument
+      ;;
+    *)    # unknown option
+      POSITIONAL+=("$1") # save it in an array for later
+      shift # past argument
+      ;;
+  esac
+done
+
+
+## Define default CSV File configuration ##
+if [[ -z $INPUT ]]; then #if INPUT is empty
+  INPUT='list.csv'
+fi
+
+set -- "${POSITIONAL[@]}" # restore positional parameters
+
+################################################################################
+#                                                                              #
+#                                 MAIN CODE                                    #
+#                                                                              #
+################################################################################
+
+FirstPrint
 
 ### Global varibles
 PRECEDENT_CATEGORY=''
-
-## Getting CSV File configuration ##
-INPUT=list.csv
 
 ## Save old separator
 OLDIFS=$IFS
@@ -70,12 +136,16 @@ do
       echo #new line
       echo "-----------------------------"
       DateValue=$(date +"%D %X")
-      echo "[*] $DateValue Strating Category $Category"
+      echo "[*] $DateValue Starting Category $Category"
       PRECEDENT_CATEGORY=$Category
     fi
 
-    ## Read Mode Command
-    if [[ $PARAMETER == '-r' ]]; then
+    #
+    #
+    # STATUS MODE
+    #
+    #
+    if [[ $MODE == "STATUS" ]]; then
       ## Test if file exist
       if [[ ! -f "$RegistryPath.plist" ]]; then
         ReturnedExit=26

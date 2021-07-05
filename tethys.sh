@@ -185,7 +185,7 @@ if [ ! -f $INPUT ]; then
   echo "$INPUT file not found";
   exit 99;
 fi
-while read ID Category Name Method MethodArgument RegistryPath RegistryItem ClassName Namespace Property DefaultValue RecommendedValue Operator Severity
+while read ID Category Name Method MethodArgument RegistryPath RegistryItem ClassName Namespace Property DefaultValue RecommendedValue TypeValue Operator Severity
 do
   ## We will not take the first row
   if [[ $ID != "ID" ]]; then

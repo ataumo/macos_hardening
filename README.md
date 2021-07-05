@@ -1,6 +1,11 @@
 # Welcome to the macOS Hardening project
 
-This project was inspired by [macOS_Hardening from beerisgood](https://github.com/beerisgood/macOS_Hardening) and [MacOS-Hardening-Script from ayethatsright](https://github.com/ayethatsright/MacOS-Hardening-Script) (Thanks for your good work !)
+This project was inspired by
+- [macOS_Hardening from beerisgood](https://github.com/beerisgood/macOS_Hardening)
+- [MacOS-Hardening-Script from ayethatsright](https://github.com/ayethatsright/MacOS-Hardening-Script)
+- [awesome-macos-command-line](https://github.com/herrbischoff/awesome-macos-command-line)
+
+(Thanks for your good work !)
 
 Also, I use this Apple documentation : https://developer.apple.com/documentation/devicemanagement/profile-specific_payload_keys.
 
@@ -28,6 +33,8 @@ This Hardening depends on a list :
     - [2200] Enable Policy Banner
   - Logout
     - [2300] Set Logout delay
+  - Windows text
+    - [2400] Set Login Window Text
 - User Preferences
   - iCloud
     - [3000] Disable the iCloud password for local accounts
@@ -128,16 +135,16 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
 
 - Enable prompt for a password on screen saver
   - ID : 2100
-  - checking command : `defaults read com.apple.screensaver askForPassword`
-  - setting command : `defaults write com.apple.screensaver askForPassword 1`
+  - checking command : `defaults read /Library/Preferences/com.apple.screensaver askForPassword`
+  - setting command : `defaults write /Library/Preferences/com.apple.screensaver askForPassword 1`
   - DefaultValue : false
   - RecommendedValue : true
   - source : https://developer.apple.com/documentation/devicemanagement/screensaver
 
 - Enable prompt for a password on screen saver
   - ID : 2101
-  - checking command : `defaults read com.apple.screensaver askForPasswordDelay`
-  - setting command : `defaults write com.apple.screensaver askForPasswordDelay -int 0`
+  - checking command : `defaults read /Library/Preferences/com.apple.screensaver askForPasswordDelay`
+  - setting command : `defaults write /Library/Preferences/com.apple.screensaver askForPasswordDelay -int 0`
   - type : int
   - DefaultValue :
   - RecommendedValue : 0
@@ -162,6 +169,17 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
   - DefaultValue :
   - RecommendedValue : 3600
   - source : https://developer.apple.com/documentation/devicemanagement/globalpreferences
+
+## Windows text
+
+- Set Login Window Text
+  - ID : 2400
+  - checking command : `defaults read /Library/Preferences/com.apple.loginwindow LoginwindowText`
+  - setting command : `defaults write /Library/Preferences/com.apple.loginwindow LoginwindowText "Your text"`
+  - DefaultValue :
+  - RecommendedValue : 3600
+  - source : https://developer.apple.com/documentation/devicemanagement/globalpreferences
+
 
 ## User Preferences
 
@@ -204,7 +222,7 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
 
 - Display all files extentions
   - ID : 3201
-  - checking command : `defaults read /Library/Preferences/com.apple.finder AppleShowAllFiles`
+  - checking command : `defaults read "Apple Global Domain" AppleShowAllFilesExtentions`
   - setting command : `defaults write /Library/Preferences/com.apple.finder AppleShowAllFiles 1`
   - DefaultValue : 0
   - RecommendedValue : 1

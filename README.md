@@ -299,8 +299,26 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
   - RecommendedValue : `true`
   - source :
 
-- Disable captive portal
+- Disable automatic software whitelisting
   - ID : 6003
+  - checking command : `defaults read /Library/Preferences/com.apple.alf allowsignedenabled`
+  - setting command : `defaults write /Library/Preferences/com.apple.alf allowsignedenabled -bool false`
+  - type = `bool`
+  - DefaultValue : `true`
+  - RecommendedValue : `false`
+  - source :
+
+- Disable automatic software whitelisting
+  - ID : 6004
+  - checking command : `defaults read /Library/Preferences/com.apple.alf allowdownloadsignedenabled`
+  - setting command : `defaults write /Library/Preferences/com.apple.alf allowdownloadsignedenabled -bool false`
+  - type = `bool`
+  - DefaultValue : `true`
+  - RecommendedValue : `false`
+  - source :
+
+- Disable captive portal
+  - ID : 6005
   - checking command : `defaults read /Library/Preferences/SystemConfiguration/com.apple.captive.control Active`
   - setting command : `defaults write /Library/Preferences/SystemConfiguration/com.apple.captive.control Active -bool false`
   - type = `bool`

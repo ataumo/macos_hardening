@@ -275,10 +275,11 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
 - Enable Firewall
   - ID : 6000
   - checking command : `defaults read /Library/Preferences/com.apple.alf globalstate`
-  - setting command : `defaults write /Library/Preferences/com.apple.alf globalstate -bool true`
-  - type = `bool`
-  - DefaultValue : `false`
-  - RecommendedValue : `true`
+  - setting command : `defaults write /Library/Preferences/com.apple.alf globalstate -int 1`
+  - type = `int`
+  - DefaultValue : `0`
+  - RecommendedValue : `1`
+  - PossibleValues : `0,1,2`
   - source : https://raymii.org/s/snippets/OS_X_-_Turn_firewall_on_or_off_from_the_command_line.html
 
 - Enable logging
@@ -308,7 +309,7 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
   - RecommendedValue : `false`
   - source :
 
-- Disable automatic software whitelisting
+- Disable automatic signed software whitelisting
   - ID : 6004
   - checking command : `defaults read /Library/Preferences/com.apple.alf allowdownloadsignedenabled`
   - setting command : `defaults write /Library/Preferences/com.apple.alf allowdownloadsignedenabled -bool false`

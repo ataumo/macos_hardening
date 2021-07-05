@@ -106,6 +106,17 @@ function PrintReinforce() {
   esac
 }
 
+function GoodType() {
+  TYPE=$1
+  if [[ "$TYPE" =~ ^(string|data|int|float|bool|date|array|array-add|dict|dict-add)$ ]]; then
+    # Good type
+    return 1
+  else
+    # Type is not correct
+    return 0
+  fi
+}
+
 ################################################################################
 #                                                                              #
 #                                  OPTIONS                                     #
@@ -164,6 +175,7 @@ fi
 
 set -- "${POSITIONAL[@]}" # restore positional parameters
 
+
 ################################################################################
 #                                                                              #
 #                                 MAIN CODE                                    #
@@ -191,6 +203,17 @@ do
   if [[ $ID != "ID" ]]; then
 
     PARAMETER=$1
+
+    #
+    #
+    # RECOMMENDEDVALUE FILTER
+    #
+    #
+    if [[ $RecommendedValue == "true" ]]; then
+      RecommendedValue=1
+    elif [[ $RecommendedValue == "false" ]]; then
+      RecommendedValue=0
+    fi
 
     #
     #
@@ -266,6 +289,7 @@ do
     #
     #
     if [[ $MODE == "REINFORCE" ]]; then
+
       #
       # Sudo checking
       #
@@ -288,7 +312,14 @@ do
       # Registry
       #
       if [[ $Method == "Registry" ]]; then
-        ReturnedValue=$(defaults write $RegistryPath $RegistryItem $RecommendedValue 2>/dev/null)
+        
+        # Type filter
+        if GoodType $TypeValue; then
+          AlertMessage "this type is not correct"
+        fi
+
+        # main code
+        ReturnedValue=$(defaults write $RegistryPath $RegistryItem -$TypeValue $RecommendedValue 2>/dev/null)
         ReturnedExit=$?
       #
       # csrutil (Integrity Protection)

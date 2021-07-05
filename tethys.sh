@@ -106,12 +106,6 @@ function PrintReinforce() {
   esac
 }
 
-function Contains() {
-  List = $1
-  Item = $2
-  [[ $List =~ (^|[[:space:]])$Item($|[[:space:]]) ]] && exit(0) || exit(1)
-}
-
 ################################################################################
 #                                                                              #
 #                                  OPTIONS                                     #

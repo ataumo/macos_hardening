@@ -23,6 +23,7 @@ This Hardening depends on a list :
     - [2000] Disable console logon from the logon screen
   - Screen saver
     - [2100] Enable prompt for a password on screen saver
+    - [2101] Set password delay
   - Policy Banner
     - [2200] Enable Policy Banner
   - Logout
@@ -31,8 +32,12 @@ This Hardening depends on a list :
   - iCloud
     - [3000] Disable the iCloud password for local accounts
     - [3001] Enable Find my mac
+    - Dia
   - Bluetooth
     - [3100] Disable Bluetooth
+  - Finder
+    - [3200] Show hidden files in Finder
+    - [3201] Display all file extensions
 - Protections
   - Systeme intergrity protection
     - [4000] Enable Systeme intergrity protection
@@ -129,6 +134,15 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
   - RecommendedValue : true
   - source : https://developer.apple.com/documentation/devicemanagement/screensaver
 
+- Enable prompt for a password on screen saver
+  - ID : 2101
+  - checking command : `defaults read com.apple.screensaver askForPasswordDelay`
+  - setting command : `defaults write com.apple.screensaver askForPasswordDelay -int 0`
+  - type : int
+  - DefaultValue :
+  - RecommendedValue : 0
+  - source : https://developer.apple.com/documentation/devicemanagement/screensaver
+
 ### Policy banner
 
 - Enable Policy Banner
@@ -178,6 +192,23 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
   - RecommendedValue : true
   - source :
 
+### Finder
+
+- Show hidden files in Finder
+  - ID : 3200
+  - checking command : `defaults read /Library/Preferences/com.apple.finder AppleShowAllFiles`
+  - setting command : `defaults write /Library/Preferences/com.apple.finder AppleShowAllFiles -bool 1`
+  - DefaultValue : 0
+  - RecommendedValue : 1
+  - source :
+
+- Display all files extentions
+  - ID : 3201
+  - checking command : `defaults read /Library/Preferences/com.apple.finder AppleShowAllFiles`
+  - setting command : `defaults write /Library/Preferences/com.apple.finder AppleShowAllFiles 1`
+  - DefaultValue : 0
+  - RecommendedValue : 1
+  - source :
 
 ## Protections
 

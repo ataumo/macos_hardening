@@ -210,6 +210,16 @@ do
     #
     #
     if [[ $MODE == "STATUS" || $MODE == "AUDIT" ]]; then
+
+      #
+      # RecommendedValue filter
+      #
+      if [[ $RecommendedValue == "true" ]]; then
+        RecommendedValue=1
+      elif [[ $RecommendedValue == "false" ]]; then
+        RecommendedValue=0
+      fi
+
       #
       # Print category
       #
@@ -274,7 +284,7 @@ do
 
     #
     ############################################################################
-    #                               REINFORCE MODE                             #
+    #                             REINFORCE METHOD                             #
     ############################################################################
     #
     if [[ $MODE == "REINFORCE" ]]; then
@@ -314,8 +324,10 @@ do
         fi
 
         # command
+        echo "defaults write $RegistryPath $RegistryItem -$TypeValue $RecommendedValue"
         ReturnedValue=$(defaults write $RegistryPath $RegistryItem -$TypeValue $RecommendedValue 2>/dev/null)
         ReturnedExit=$?
+        echo "---> $ReturnedExit"
 
       #
       # csrutil (Integrity Protection)

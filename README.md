@@ -176,13 +176,14 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
   - RecommendedValue : 3600
   - source : https://developer.apple.com/documentation/devicemanagement/globalpreferences
 
-## Windows text
+### Windows text
 
 - Set Login Window Text
   - ID : 2400
   - checking command : `defaults read /Library/Preferences/com.apple.loginwindow LoginwindowText`
   - setting command : `defaults write /Library/Preferences/com.apple.loginwindow LoginwindowText "Your text"`
   - DefaultValue :
+  - TypeValue : string
   - RecommendedValue : 3600
   - source : https://developer.apple.com/documentation/devicemanagement/globalpreferences
 

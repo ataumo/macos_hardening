@@ -4,6 +4,8 @@ This project was inspired by
 - [macOS_Hardening from beerisgood](https://github.com/beerisgood/macOS_Hardening)
 - [MacOS-Hardening-Script from ayethatsright](https://github.com/ayethatsright/MacOS-Hardening-Script)
 - [awesome-macos-command-line](https://github.com/herrbischoff/awesome-macos-command-line)
+- [Note from MoeClub](https://github.com/MoeClub/Note/blob/81a3651d81c871f2327c3312e090bdca3cabf915/MacInitial.sh)
+- [stronghold from alichtman](https://github.com/alichtman/stronghold/blob/master/stronghold.py)
 
 (Thanks for your good work !)
 
@@ -56,6 +58,8 @@ This Hardening depends on a list :
 - Network
   - Firewall
     - [6000] Enable Firewall
+    - [6001] Enable logging
+    - [6003] Enable Stealth Mode
   - Remote Management
     - [6100] Disable remote management
 
@@ -136,9 +140,10 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
 - Enable prompt for a password on screen saver
   - ID : 2100
   - checking command : `defaults read /Library/Preferences/com.apple.screensaver askForPassword`
-  - setting command : `defaults write /Library/Preferences/com.apple.screensaver askForPassword 1`
-  - DefaultValue : false
-  - RecommendedValue : true
+  - setting command : `defaults write /Library/Preferences/com.apple.screensaver askForPassword -int 1`
+  - type : int
+  - DefaultValue :
+  - RecommendedValue : 1
   - source : https://developer.apple.com/documentation/devicemanagement/screensaver
 
 - Enable prompt for a password on screen saver
@@ -222,10 +227,10 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
 
 - Display all files extentions
   - ID : 3201
-  - checking command : `defaults read "Apple Global Domain" AppleShowAllFilesExtentions`
-  - setting command : `defaults write /Library/Preferences/com.apple.finder AppleShowAllFiles 1`
-  - DefaultValue : 0
-  - RecommendedValue : 1
+  - checking command : `defaults read NSGlobalDomain AppleShowAllFilesExtentions`
+  - setting command : `defaults write NSGlobalDomain AppleShowAllFilesExtentions -bool true`
+  - DefaultValue : false  
+  - RecommendedValue : true
   - source :
 
 ## Protections
@@ -268,18 +273,37 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
 
 - Enable Firewall
   - ID : 6000
-  - checking command : `defaults read /Library/Preferences/com.apple.alf.plist globalstate`
-  - setting command : `defaults write /Library/Preferences/com.apple.alf.plist globalstate -int 1`
-  - DefaultValue : 0
-  - RecommendedValue : 1
+  - checking command : `defaults read /Library/Preferences/com.apple.alf globalstate`
+  - setting command : `defaults write /Library/Preferences/com.apple.alf globalstate -bool true`
+  - type = `bool`
+  - DefaultValue : `false`
+  - RecommendedValue : `true`
   - source : https://raymii.org/s/snippets/OS_X_-_Turn_firewall_on_or_off_from_the_command_line.html
+
+- Enable logging
+  - ID : 6001
+  - checking command : `defaults read /Library/Preferences/com.apple.alf loggingenabled`
+  - setting command : `defaults write /Library/Preferences/com.apple.alf loggingenabled -bool true`
+  - type = `bool`
+  - DefaultValue : `false`
+  - RecommendedValue : `true`
+  - source :
+
+- Enable Stealth Mode
+  - ID : 6002
+  - checking command : `defaults read /Library/Preferences/com.apple.alf stealthenabled`
+  - setting command : `defaults write /Library/Preferences/com.apple.alf loggingenabled -bool true`
+  - type = `bool`
+  - DefaultValue : `false`
+  - RecommendedValue : `true`
+  - source :
 
 ### Remote Management
 
 - Disable Remote Management
   - ID : 6100
   - checking command :
-  - setting command : `/System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart -deactivate`
+  - setting command : `/System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart -desactivate`
   - DefaultValue : 0
   - RecommendedValue : `-desactive`
   - source : https://support.apple.com/fr-fr/guide/remote-desktop/apd8b1c65bd/mac

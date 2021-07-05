@@ -318,7 +318,6 @@ do
       #
       if [[ $Method == "Registry" ]]; then
 
-        echo "ok"
         # Type filter
         if GoodType $TypeValue; then
           AlertMessage "this type is not correct"
@@ -328,7 +327,7 @@ do
         # command
         ReturnedValue=$(defaults write $RegistryPath $RegistryItem -$TypeValue $RecommendedValue 2>/dev/null)
         ReturnedExit=$?
-
+        echo "---> $ReturnedExit"
 
       #
       # csrutil (Integrity Protection)

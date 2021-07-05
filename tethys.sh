@@ -325,7 +325,7 @@ do
         fi
 
         # command
-        ReturnedValue=$(defaults write $RegistryPath $RegistryItem -$TypeValue $RecommendedValue 2>/dev/null)
+        ReturnedValue=$(defaults write $RegistryPath $RegistryItem -$TypeValue $RecommendedValue)
         ReturnedExit=$?
         echo "---> $ReturnedExit"
 

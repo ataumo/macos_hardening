@@ -76,7 +76,8 @@ infos : https://developer.apple.com/documentation/devicemanagement/softwareupdat
   - checking command : `defaults read /Library/Preferences/com.apple.SoftwareUpdate.plist AutomaticCheckEnabled`
   - setting command : `defaults write /Library/Preferences/com.apple.SoftwareUpdate.plist AutomaticCheckEnabled -bool true`
   - DefaultValue :
-  - RecommendedValue : 1
+  - RecommendedValue : true
+  - TypeValue : bool
   - source :
 
 - Automatically download new software updates
@@ -97,8 +98,8 @@ infos : https://developer.apple.com/documentation/devicemanagement/softwareupdat
 
 - Automatically install macOS updates
   - ID : 1003
-  - checking command : `defaults read /Library/Preferences/com.apple.SoftwareUpdate.plist AutomaticallyInstallMacOSUpdates`
-  - setting command : `defaults write /Library/Preferences/com.apple.SoftwareUpdate.plist AutomaticallyInstallMacOSUpdates -bool true`
+  - checking command : `defaults read /Library/Preferences/com.apple.SoftwareUpdate AutomaticallyInstallMacOSUpdates`
+  - setting command : `defaults write /Library/Preferences/com.apple.SoftwareUpdate AutomaticallyInstallMacOSUpdates -bool true`
   - DefaultValue :
   - RecommendedValue : 1
   - source :

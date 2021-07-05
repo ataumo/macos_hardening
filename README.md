@@ -60,6 +60,7 @@ This Hardening depends on a list :
     - [6000] Enable Firewall
     - [6001] Enable logging
     - [6003] Enable Stealth Mode
+    - [6004] Disable captive portal
   - Remote Management
     - [6100] Disable remote management
 
@@ -296,6 +297,15 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
   - type = `bool`
   - DefaultValue : `false`
   - RecommendedValue : `true`
+  - source :
+
+- Disable captive portal
+  - ID : 6003
+  - checking command : `defaults read /Library/Preferences/SystemConfiguration/com.apple.captive.control Active`
+  - setting command : `defaults write /Library/Preferences/SystemConfiguration/com.apple.captive.control Active -bool false`
+  - type = `bool`
+  - DefaultValue : `true`
+  - RecommendedValue : `false`
   - source :
 
 ### Remote Management

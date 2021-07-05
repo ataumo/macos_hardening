@@ -76,8 +76,8 @@ infos : https://developer.apple.com/documentation/devicemanagement/softwareupdat
   - checking command : `defaults read /Library/Preferences/com.apple.SoftwareUpdate.plist AutomaticCheckEnabled`
   - setting command : `defaults write /Library/Preferences/com.apple.SoftwareUpdate.plist AutomaticCheckEnabled -bool true`
   - DefaultValue :
-  - RecommendedValue : true
-  - TypeValue : bool
+  - RecommendedValue : `true`
+  - TypeValue : `bool`
   - source :
 
 - Automatically download new software updates
@@ -85,7 +85,8 @@ infos : https://developer.apple.com/documentation/devicemanagement/softwareupdat
   - checking command : `defaults read /Library/Preferences/com.apple.SoftwareUpdate.plist AutomaticDownload`
   - setting command : `defaults write /Library/Preferences/com.apple.SoftwareUpdate.plist AutomaticDownload -bool true`
   - DefaultValue :
-  - RecommendedValue : 1
+  - RecommendedValue : `true`
+  - TypeValue : `bool`
   - source :
 
 - Automatically install new critical updates
@@ -93,7 +94,8 @@ infos : https://developer.apple.com/documentation/devicemanagement/softwareupdat
   - checking command : `defaults read /Library/Preferences/com.apple.SoftwareUpdate.plist CriticalUpdateInstall
   - setting command : defaults write /Library/Preferences/com.apple.SoftwareUpdate.plist CriticalUpdateInstall -bool true`
   - DefaultValue :
-  - RecommendedValue : 1
+  - RecommendedValue : `true`
+  - TypeValue : `bool`
   - source :
 
 - Automatically install macOS updates
@@ -101,15 +103,17 @@ infos : https://developer.apple.com/documentation/devicemanagement/softwareupdat
   - checking command : `defaults read /Library/Preferences/com.apple.SoftwareUpdate AutomaticallyInstallMacOSUpdates`
   - setting command : `defaults write /Library/Preferences/com.apple.SoftwareUpdate AutomaticallyInstallMacOSUpdates -bool true`
   - DefaultValue :
-  - RecommendedValue : 1
+  - RecommendedValue : `true`
+  - TypeValue : `bool`
   - source :
 
 - Restrict SoftwareUpdate require Admin to install
   - ID : 1004
   - checking command : `defaults read /Library/Preferences/com.apple.SoftwareUpdate restrict-software-update-require-admin-to-install`
   - setting command : `defaults write /Library/Preferences/com.apple.SoftwareUpdate.plist restrict-software-update-require-admin-to-install 1`
-  - DefaultValue : 0
-  - RecommendedValue : 1
+  - DefaultValue : `false`
+  - RecommendedValue : `true`
+  - TypeValue : `bool`
   - source :
 
 
@@ -118,9 +122,10 @@ infos : https://developer.apple.com/documentation/devicemanagement/softwareupdat
 - Automatically keep apps up to date from app store
   - ID : 1100
   - checking command : `defaults read /Library/Preferences/com.apple.commerce AutoUpdate`
-  - setting command : `defaults write /Library/Preferences/com.apple.commerce AutoUpdate -bool 1`
-  - DefaultValue : 1
-  - RecommendedValue : 1
+  - setting command : `defaults write /Library/Preferences/com.apple.commerce AutoUpdate -bool true`
+  - DefaultValue :
+  - RecommendedValue : `true`
+  - Type : `bool`
   - source :
 
 ## Login
@@ -131,9 +136,9 @@ source : https://developer.apple.com/documentation/devicemanagement/loginwindow
 - Disable console logon from the logon screen
   - ID : 2000
   - checking command : `defaults read /Library/Preferences/com.apple.loginwindow.plist DisableConsoleAccess`
-  - setting command : `defaults write /Library/Preferences/com.apple.loginwindow.plist DisableConsoleAccess 1`
-  - DefaultValue : 0
-  - RecommendedValue : 1
+  - setting command : `defaults write /Library/Preferences/com.apple.loginwindow.plist DisableConsoleAccess -bool true`
+  - DefaultValue : `false`
+  - RecommendedValue : `true`
   - source :
 
 ### Screen saver

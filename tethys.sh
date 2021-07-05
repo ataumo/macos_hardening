@@ -273,9 +273,9 @@ do
     fi
 
     #
-    #
-    # REINFORCE MODE
-    #
+    ############################################################################
+    #                               REINFORCE MODE                             #
+    ############################################################################
     #
     if [[ $MODE == "REINFORCE" ]]; then
 
@@ -314,10 +314,8 @@ do
         fi
 
         # command
-        echo "defaults write $RegistryPath $RegistryItem -$TypeValue $RecommendedValue"
         ReturnedValue=$(defaults write $RegistryPath $RegistryItem -$TypeValue $RecommendedValue 2>/dev/null)
         ReturnedExit=$?
-        echo "---> $ReturnedExit"
 
       #
       # csrutil (Integrity Protection)

@@ -298,6 +298,7 @@ do
       	exit 1
       fi
 
+
       #
       # Print category
       #
@@ -308,31 +309,43 @@ do
         PRECEDENT_CATEGORY=$Category
       fi
 
+      ##########################################################################
+      #                              CASE METHODS                              #
+      ##########################################################################
+
       #
       # Registry
       #
       if [[ $Method == "Registry" ]]; then
-        
+
+        echo "ok"
         # Type filter
         if GoodType $TypeValue; then
           AlertMessage "this type is not correct"
+          exit 1
         fi
 
-        # main code
+        # command
         ReturnedValue=$(defaults write $RegistryPath $RegistryItem -$TypeValue $RecommendedValue 2>/dev/null)
         ReturnedExit=$?
+
+
       #
       # csrutil (Integrity Protection)
       #
       elif [[ $Method == "csrutil" ]]; then
         # "This tool needs to be executed from Recovery OS."
         ReturnedExit=13
+
+
       #
       # spctl (Gatekeeper)
       #
       elif [[ $Method == "spctl" ]]; then
         ReturnedValue=$(spctl --$RecommendedValue 2>/dev/null)
         ReturnedExit=$?
+
+
       #
       # fdesetup (FileVault)
       #

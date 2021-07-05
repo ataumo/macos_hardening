@@ -206,17 +206,6 @@ do
 
     #
     #
-    # RECOMMENDEDVALUE FILTER
-    #
-    #
-    if [[ $RecommendedValue == "true" ]]; then
-      RecommendedValue=1
-    elif [[ $RecommendedValue == "false" ]]; then
-      RecommendedValue=0
-    fi
-
-    #
-    #
     # STATUS AND AUDIT MODE
     #
     #

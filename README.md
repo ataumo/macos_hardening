@@ -147,10 +147,10 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
 - Enable prompt for a password on screen saver
   - ID : 2100
   - checking command : `defaults read /Library/Preferences/com.apple.screensaver askForPassword`
-  - setting command : `defaults write /Library/Preferences/com.apple.screensaver askForPassword -int 1`
-  - type : int
+  - setting command : `defaults write /Library/Preferences/com.apple.screensaver askForPassword -bool 1`
+  - type : `bool`
   - DefaultValue :
-  - RecommendedValue : 1
+  - RecommendedValue : `true`
   - source : https://developer.apple.com/documentation/devicemanagement/screensaver
 
 - Enable prompt for a password on screen saver
@@ -239,6 +239,14 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
   - setting command : `defaults write NSGlobalDomain AppleShowAllFilesExtentions -bool true`
   - DefaultValue : false  
   - RecommendedValue : true
+  - source :
+
+- Show status bar
+  - ID : 3202
+  - checking command : `defaults read com.apple.finder ShowStatusBar`
+  - setting command : `defaults write com.apple.finder ShowStatusBar -bool true`
+  - DefaultValue :   
+  - RecommendedValue : `true`
   - source :
 
 ## Protections

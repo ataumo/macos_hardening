@@ -69,6 +69,10 @@ function FirstPrint() {
   echo "CSV File configuration  : $INPUT"
 }
 
+#
+# Print result (STATUS mode)
+# INPUT : ID, Name, ReturnedExit, ReturnedValue
+#
 function PrintResult() {
   ID=$1
   Name=$2
@@ -89,6 +93,10 @@ function PrintResult() {
   esac
 }
 
+#
+# Print result with colors depending on the status (AUDIT mode)
+# INPUT : ID, Name, ReturnedExit, ReturnedValue, RecommendedValue
+#
 function PrintAudit() {
   ID=$1
   Name=$2
@@ -115,6 +123,10 @@ function PrintAudit() {
   esac
 }
 
+#
+# State result of reinforcement (REINFORCE mode)
+# INPUT : ID, Name, ReturnedExit
+#
 function PrintReinforce() {
   ID=$1
   Name=$2
@@ -133,6 +145,10 @@ function PrintReinforce() {
   esac
 }
 
+#
+# Test if type is correct
+# INPUT : TYPE
+#
 function GoodType() {
   TYPE=$1
   if [[ "$TYPE" =~ ^(string|data|int|float|bool|date|array|array-add|dict|dict-add)$ ]]; then

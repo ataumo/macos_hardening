@@ -235,8 +235,8 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
 
 - Display all files extentions
   - ID : 3201
-  - checking command : `defaults read NSGlobalDomain AppleShowAllExtentions`
-  - setting command : `defaults write NSGlobalDomain AppleShowAllExtentions -bool true`
+  - checking command : `defaults read NSGlobalDomain AppleShowAllExtensions`
+  - setting command : `defaults write NSGlobalDomain AppleShowAllExtensions -bool true`
   - DefaultValue : false  
   - RecommendedValue : true
   - source :

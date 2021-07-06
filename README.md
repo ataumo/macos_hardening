@@ -227,10 +227,10 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
 
 - Show hidden files in Finder
   - ID : 3200
-  - checking command : `defaults read /Library/Preferences/com.apple.finder AppleShowAllFiles`
-  - setting command : `defaults write /Library/Preferences/com.apple.finder AppleShowAllFiles -bool 1`
-  - DefaultValue : 0
-  - RecommendedValue : 1
+  - checking command : `defaults read com.apple.finder AppleShowAllFiles`
+  - setting command : `defaults write com.apple.finder AppleShowAllFiles -bool true`
+  - DefaultValue : `false`
+  - RecommendedValue : `true`
   - source :
 
 - Display all files extentions

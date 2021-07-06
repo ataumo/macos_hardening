@@ -286,12 +286,6 @@ do
         if [[ $ReturnedExit == 1 ]]; then
           ReturnedExit=26
         fi
-        if [[ $ReturnedValue == "true" ]]; then
-          ReturnedValue=1
-        fi
-        if [[ $ReturnedValue == "false" ]]; then
-          ReturnedValue=0
-        fi
       #
       # csrutil (Intergrity Protection)
       #

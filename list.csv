@@ -13,7 +13,7 @@ ID,Category,Name,Method,MethodArgument,RegistryPath,RegistryItem,ClassName,Names
 3001,User Preferences,iCloud : Enable Find my Mac,Registry,,/Library/Preferences/com.apple.FindMyMac,FMMEnabled,,,,false,true,bool,=,Hight
 3100,User Preferences,Bluetooth : Disable Bluetooth,Registry,,/Library/Preferences/com.apple.Bluetooth,ControllerPowerState,,,,true,false,bool,=,Low
 3200,User Preferences,Finder : Show hidden files in Finder,Registry,,/Library/Preferences/com.apple.finder,AppleShowAllFiles,,,,false,true,bool,=,Medium
-3201,User Preferences,Finder : Display all files extentions,Registry,,NSGlobalDomain,AppleShowAllFilesExtentions,,,,false,true,bool,=,Medium
+3201,User Preferences,Finder : Display all files extentions,Registry,,NSGlobalDomain,AppleShowAllExtentions,,,,false,true,bool,=,Medium
 3202,User Preferences,Finder : Show status bar,Registry,,com.apple.finder,ShowStatusBar,,,,false,true,bool,,Low
 4000,Protections,Systeme intergrity protection : Enable Systeme intergrity protection,csrutil,,,,,,,enable,enable,,=,Hight
 4100,Protections,Gatekeeper : Enable Gatekeeper,spctl,,,,,,,enable,enable,,=,Hight

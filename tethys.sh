@@ -286,6 +286,7 @@ do
         if [[ $ReturnedExit == 1 ]]; then
           ReturnedExit=26
         fi
+
       #
       # csrutil (Intergrity Protection)
       #
@@ -331,7 +332,7 @@ do
       #
       if [[ $UID -ne 0 ]]; then
       	AlertMessage "You have to run this script as root (with sudo)"
-      	sudo -v
+      	exit 1
       fi
 
 

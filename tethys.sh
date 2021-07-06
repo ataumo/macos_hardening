@@ -12,12 +12,23 @@ NC='\033[0m' # No Color
 #                                                                              #
 ################################################################################
 
+
+#
+# Usage function
+#
 function Usage() {
   echo "Usage: ./tethys.sh [options]"
-  echo "  -s (--status)   : read method to read configuration"
-  echo "  -a (-audit)     : audit method to audit configuration"
-  echo "  -r (-reinforce) : apply a configuration)"
-  echo "  -h : help method"
+  echo ""
+  echo "  -s                          : read configuration from default csv file list.csv"
+  echo "  -s <file_finding_list.csv>  : read configuration from file_finding_list.csv"
+  echo ""
+  echo "  -a                          : audit configuration from default csv file list.csv"
+  echo "  -a <file_finding_list.csv>  : audit configuration from file_finding_list.csv"
+  echo ""
+  echo "  -r                          : reinforce a configuration from default csv file list.csv)"
+  echo "  -r <file_finding_list.csv>  : reinforce configuration from file_finding_list.csv"
+  echo ""
+  echo "  -h (--help)      : help method"
 }
 
 function WarningMessage() {

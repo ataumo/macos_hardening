@@ -123,6 +123,15 @@ infos : https://developer.apple.com/documentation/devicemanagement/softwareupdat
   - ID : 1100
   - checking command : `defaults read /Library/Preferences/com.apple.commerce AutoUpdate`
   - setting command : `defaults write /Library/Preferences/com.apple.commerce AutoUpdate -bool true`
+  - DefaultValue : `false`
+  - RecommendedValue : `true`
+  - Type : `bool`
+  - source :
+
+- Automatically update when restart is required
+  - ID : 1101
+  - checking command : `defaults read /Library/Preferences/com.apple.commerce AutoUpdateRestartRequired`
+  - setting command : `defaults write /Library/Preferences/com.apple.commerce AutoUpdateRestartRequired -bool true`
   - DefaultValue :
   - RecommendedValue : `true`
   - Type : `bool`
@@ -153,7 +162,7 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
   - RecommendedValue : `true`
   - source : https://developer.apple.com/documentation/devicemanagement/screensaver
 
-- Enable prompt for a password on screen saver
+- Set password delay
   - ID : 2101
   - checking command : `defaults read /Library/Preferences/com.apple.screensaver askForPasswordDelay`
   - setting command : `defaults write /Library/Preferences/com.apple.screensaver askForPasswordDelay -int 0`

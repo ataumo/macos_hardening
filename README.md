@@ -216,10 +216,8 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
 
 - Enable Find my mac
   - ID : 3001
-  - checking command : `defaults read com.apple.FindMyMac FMMEnabled`
-  - setting command : `defaults write com.apple.FindMyMac FMMEnabled 1`
-  - DefaultValue : 0
-  - RecommendedValue : 1
+  - checking command : `nvram -p | grep -c 'fmm-mobileme-token-FMM'`
+  - setting command : ``
   - source :
 
 ### Bluetooth

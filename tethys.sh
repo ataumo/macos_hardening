@@ -5,6 +5,9 @@ YELLOW='\033[0;33m'
 GREEN='\033[0;32m'
 LIGHTGRAY='\033[0;37m'
 NC='\033[0m' # No Color
+Maximum points
+MAXIMUMPOINTS=0
+POINTSARCHIVED=0
 
 ################################################################################
 #                                                                              #
@@ -95,7 +98,7 @@ function PrintResult() {
 
 #
 # Print result with colors depending on the status (AUDIT mode)
-# INPUT : ID, Name, ReturnedExit, ReturnedValue, RecommendedValue
+# INPUT : ID, Name, ReturnedExit, ReturnedValue, RecommendedValue, Severity
 #
 function PrintAudit() {
   ID=$1
@@ -103,12 +106,26 @@ function PrintAudit() {
   ReturnedExit=$3
   ReturnedValue=$4
   RecommendedValue=$5
+  Severity=$6
+  MAXIMUMPOINTS=$((MAXIMUMPOINTS+4))
 
   case $ReturnedExit in
     0 )#No Error
     if [[ "$RecommendedValue" == "$ReturnedValue" ]]; then
+      POINTSARCHIVED=$((POINTSARCHIVED+4))
       SuccessMessage "[-] $ID : $Name ; ActualValue = $ReturnedValue ; RecommendedValue = $RecommendedValue"
     else
+      case $Severity in
+        "Hight" )
+        POINTSARCHIVED=$((POINTSARCHIVED+0))
+          ;;
+        "Medium" )
+        POINTSARCHIVED=$((POINTSARCHIVED+1))
+          ;;
+        "Low" )
+        POINTSARCHIVED=$((POINTSARCHIVED+2))
+          ;;
+      esac
       AlertMessage "[-] $ID : $Name ; ActualValue = $ReturnedValue ; RecommendedValue = $RecommendedValue"
     fi
 
@@ -394,7 +411,7 @@ do
     if [[ $MODE == "STATUS" ]]; then
       PrintResult "$ID" "$Name" "$ReturnedExit" "$ReturnedValue"
     elif [[ $MODE == "AUDIT" ]]; then
-      PrintAudit "$ID" "$Name" "$ReturnedExit" "$ReturnedValue" "$RecommendedValue"
+      PrintAudit "$ID" "$Name" "$ReturnedExit" "$ReturnedValue" "$RecommendedValue" "$Severity"
     elif [[ $MODE == "REINFORCE" ]]; then
       PrintReinforce "$ID" "$Name" "$ReturnedExit"
     fi
@@ -405,3 +422,19 @@ done < $INPUT
 
 ## Redefine separator with its precedent value
 IFS=$OLDIFS
+
+################################################################################
+#                                END OF PROCESS                                #
+################################################################################
+
+if [[ $MODE == "AUDIT" ]]; then
+  echo ""
+  echo "#############################"
+  echo "########### SCORE ###########"
+  echo "#############################"
+  echo ""
+  echo "total points : $MAXIMUMPOINTS"
+  echo "points archived : $POINTSARCHIVED"
+  VALUE=$(bc -l <<< "($POINTSARCHIVED/$MAXIMUMPOINTS)*5+1")
+  echo "Score : $VALUE"
+fi

@@ -25,31 +25,48 @@ function Usage() {
   echo "  -a                          : audit configuration from default csv file list.csv"
   echo "  -a <file_finding_list.csv>  : audit configuration from file_finding_list.csv"
   echo ""
-  echo "  -r                          : reinforce a configuration from default csv file list.csv)"
+  echo "  -r                          : reinforce a configuration from default csv file list.csv"
   echo "  -r <file_finding_list.csv>  : reinforce configuration from file_finding_list.csv"
   echo ""
   echo "  -h (--help)      : help method"
 }
 
+#
+# Messages functions
+#
+
+# Simple message
+function SimpleMessage() {
+  STRING=$1
+  echo "$STRING"
+}
+
+# Warning message
 function WarningMessage() {
   STRING=$1
-  echo -e "${YELLOW} $STRING ${NC}"
+  echo -e "${YELLOW}$STRING${NC}"
 }
 
+# Alert message
 function AlertMessage() {
   STRING=$1
-  echo -e "${RED} $STRING ${NC}"
+  echo -e "${RED}$STRING${NC}"
 }
 
+# Success message
 function SuccessMessage() {
   STRING=$1
-  echo -e "${GREEN} $STRING ${NC}"
+  echo -e "${GREEN}$STRING${NC}"
 }
 
+#
+# First print
+#
 function FirstPrint() {
-  echo "User name : $USER"
-  echo "Mode to apply : $MODE"
-  echo "CSV File configuration : $INPUT"
+  echo "User name               : $USER"
+  echo "Mode to apply           : $MODE"
+  echo "Hostname                : $(hostname)"
+  echo "CSV File configuration  : $INPUT"
 }
 
 function PrintResult() {
@@ -60,14 +77,14 @@ function PrintResult() {
 
   case $ReturnedExit in
     0 )#No Error
-    echo "[-] $ID : $Name ; ActualValue = $ReturnedValue"
+    SimpleMessage "[-] $ID : $Name ; ActualValue = $ReturnedValue"
       ;;
     1 )#Error Exec
-    echo -e "${RED}[x] $ID : $Name ; Error : The execution caused an error${NC}"
+    AlertMessage "[x] $ID : $Name ; Error : The execution caused an error"
       ;;
     26 )#Error exist policy
     echo -e "${LIGHTGRAY}[!] $ID, $Name${NC}"
-    echo -e "${YELLOW}-> Warning : $ID policy does not exist yet${NC}"
+    WarningMessage "-> Warning : $ID policy does not exist yet"
       ;;
   esac
 }
@@ -82,19 +99,18 @@ function PrintAudit() {
   case $ReturnedExit in
     0 )#No Error
     if [[ "$RecommendedValue" == "$ReturnedValue" ]]; then
-      COLOR=$GREEN
+      SuccessMessage "[-] $ID : $Name ; ActualValue = $ReturnedValue ; RecommendedValue = $RecommendedValue"
     else
-      COLOR=$RED
+      AlertMessage "[-] $ID : $Name ; ActualValue = $ReturnedValue ; RecommendedValue = $RecommendedValue"
     fi
-    echo -e "${COLOR}[-] $ID : $Name ; ActualValue = $ReturnedValue ; RecommendedValue = $RecommendedValue${NC}"
 
       ;;
     1 )#Error Exec
-    echo -e "${RED}[x] $ID : $Name ; Error : The execution caused an error${NC}"
+    AlertMessage "[x] $ID : $Name ; Error : The execution caused an error"
       ;;
     26 )#Error exist policy
     echo -e "${LIGHTGRAY}[!] $ID, $Name${NC}"
-    echo -e "${YELLOW}-> Warning : $ID policy does not exist yet${NC}"
+    WarningMessage "-> Warning : $ID policy does not exist yet"
       ;;
   esac
 }

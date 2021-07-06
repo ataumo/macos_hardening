@@ -331,7 +331,7 @@ do
       #
       if [[ $UID -ne 0 ]]; then
       	AlertMessage "You have to run this script as root (with sudo)"
-      	exit 1
+      	sudo -v
       fi
 
 

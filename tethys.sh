@@ -435,7 +435,7 @@ do
         fi
 
         # command
-        ReturnedValue=$(sudo defaults write $RegistryPath $RegistryItem -$TypeValue $RecommendedValue 2>/dev/null)
+        ReturnedValue=$(sudo $SudoOption defaults $MethodOption write $RegistryPath $RegistryItem -$TypeValue $RecommendedValue 2>/dev/null)
         ReturnedExit=$?
 
       #

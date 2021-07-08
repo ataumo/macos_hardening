@@ -94,9 +94,18 @@ infos : https://developer.apple.com/documentation/devicemanagement/softwareupdat
 
 - Verify all Apple provided software is current
   - ID : 1000
-  - checking command : `softwareupdate -l`
-  - setting command : `sudo softwareupdate -i packagename`
-  - RecommendedValue : `No new software available`
+  - Level : 1
+  - Method : softwareupdate
+  - Assessment Status : Automatically
+  - Checking command : `softwareupdate -l`
+  - ExpectedOutput : `No new software available`
+  - Setting command : `sudo softwareupdate -i -a`
+  - Graphical Method :
+    1. Open System Preferences
+    2. Select Software Update
+    3. Select Automatically check for updates to allow Software Update to check with
+    Apple's servers for any outstanding updates
+    4. Select Show Updates to verify that there are no software updates available
 
 - Automatically check new software updates
   - ID : 1001

@@ -309,11 +309,32 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
 
 - Disable Bluetooth
   - ID : 3100
+  - Level : 1
+  - Method : Registry
+  - Assessment Status : Automatically
   - checking command : `defaults read /Library/Preferences/com.apple.Bluetooth ControllerPowerState`
-  - setting command : `defaults write /Library/Preferences/com.apple.Bluetooth AutoUpdate true`
-  - DefaultValue : false
-  - RecommendedValue : true
-  - source :
+  - setting command : `defaults write /Library/Preferences/com.apple.Bluetooth ControllerPowerState -bool false`
+  - DefaultValue : `true`
+  - RecommendedValue : `false`
+  - Type : `bool`
+  - Graphical method :
+    1. Open System Preferences
+    2. Select Bluetooth
+    3. Select Turn Bluetooth Off
+
+- Show Bluetooth status in menu bar
+  - ID : 3100
+  - Level : 1
+  - Method : Registry
+  - Assessment Status : Automatically
+  - checking command : `sudo -u <username> defaults -currentHost read com.apple.controlcenter.plist Bluetooth`
+  - setting command : `sudo -u <username> defaults -currentHost write com.apple.controlcenter.plist Bluetooth -int 18`
+  - RecommendedValue : `18`
+  - Type : `int`
+  - Graphical method :
+    1. Open System Preferences
+    2. Select Bluetooth
+    3. Verify the Show Bluetooth in menu bar is selected
 
 #### Finder
 

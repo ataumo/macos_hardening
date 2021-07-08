@@ -314,7 +314,7 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
     3. Select Turn Bluetooth Off
 
 - Show Bluetooth status in menu bar
-  - ID : 3100
+  - ID : 3101
   - Level : 1
   - Method : Registry
   - Assessment Status : Automatically

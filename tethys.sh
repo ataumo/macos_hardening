@@ -44,25 +44,25 @@ function Usage() {
 
 # Simple message
 function SimpleMessage() {
-  STRING=$1
+  local STRING=$1
   echo "$STRING"
 }
 
 # Warning message
 function WarningMessage() {
-  STRING=$1
+  local STRING=$1
   echo -e "${YELLOW}$STRING${NC}"
 }
 
 # Alert message
 function AlertMessage() {
-  STRING=$1
+  local STRING=$1
   echo -e "${RED}$STRING${NC}"
 }
 
 # Success message
 function SuccessMessage() {
-  STRING=$1
+  local STRING=$1
   echo -e "${GREEN}$STRING${NC}"
 }
 

@@ -420,7 +420,7 @@ do
         fi
 
         # command
-        ReturnedValue=$(defaults write $RegistryPath $RegistryItem -$TypeValue $RecommendedValue 2>/dev/null)
+        ReturnedValue=$(sudo defaults write $RegistryPath $RegistryItem -$TypeValue $RecommendedValue 2>/dev/null)
         ReturnedExit=$?
 
       #
@@ -435,7 +435,7 @@ do
       # spctl (Gatekeeper)
       #
       elif [[ $Method == "spctl" ]]; then
-        ReturnedValue=$(spctl --$RecommendedValue 2>/dev/null)
+        ReturnedValue=$(sudo spctl --$RecommendedValue 2>/dev/null)
         ReturnedExit=$?
 
 
@@ -443,7 +443,7 @@ do
       # fdesetup (FileVault)
       #
       elif [[ $Method == "fdesetup" ]]; then
-        ReturnedValue=$(fdesetup $RecommendedValue 2>/dev/null)
+        ReturnedValue=$(sudo fdesetup $RecommendedValue 2>/dev/null)
         ReturnedExit=$?
       fi
     fi

@@ -187,7 +187,9 @@ function GoodType() {
 #                                                                              #
 ################################################################################
 
+
 POSITIONAL=()
+SKIP_UPDATE=false
 while [[ $# -gt 0 ]]; do
   key="$1"
 
@@ -197,28 +199,30 @@ while [[ $# -gt 0 ]]; do
       exit 1
       ;;
     -a|--audit)
-      INPUT="$2"
       MODE="AUDIT"
       shift # past argument
-      shift # past value
       ;;
     -s|--status)
-      INPUT="$2"
       MODE="STATUS"
       shift # past argument
-      shift # past value
       ;;
     -r|--reinforce)
-      INPUT="$2"
       MODE="REINFORCE"
+      shift # past argument
+      ;;
+    -b|--backup)
+      MODE="BACKUP"
+      shift # past argument
+      ;;
+    -f|--file)
+      INPUT="$2"
       shift # past argument
       shift # past value
       ;;
-    -b|--backup)
+    -skipu|--skip-update)
       INPUT="$2"
-      MODE="BACKUP"
+      SKIP_UPDATE=true
       shift # past argument
-      shift # past value
       ;;
     --default)
       DEFAULT=YES

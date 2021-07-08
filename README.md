@@ -138,44 +138,71 @@ infos : https://developer.apple.com/documentation/devicemanagement/softwareupdat
     3. Select Advanced
     4. Verify that Download new updates when available is selected
 
-- Automatically install new critical updates
+- Enable system data files  
   - ID : 1003
-  - checking command : `defaults read /Library/Preferences/com.apple.SoftwareUpdate.plist CriticalUpdateInstall
-  - setting command : defaults write /Library/Preferences/com.apple.SoftwareUpdate.plist CriticalUpdateInstall -bool true`
-  - DefaultValue :
-  - RecommendedValue : `true`
-  - TypeValue : `bool`
-  - source :
-
-- Automatically install macOS updates
-  - ID : 1004
-  - checking command : `defaults read /Library/Preferences/com.apple.SoftwareUpdate AutomaticallyInstallMacOSUpdates`
-  - setting command : `defaults write /Library/Preferences/com.apple.SoftwareUpdate AutomaticallyInstallMacOSUpdates -bool true`
-  - DefaultValue :
-  - RecommendedValue : `true`
-  - TypeValue : `bool`
-  - source :
-
-- Restrict SoftwareUpdate require Admin to install
-  - ID : 1005
-  - checking command : `defaults read /Library/Preferences/com.apple.SoftwareUpdate restrict-software-update-require-admin-to-install`
-  - setting command : `defaults write /Library/Preferences/com.apple.SoftwareUpdate.plist restrict-software-update-require-admin-to-install 1`
+  - Level : 1
+  - Method : Registry
+  - Assessment Status : Automatically
+  - Checking command : `defaults read /Library/Preferences/com.apple.commerce ConfigDataInstall`
+  - Setting command : `defaults write /Library/Preferences/com.apple.commerce ConfigDataInstall -bool true`
   - DefaultValue : `false`
   - RecommendedValue : `true`
+  - Type : `bool`
+  - Graphical method :
+    1. Open System Preferences
+    2. Select Software Updates
+    3. Select Advanced
+    4. Verify that Install system data files and security updates is selected
+
+- Enable security updates install
+  - ID : 1004
+  - Level : 1
+  - Method : Registry
+  - Assessment Status : Automatically
+  - Checking command : `defaults read /Library/Preferences/com.apple.commerce CriticalUpdateInstall`
+  - Setting command : `defaults write /Library/Preferences/com.apple.commerce CriticalUpdateInstall -bool true`
+  - DefaultValue : `false`
+  - RecommendedValue : `true`
+  - Type : `bool`
+  - Graphical method :
+    1. Open System Preferences
+    2. Select Software Updates
+    3. Select Advanced
+    4. Verify that Install system data files and security updates is selected
+
+- Automatically install macOS updates
+  - ID : 1005
+  - Level : 1
+  - Method : Registry
+  - Assessment Status : Automatically
+  - Checking command : `defaults read /Library/Preferences/com.apple.SoftwareUpdate AutomaticallyInstallMacOSUpdates`
+  - Setting command : `defaults write /Library/Preferences/com.apple.SoftwareUpdate AutomaticallyInstallMacOSUpdates -bool true`
+  - RecommendedValue : `true`
   - TypeValue : `bool`
-  - source :
+  - Graphical method :
+    1. Open System Preferences
+    2. Select Software Updates
+    3. Select Advanced
+    4. Verify that Install macOS updates is selected
 
 
 #### AppStore
 
 - Automatically keep apps up to date from app store
   - ID : 1100
+  - Level : 1
+  - Method : Registry
+  - Assessment Status : Automatically
   - checking command : `defaults read /Library/Preferences/com.apple.commerce AutoUpdate`
   - setting command : `defaults write /Library/Preferences/com.apple.commerce AutoUpdate -bool true`
   - DefaultValue : `false`
   - RecommendedValue : `true`
   - Type : `bool`
-  - source :
+  - Graphical method :
+    1. Open System Preferences
+    2. Select Software Updates
+    3. Select Advanced
+    4. Verify that Install app updates from the App Store is checked
 
 - Enable macOS update installs
   - ID : 1101

@@ -14,6 +14,7 @@ Also, I use this Apple documentation : https://developer.apple.com/documentation
 
 
 And based on CIS Apple macOS 11.0 Benchmark v1.2.0 (https://downloads.cisecurity.org/#/)
+
 Before, you have to login to your iCloud account
 
 This Hardening depends on a list :
@@ -73,8 +74,14 @@ This Hardening depends on a list :
 ### Software Update
 infos : https://developer.apple.com/documentation/devicemanagement/softwareupdate
 
-- Automatically check new software updates
+- Verify all Apple provided software is current
   - ID : 1000
+  - checking command : `softwareupdate -l`
+  - setting command : `sudo softwareupdate -i packagename`
+  - RecommendedValue : `No new software available`
+
+- Automatically check new software updates
+  - ID : 1001
   - checking command : `defaults read /Library/Preferences/com.apple.SoftwareUpdate.plist AutomaticCheckEnabled`
   - setting command : `defaults write /Library/Preferences/com.apple.SoftwareUpdate.plist AutomaticCheckEnabled -bool true`
   - DefaultValue :
@@ -83,7 +90,7 @@ infos : https://developer.apple.com/documentation/devicemanagement/softwareupdat
   - source :
 
 - Automatically download new software updates
-  - ID : 1001
+  - ID : 1002
   - checking command : `defaults read /Library/Preferences/com.apple.SoftwareUpdate.plist AutomaticDownload`
   - setting command : `defaults write /Library/Preferences/com.apple.SoftwareUpdate.plist AutomaticDownload -bool true`
   - DefaultValue :
@@ -92,7 +99,7 @@ infos : https://developer.apple.com/documentation/devicemanagement/softwareupdat
   - source :
 
 - Automatically install new critical updates
-  - ID : 1002
+  - ID : 1003
   - checking command : `defaults read /Library/Preferences/com.apple.SoftwareUpdate.plist CriticalUpdateInstall
   - setting command : defaults write /Library/Preferences/com.apple.SoftwareUpdate.plist CriticalUpdateInstall -bool true`
   - DefaultValue :
@@ -101,7 +108,7 @@ infos : https://developer.apple.com/documentation/devicemanagement/softwareupdat
   - source :
 
 - Automatically install macOS updates
-  - ID : 1003
+  - ID : 1004
   - checking command : `defaults read /Library/Preferences/com.apple.SoftwareUpdate AutomaticallyInstallMacOSUpdates`
   - setting command : `defaults write /Library/Preferences/com.apple.SoftwareUpdate AutomaticallyInstallMacOSUpdates -bool true`
   - DefaultValue :
@@ -110,7 +117,7 @@ infos : https://developer.apple.com/documentation/devicemanagement/softwareupdat
   - source :
 
 - Restrict SoftwareUpdate require Admin to install
-  - ID : 1004
+  - ID : 1005
   - checking command : `defaults read /Library/Preferences/com.apple.SoftwareUpdate restrict-software-update-require-admin-to-install`
   - setting command : `defaults write /Library/Preferences/com.apple.SoftwareUpdate.plist restrict-software-update-require-admin-to-install 1`
   - DefaultValue : `false`
@@ -130,7 +137,7 @@ infos : https://developer.apple.com/documentation/devicemanagement/softwareupdat
   - Type : `bool`
   - source :
 
-- Automatically update when restart is required
+- Enable macOS update installs
   - ID : 1101
   - checking command : `defaults read /Library/Preferences/com.apple.commerce AutoUpdateRestartRequired`
   - setting command : `defaults write /Library/Preferences/com.apple.commerce AutoUpdateRestartRequired -bool true`
@@ -199,9 +206,18 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
   - ID : 2400
   - checking command : `defaults read /Library/Preferences/com.apple.loginwindow LoginwindowText`
   - setting command : `defaults write /Library/Preferences/com.apple.loginwindow LoginwindowText "Your text"`
-  - DefaultValue :
   - TypeValue : string
-  - RecommendedValue : 3600
+  - source : https://developer.apple.com/documentation/devicemanagement/globalpreferences
+
+### Automatic login
+
+- Disable automatic login
+  - ID : 2500
+  - checking command : `defaults read /Library/Preferences/com.apple.loginwindow autoLoginUser`
+  - setting command : `defaults write /Library/Preferences/com.apple.loginwindow autoLoginUser -bool false`
+  - DefaultValue :
+  - TypeValue : `bool`
+  - RecommendedValue : `false`
   - source : https://developer.apple.com/documentation/devicemanagement/globalpreferences
 
 

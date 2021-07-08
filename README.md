@@ -31,7 +31,7 @@ the following characteristics:
   - may negatively inhibit the utility or performance of the technology.
 
 
-## List of policies 
+## List of policies
 
 Before, you have to login to your iCloud account
 
@@ -87,13 +87,10 @@ This Hardening depends on a list :
 
 
 
-## Updates
-
-### Software Update
-infos : https://developer.apple.com/documentation/devicemanagement/softwareupdate
+### Updates
 
 - Verify all Apple provided software is current
-  - ID : 1000
+  - ID : 0000
   - Level : 1
   - Method : softwareupdate
   - Assessment Status : Automatically
@@ -106,6 +103,9 @@ infos : https://developer.apple.com/documentation/devicemanagement/softwareupdat
     3. Select Automatically check for updates to allow Software Update to check with
     Apple's servers for any outstanding updates
     4. Select Show Updates to verify that there are no software updates available
+
+#### Software Update
+infos : https://developer.apple.com/documentation/devicemanagement/softwareupdate
 
 - Automatically check new software updates
   - ID : 1001
@@ -153,7 +153,7 @@ infos : https://developer.apple.com/documentation/devicemanagement/softwareupdat
   - source :
 
 
-### AppStore
+#### AppStore
 
 - Automatically keep apps up to date from app store
   - ID : 1100
@@ -173,11 +173,11 @@ infos : https://developer.apple.com/documentation/devicemanagement/softwareupdat
   - Type : `bool`
   - source :
 
-## Login
+### Login
 
 source : https://developer.apple.com/documentation/devicemanagement/loginwindow
 
-### Console
+#### Console
 - Disable console logon from the logon screen
   - ID : 2000
   - checking command : `defaults read /Library/Preferences/com.apple.loginwindow.plist DisableConsoleAccess`
@@ -186,7 +186,7 @@ source : https://developer.apple.com/documentation/devicemanagement/loginwindow
   - RecommendedValue : `true`
   - source :
 
-### Screen saver
+#### Screen saver
 https://developer.apple.com/documentation/devicemanagement/screensaver
 
 - Enable prompt for a password on screen saver
@@ -207,7 +207,7 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
   - RecommendedValue : 0
   - source : https://developer.apple.com/documentation/devicemanagement/screensaver
 
-### Policy banner
+#### Policy banner
 
 - Enable Policy Banner
   - ID : 2200
@@ -217,7 +217,7 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
   - RecommendedValue : true
   - source :
 
-### Logout
+#### Logout
 
 - Set Logout delay
   - ID : 2300
@@ -227,7 +227,7 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
   - RecommendedValue : 3600
   - source : https://developer.apple.com/documentation/devicemanagement/globalpreferences
 
-### Windows text
+#### Windows text
 
 - Set Login Window Text
   - ID : 2400
@@ -236,7 +236,7 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
   - TypeValue : string
   - source : https://developer.apple.com/documentation/devicemanagement/globalpreferences
 
-### Automatic login
+#### Automatic login
 
 - Disable automatic login
   - ID : 2500
@@ -248,9 +248,9 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
   - source : https://developer.apple.com/documentation/devicemanagement/globalpreferences
 
 
-## User Preferences
+### User Preferences
 
-### iCloud
+#### iCloud
 - Disable the iCloud password for local accounts - Hight
   - ID : 3000
   - checking command : `defaults read com.apple.preference.users DisableUsingiCloudPassword`
@@ -265,7 +265,7 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
   - setting command : ``
   - source :
 
-### Bluetooth
+#### Bluetooth
 
 - Disable Bluetooth
   - ID : 3100
@@ -275,7 +275,7 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
   - RecommendedValue : true
   - source :
 
-### Finder
+#### Finder
 
 - Show hidden files in Finder
   - ID : 3200
@@ -301,7 +301,7 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
   - RecommendedValue : `true`
   - source :
 
-### Safari
+#### Safari
 
 - Disable the automatic run of safe files in Safari
   - ID : 3300
@@ -328,9 +328,9 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
   - RecommendedValue : `true`
 
 
-## Protections
+### Protections
 
-### Systeme intergrity protection
+#### Systeme intergrity protection
 
 - Enable Systeme intergrity protection
   - ID : 4000
@@ -340,7 +340,7 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
   - RecommendedValue : enable
   - source :
 
-### Gatekeeper
+#### Gatekeeper
 
 - Enable Gatekeeper
   - ID : 4100
@@ -350,9 +350,9 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
   - RecommendedValue : --master-enable
   - source :
 
-## Encryption
+### Encryption
 
-### FileVault
+#### FileVault
 
 - Enable FileVault
   - ID : 5000
@@ -362,9 +362,9 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
   - RecommendedValue : enable
   - source :
 
-## Network
+### Network
 
-### Firewall
+#### Firewall
 
 - Enable Firewall
   - ID : 6000
@@ -421,7 +421,7 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
   - RecommendedValue : `false`
   - source :
 
-### Remote Management
+#### Remote Management
 
 - Disable Remote Management
   - ID : 6100
@@ -440,7 +440,7 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
   - Consquence : Problemes with FindMyMac
 
 
-## Cache
+### Cache
 
 - Configurer les réglages avancés de la mise en cache de contenu sur Mac
   - checking command :

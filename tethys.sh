@@ -292,7 +292,7 @@ if [ ! -f $INPUT ]; then
   echo "$INPUT file not found";
   exit 99;
 fi
-while read ID Category Name Method MethodArgument RegistryPath RegistryItem ClassName Namespace Property DefaultValue RecommendedValue TypeValue Operator Severity
+while read ID Category Name AssessmentStatus Method RegistryPath RegistryItem ExpectedOutput DefaultValue RecommendedValue TypeValue Operator Severity Level
 do
   ## We will not take the first row
   if [[ $ID != "ID" ]]; then
@@ -343,7 +343,6 @@ do
         if [[ $ReturnedExit == 1 ]]; then
           ReturnedExit=26
         fi
-
       #
       # csrutil (Intergrity Protection)
       #

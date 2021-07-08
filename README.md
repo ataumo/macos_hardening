@@ -256,6 +256,33 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
   - RecommendedValue : `true`
   - source :
 
+### Safari
+
+- Disable the automatic run of safe files in Safari
+  - ID : 3300
+  - checking command : `defaults read /Users/<username>/Library/Containers/com.apple.Safari/Data/Library/Preferences/com.apple.Safari AutoOpenSafeDownloads`
+  - setting command : `sudo defaults read /Users/<username>/Library/Containers/com.apple.Safari/Data/Library/Preferences/com.apple.Safari AutoOpenSafeDownloads -bool false`
+  - DefaultValue : `true`
+  - TypeValue : `bool`
+  - RecommendedValue : `false`
+
+- Don't send search queries to Apple
+  - ID : 3301
+  - checking command : `defaults read com.apple.Safari UniversalSearchEnabled`
+  - setting command : `defaults write com.apple.Safari UniversalSearchEnabled -bool false`
+  - DefaultValue : `true`
+  - TypeValue : `bool`
+  - RecommendedValue : `false`
+
+- Enable suppress search suggestions
+  - ID : 3301
+  - checking command : `defaults read com.apple.Safari SuppressSearchSuggestions`
+  - setting command : `defaults write com.apple.Safari SuppressSearchSuggestions -bool true`
+  - DefaultValue :
+  - TypeValue : `bool`
+  - RecommendedValue : `true`
+
+
 ## Protections
 
 ### Systeme intergrity protection

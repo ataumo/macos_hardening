@@ -96,7 +96,7 @@ This Hardening depends on a list :
   - Assessment Status : Automatically
   - Checking command : `softwareupdate -l`
   - ExpectedOutput : `No new software available`
-  - Setting command : `sudo softwareupdate -i -a`
+  - Setting command : `sudo softwareupdate -ia`
   - Graphical Method :
     1. Open System Preferences
     2. Select Software Update

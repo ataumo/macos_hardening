@@ -204,15 +204,6 @@ infos : https://developer.apple.com/documentation/devicemanagement/softwareupdat
     3. Select Advanced
     4. Verify that Install app updates from the App Store is checked
 
-- Enable macOS update installs
-  - ID : 1101
-  - checking command : `defaults read /Library/Preferences/com.apple.commerce AutoUpdateRestartRequired`
-  - setting command : `defaults write /Library/Preferences/com.apple.commerce AutoUpdateRestartRequired -bool true`
-  - DefaultValue :
-  - RecommendedValue : `true`
-  - Type : `bool`
-  - source :
-
 ### Login
 
 source : https://developer.apple.com/documentation/devicemanagement/loginwindow

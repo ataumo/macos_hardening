@@ -90,7 +90,7 @@ This Hardening depends on a list :
 ### Updates
 
 - Verify all Apple provided software is current
-  - ID : 0000
+  - ID : 1000
   - Level : 1
   - Method : softwareupdate
   - Assessment Status : Automatically
@@ -138,7 +138,7 @@ infos : https://developer.apple.com/documentation/devicemanagement/softwareupdat
     3. Select Advanced
     4. Verify that Download new updates when available is selected
 
-- Enable system data files  
+- Enable system data files updates install
   - ID : 1003
   - Level : 1
   - Method : Registry

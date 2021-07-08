@@ -19,18 +19,23 @@ POINTSARCHIVED=0
 # Usage function
 #
 function Usage() {
-  echo "Usage: ./tethys.sh [options]"
+  echo "Usages: "
+  echo "  ./tethys.sh -h"
+  echo "  ./tethys.sh [mode]"
+  echo "  ./tethys.sh [mode <options>]"
+  echo "  ./tethys.sh [mode] [file <file.csv>]"
+  echo "  ./tethys.sh [mode <options>] [file <file.csv>]"
   echo ""
-  echo "  -s                          : read configuration from default csv file list.csv"
-  echo "  -s <file_finding_list.csv>  : read configuration from file_finding_list.csv"
-  echo ""
-  echo "  -a                          : audit configuration from default csv file list.csv"
-  echo "  -a <file_finding_list.csv>  : audit configuration from file_finding_list.csv"
-  echo ""
-  echo "  -r                          : reinforce a configuration from default csv file list.csv"
-  echo "  -r <file_finding_list.csv>  : reinforce configuration from file_finding_list.csv"
-  echo ""
-  echo "  -h (--help)      : help method"
+  echo "  -h | --help                   : help method"
+  echo "  mode :"
+  echo "    -s | --status               : read configuration"
+  echo "    -a | --audit                : audit configuration"
+  echo "    options :"
+  echo "        -skipu | --skip-update     : to skip software update verification in audit mode"
+  echo "    -r | --reinforce            : reinforce a configuration"
+  echo "  file :"
+  echo "    -f | --file                 : csv file containing list of policies"
+
 }
 
 #

@@ -188,7 +188,7 @@ function GoodType() {
 function SudoOptionFilter() {
   case $SudoOption in
     "-u <usename>" )
-      SudoOption="-u $USER"
+      SudoOption="-u $(logname)"
       ;;
   esac
 }

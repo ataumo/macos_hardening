@@ -6,12 +6,14 @@ This project was inspired by
 - [awesome-macos-command-line](https://github.com/herrbischoff/awesome-macos-command-line)
 - [Note from MoeClub](https://github.com/MoeClub/Note/blob/81a3651d81c871f2327c3312e090bdca3cabf915/MacInitial.sh)
 - [stronghold from alichtman](https://github.com/alichtman/stronghold/blob/master/stronghold.py)
+- [cis_apple_macOS_10.13.yml from wazuh](https://github.com/wazuh/wazuh-ruleset/blob/13925fbe0d0e27f012d3d3f3c492e4d420a104b4/sca/darwin/17/cis_apple_macOS_10.13.yml)
 
 (Thanks for your good work !)
 
 Also, I use this Apple documentation : https://developer.apple.com/documentation/devicemanagement/profile-specific_payload_keys.
 
 
+And based on CIS Apple macOS 11.0 Benchmark v1.2.0 (https://downloads.cisecurity.org/#/)
 Before, you have to login to your iCloud account
 
 This Hardening depends on a list :

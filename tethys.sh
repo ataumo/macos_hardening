@@ -181,6 +181,18 @@ function GoodType() {
   fi
 }
 
+#
+# Transform generic sudo option with correct option
+# Example : -u <usename> -> -u steavejobs
+#
+function SudoOptionFilter() {
+  case $SudoOption in
+    "-u <usename>" )
+      SudoOption="-u $USER"
+      ;;
+  esac
+}
+
 ################################################################################
 #                                                                              #
 #                                  OPTIONS                                     #
@@ -392,6 +404,10 @@ do
       	exit 1
       fi
 
+      #
+      # Sudo option filter
+      #
+      SudoOptionFilter
 
       #
       # Print category

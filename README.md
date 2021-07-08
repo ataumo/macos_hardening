@@ -359,6 +359,14 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
   - RecommendedValue : `-desactive`
   - source : https://support.apple.com/fr-fr/guide/remote-desktop/apd8b1c65bd/mac
 
+- Disable "Wake for network access"
+  - ID : 6101
+  - checking command : `/usr/libexec/PlistBuddy -c "Print 'AC Power':'Wake On LAN'" /Library/Preferences/com.apple.PowerManagement.plist`
+  - setting command : `sudo /usr/libexec/PlistBuddy -c "Set 'AC Power':'Wake On LAN' 0" /Library/Preferences/com.apple.PowerManagement.plist`
+  - DefaultValue : `1`
+  - RecommendedValue : `0`
+  - Consquence : Problemes with FindMyMac
+
 
 ## Cache
 

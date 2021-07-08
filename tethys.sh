@@ -81,10 +81,10 @@ function FirstPrint() {
 # INPUT : ID, Name, ReturnedExit, ReturnedValue
 #
 function PrintResult() {
-  ID=$1
-  Name=$2
-  ReturnedExit=$3
-  ReturnedValue=$4
+  local ID=$1
+  local Name=$2
+  local ReturnedExit=$3
+  local ReturnedValue=$4
 
   case $ReturnedExit in
     0 )#No Error
@@ -105,12 +105,12 @@ function PrintResult() {
 # INPUT : ID, Name, ReturnedExit, ReturnedValue, RecommendedValue, Severity
 #
 function PrintAudit() {
-  ID=$1
-  Name=$2
-  ReturnedExit=$3
-  ReturnedValue=$4
-  RecommendedValue=$5
-  Severity=$6
+  local ID=$1
+  local Name=$2
+  local ReturnedExit=$3
+  local ReturnedValue=$4
+  local RecommendedValue=$5
+  local Severity=$6
   MAXIMUMPOINTS=$((MAXIMUMPOINTS+4))
 
   case $ReturnedExit in
@@ -149,9 +149,9 @@ function PrintAudit() {
 # INPUT : ID, Name, ReturnedExit
 #
 function PrintReinforce() {
-  ID=$1
-  Name=$2
-  ReturnedExit=$3
+  local ID=$1
+  local Name=$2
+  local ReturnedExit=$3
 
   case $ReturnedExit in
     0 )#No Error
@@ -171,7 +171,7 @@ function PrintReinforce() {
 # INPUT : TYPE
 #
 function GoodType() {
-  TYPE=$1
+  local TYPE=$1
   if [[ "$TYPE" =~ ^(string|data|int|float|bool|date|array|array-add|dict|dict-add)$ ]]; then
     # Good type
     return 1

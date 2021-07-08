@@ -250,7 +250,34 @@ set -- "${POSITIONAL[@]}" # restore positional parameters
 #                                                                              #
 ################################################################################
 
+#
+# First print with some caracteritics environnement
+#
+echo "################################################################################"
 FirstPrint
+echo "################################################################################"
+echo ""
+#
+# Verify all Apple provided software is current
+#
+if [[ "$SKIP_UPDATE" == false ]]; then
+  echo "################################################################################"
+  EXPECTED_OUTPUT_SOFTWARE_UPDATE="SoftwareUpdateToolFindingavailablesoftware"
+  if [[ $MODE == "AUDIT" ]]; then
+    echo "Verify all Apple provided software is current..."
+    ReturnedValue=$(softwareupdate -l)
+    ReturnedValue=${ReturnedValue//[[:space:]]/} # we remove all white space
+    if [[ $ReturnedValue == $EXPECTED_OUTPUT_SOFTWARE_UPDATE ]]; then
+      SuccessMessage "Your software is up to date !"
+    else
+      AlertMessage "You have to update your software."
+      SimpleMessage "Remediation 1 : with reinforce mode (-r)"
+      SimpleMessage "Remediation 2 : with command 'sudo softwareupdate -ia'"
+    fi
+  fi
+  echo "################################################################################"
+fi
+
 
 ### Global varibles
 PRECEDENT_CATEGORY=''

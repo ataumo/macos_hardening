@@ -109,21 +109,34 @@ infos : https://developer.apple.com/documentation/devicemanagement/softwareupdat
 
 - Automatically check new software updates
   - ID : 1001
-  - checking command : `defaults read /Library/Preferences/com.apple.SoftwareUpdate.plist AutomaticCheckEnabled`
-  - setting command : `defaults write /Library/Preferences/com.apple.SoftwareUpdate.plist AutomaticCheckEnabled -bool true`
-  - DefaultValue :
+  - Level : 1
+  - Method : Registry
+  - Assessment Status : Automatically
+  - Checking command : `defaults read /Library/Preferences/com.apple.SoftwareUpdate AutomaticCheckEnabled`
+  - Setting command : `defaults write /Library/Preferences/com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true`
   - RecommendedValue : `true`
   - TypeValue : `bool`
-  - source :
+  - Graphical Method :
+    1. Open System Preferences
+    2. Select Software Update
+    3. Select Advanced
+    4. Verify that Check for updates is selected
 
 - Automatically download new software updates
   - ID : 1002
-  - checking command : `defaults read /Library/Preferences/com.apple.SoftwareUpdate.plist AutomaticDownload`
-  - setting command : `defaults write /Library/Preferences/com.apple.SoftwareUpdate.plist AutomaticDownload -bool true`
+  - Level : 1
+  - Method : Registry
+  - Assessment Status : Automatically
+  - Checking command : `defaults read /Library/Preferences/com.apple.SoftwareUpdate.plist AutomaticDownload`
+  - Setting command : `defaults write /Library/Preferences/com.apple.SoftwareUpdate.plist AutomaticDownload -bool true`
   - DefaultValue :
   - RecommendedValue : `true`
   - TypeValue : `bool`
-  - source :
+  - Graphical Method :
+    1. Open System Preferences
+    2. Select Software Update
+    3. Select Advanced
+    4. Verify that Download new updates when available is selected
 
 - Automatically install new critical updates
   - ID : 1003

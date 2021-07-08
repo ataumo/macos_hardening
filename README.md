@@ -15,6 +15,24 @@ Also, I use this Apple documentation : https://developer.apple.com/documentation
 
 And based on CIS Apple macOS 11.0 Benchmark v1.2.0 (https://downloads.cisecurity.org/#/)
 
+## CIS Apple macOS Benchmark
+
+### Profile Definitions
+
+1. Level 1 : Items in this profile intend to:
+  - be practical and prudent;
+  - provide a clear security benefit; and
+  - not inhibit the utility of the technology beyond acceptable means.
+
+2. Level 2 : This profile extends the "Level 1" profile. Items in this profile exhibit one or more of
+the following characteristics:
+  - are intended for environments or use cases where security is paramount
+  - acts as defense in depth measure
+  - may negatively inhibit the utility or performance of the technology.
+
+
+## List of policies 
+
 Before, you have to login to your iCloud account
 
 This Hardening depends on a list :

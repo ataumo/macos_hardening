@@ -292,7 +292,7 @@ if [ ! -f $INPUT ]; then
   echo "$INPUT file not found";
   exit 99;
 fi
-while read ID Category Name AssessmentStatus Method RegistryPath RegistryItem DefaultValue RecommendedValue TypeValue Operator Severity Level
+while read ID Category Name AssessmentStatus Method MethodOption RegistryPath RegistryItem DefaultValue RecommendedValue TypeValue Operator Severity Level
 do
   ## We will not take the first row
   if [[ $ID != "ID" ]]; then
@@ -336,7 +336,7 @@ do
       if [[ $Method == "Registry" ]]; then
 
         # throw away stderr
-        ReturnedValue=$(defaults read $RegistryPath $RegistryItem 2>/dev/null)
+        ReturnedValue=$(defaults $MethodOption read $RegistryPath $RegistryItem 2>/dev/null)
         ReturnedExit=$?
         # if an error occurs, it's caused by non-existance of the couple (file,item)
         # we will not consider this as an error, but as an warning

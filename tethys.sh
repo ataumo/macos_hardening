@@ -292,13 +292,12 @@ if [ ! -f $INPUT ]; then
   echo "$INPUT file not found";
   exit 99;
 fi
-while read ID Category Name AssessmentStatus Method MethodOption RegistryPath RegistryItem DefaultValue RecommendedValue TypeValue Operator Severity Level
+while read ID Category Name AssessmentStatus Method MethodOption SudoOption RegistryPath RegistryItem DefaultValue RecommendedValue TypeValue Operator Severity Level
 do
   ## We will not take the first row
   if [[ $ID != "ID" ]]; then
 
     PARAMETER=$1
-
 
     #
     ############################################################################

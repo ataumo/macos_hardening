@@ -1,29 +1,30 @@
-ID,Category,Name,AssessmentStatus,Method,MethodOption,User,RegistryPath,RegistryItem,DefaultValue,RecommendedValue,TypeValue,Operator,Severity,Level 
-1001,Updates,Software Update : Automatically check new software updates,Automatically,Registry,,,/Library/Preferences/com.apple.SoftwareUpdate,AutomaticCheckEnabled,,true,bool,=,Medium,1
-1002,Updates,Software Update : Automatically download new software updates,Automatically,Registry,,,/Library/Preferences/com.apple.SoftwareUpdate,AutomaticDownload,,true,bool,=,Medium,1
-1003,Updates,Software Update : Enable system data files updates install,Automatically,Registry,,,/Library/Preferences/com.apple.SoftwareUpdate,ConfigDataInstall,,true,bool,=,Medium,1
-1004,Updates,Software Update : Enable security updates install,Automatically,Registry,,,/Library/Preferences/com.apple.SoftwareUpdate,CriticalUpdateInstall,,true,bool,=,Medium,1
-1005,Updates,Software Update : Automatically install macOS updates,Automatically,Registry,,,/Library/Preferences/com.apple.SoftwareUpdate,AutomaticallyInstallMacOSUpdates,,true,bool,=,Medium,1
-1100,Updates,AppStore : Automatically keep apps up to date from app store,Automatically,Registry,,,/Library/Preferences/com.apple.commerce,AutoUpdate,,true,bool,=,Medium,1
-2000,Login,Console : Disable console logon from the logon screen,,Registry,,,/Library/Preferences/com.apple.loginwindow,DisableConsoleAccess,,true,bool,=,Medium,
-2100,Login,Screen Saver : Enable prompt for a password on screen saver,,Registry,,,com.apple.screensaver,askForPassword,false,true,bool,=,Hight,
-2101,Login,Screen Saver : Set password delay,,Registry,,,com.apple.screensaver,askForPasswordDelay,,0,int,<=,Hight,
-2200,Login,Policy Banner : Enable Policy Banner,,,,,,,,,,=,Low,
-2300,Login,Logout : Set Logout delay,,Registry,,,/Library/Preferences/.GlobalPreferences,com.apple.autologout.AutoLogOutDelay,,3600,int,<=,Hight,
-3000,User Preferences,iCloud : Disable the iCloud password for local accounts,,Registry,,,/Library/Preferences/com.apple.preference.users,DisableUsingiCloudPassword,false,true,bool,=,Hight,
-3001,User Preferences,iCloud : Enable Find my Mac,,nvram,,,,,false,true,bool,=,Hight,
-3100,User Preferences,Bluetooth : Disable Bluetooth,Automatically,Registry,,,/Library/Preferences/com.apple.Bluetooth,ControllerPowerState,true,false,bool,=,Low,1
-3101,User Preferences,Bluetooth : Show Bluetooth status in menu bar,Automatically,Registry,-currentHost,username,com.apple.controlcenter.plist,Bluetooth,,18,int,=,Low,1
-3200,User Preferences,Finder : Show hidden files in Finder,,Registry,,,/Library/Preferences/com.apple.finder,AppleShowAllFiles,NO,YES,string,=,Medium,
-3201,User Preferences,Finder : Display all files extentions,,Registry,,,NSGlobalDomain,AppleShowAllExtensions,false,true,bool,=,Medium,
-3202,User Preferences,Finder : Show status bar,,Registry,,,com.apple.finder,ShowStatusBar,false,true,bool,,Low,
-4000,Protections,Systeme intergrity protection : Enable Systeme intergrity protection,,csrutil,,,,,enable,enable,,=,Hight,
-4100,Protections,Gatekeeper : Enable Gatekeeper,,spctl,,,,,enable,enable,,=,Hight,
-5000,Encryption,FileVault : Enable FileVault,,fdesetup,,,,,disable,enable,,=,Medium,
-6000,Network,Firewall : Enable Firewall,,Registry,,,/Library/Preferences/com.apple.alf,globalstate,0,1,int,>=,Hight,
-6001,Network,Firewall : Enable logging,,Registry,,,/Library/Preferences/com.apple.alf,loggingenabled,,true,bool,=,Low,
-6002,Network,Firewall : Enable Enable Stealth Mode,,Registry,,,/Library/Preferences/com.apple.alf,stealthenabled,,true,bool,=,Medium,
-6003,Network,Firewall : Disable automatic software whitelisting,,Registry,,,/Library/Preferences/com.apple.alf,allowsignedenabled,,false,bool,=,Medium,
-6004,Network,Firewall : Disable automatic signed software whitelisting,,Registry,,,/Library/Preferences/com.apple.alf,allowdownloadsignedenabled,,false,bool,=,Medium,
-6005,Network,Firewall : Disable captive portal,,Registry,,,/Library/Preferences/SystemConfiguration/com.apple.captive.control,Active,true,false,bool,=,Medium,
-6100,Network,Remote Management : Disable Remote Management,,kickstart,,,,,,disable,bool,=,Medium,
+ID,Category,Name,AssessmentStatus,Method,MethodOption,GetCommand,SetCommand,User,RegistryPath,RegistryItem,DefaultValue,RecommendedValue,TypeValue,Operator,Severity,Level 
+1001,Updates,Software Update : Automatically check new software updates,Automatically,Registry,,,,,/Library/Preferences/com.apple.SoftwareUpdate,AutomaticCheckEnabled,,true,bool,=,Medium,1
+1002,Updates,Software Update : Automatically download new software updates,Automatically,Registry,,,,,/Library/Preferences/com.apple.SoftwareUpdate,AutomaticDownload,,true,bool,=,Medium,1
+1003,Updates,Software Update : Enable system data files updates install,Automatically,Registry,,,,,/Library/Preferences/com.apple.SoftwareUpdate,ConfigDataInstall,,true,bool,=,Medium,1
+1004,Updates,Software Update : Enable security updates install,Automatically,Registry,,,,,/Library/Preferences/com.apple.SoftwareUpdate,CriticalUpdateInstall,,true,bool,=,Medium,1
+1005,Updates,Software Update : Automatically install macOS updates,Automatically,Registry,,,,,/Library/Preferences/com.apple.SoftwareUpdate,AutomaticallyInstallMacOSUpdates,,true,bool,=,Medium,1
+1100,Updates,AppStore : Automatically keep apps up to date from app store,Automatically,Registry,,,,,/Library/Preferences/com.apple.commerce,AutoUpdate,,true,bool,=,Medium,1
+2000,Login,Console : Disable console logon from the logon screen,,Registry,,,,,/Library/Preferences/com.apple.loginwindow,DisableConsoleAccess,,true,bool,=,Medium,
+2100,Login,Screen Saver : Enable prompt for a password on screen saver,,Registry,,,,,com.apple.screensaver,askForPassword,false,true,bool,=,Hight,
+2101,Login,Screen Saver : Set password delay,,Registry,,,,,com.apple.screensaver,askForPasswordDelay,,0,int,<=,Hight,
+2200,Login,Policy Banner : Enable Policy Banner,,,,,,,,,,,,=,Low,
+2300,Login,Logout : Set Logout delay,,Registry,,,,,/Library/Preferences/.GlobalPreferences,com.apple.autologout.AutoLogOutDelay,,3600,int,<=,Hight,
+3000,User Preferences,iCloud : Disable the iCloud password for local accounts,,Registry,,,,,/Library/Preferences/com.apple.preference.users,DisableUsingiCloudPassword,false,true,bool,=,Hight,
+3001,User Preferences,iCloud : Enable Find my Mac,,nvram,,,,,,,false,true,bool,=,Hight,
+3100,User Preferences,Bluetooth : Disable Bluetooth,Automatically,Registry,,,,,/Library/Preferences/com.apple.Bluetooth,ControllerPowerState,true,false,bool,=,Low,1
+3101,User Preferences,Bluetooth : Show Bluetooth status in menu bar,Automatically,Registry,-currentHost,,,username,com.apple.controlcenter.plist,Bluetooth,,18,int,=,Low,1
+3200,User Preferences,Finder : Show hidden files in Finder,,Registry,,,,,/Library/Preferences/com.apple.finder,AppleShowAllFiles,NO,YES,string,=,Medium,
+3201,User Preferences,Finder : Display all files extentions,,Registry,,,,,NSGlobalDomain,AppleShowAllExtensions,false,true,bool,=,Medium,
+3202,User Preferences,Finder : Show status bar,,Registry,,,,,com.apple.finder,ShowStatusBar,false,true,bool,,Low,
+3400,User Preferences,Date and Time : Set time and date automatically,Automatically,systemsetup,,-getnetworktimeserver,-setnetworktimeserver,,,,,time.euro.apple.com,,,,
+4000,Protections,Systeme intergrity protection : Enable Systeme intergrity protection,,csrutil,,status,,,,,enable,enable,,=,Hight,
+4100,Protections,Gatekeeper : Enable Gatekeeper,,spctl,,--status,,,,,enable,enable,,=,Hight,
+5000,Encryption,FileVault : Enable FileVault,,fdesetup,,status,,,,,disable,enable,,=,Medium,
+6000,Network,Firewall : Enable Firewall,,Registry,,,,,/Library/Preferences/com.apple.alf,globalstate,0,1,int,>=,Hight,
+6001,Network,Firewall : Enable logging,,Registry,,,,,/Library/Preferences/com.apple.alf,loggingenabled,,true,bool,=,Low,
+6002,Network,Firewall : Enable Enable Stealth Mode,,Registry,,,,,/Library/Preferences/com.apple.alf,stealthenabled,,true,bool,=,Medium,
+6003,Network,Firewall : Disable automatic software whitelisting,,Registry,,,,,/Library/Preferences/com.apple.alf,allowsignedenabled,,false,bool,=,Medium,
+6004,Network,Firewall : Disable automatic signed software whitelisting,,Registry,,,,,/Library/Preferences/com.apple.alf,allowdownloadsignedenabled,,false,bool,=,Medium,
+6005,Network,Firewall : Disable captive portal,,Registry,,,,,/Library/Preferences/SystemConfiguration/com.apple.captive.control,Active,true,false,bool,=,Medium,
+6100,Network,Remote Management : Disable Remote Management,,kickstart,,,,,,,,disable,bool,=,Medium,

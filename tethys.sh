@@ -132,7 +132,7 @@ function PrintAudit() {
         POINTSARCHIVED=$((POINTSARCHIVED+2))
           ;;
       esac
-      AlertMessage "[-] $ID : $Name ; ActualValue = $ReturnedValue ; RecommendedValue = $RecommendedValue"
+      AlertMessage "[x] $ID : $Name ; ActualValue = $ReturnedValue ; RecommendedValue = $RecommendedValue"
     fi
 
       ;;
@@ -567,7 +567,7 @@ do
         fi
         ReturnedExit=$?
 
-        
+
       fi
     fi
 

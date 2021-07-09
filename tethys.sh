@@ -24,7 +24,7 @@ function Usage() {
   echo "  ./tethys.sh [mode]"
   echo "  ./tethys.sh [mode <options>]"
   echo "  ./tethys.sh [mode] [file <file.csv>]"
-  echo "  ./tethys.sh [mode <options>] [file <file.csv>]"
+  echo "  ./tethys.sh [mode <options>] [global options] [file <file.csv>]"
   echo ""
   echo "  -h | --help                   : help method"
   echo "  mode :"
@@ -35,6 +35,8 @@ function Usage() {
   echo "    -r | --reinforce            : reinforce a configuration"
   echo "  file :"
   echo "    -f | --file                 : csv file containing list of policies"
+  echo "  global options :"
+  echo "    -v | --verbose              : print executed commands"
 
 }
 
@@ -205,6 +207,7 @@ function SudoUserFilter() {
 
 POSITIONAL=()
 SKIP_UPDATE=false
+VERBOSE=false
 while [[ $# -gt 0 ]]; do
   key="$1"
 
@@ -237,6 +240,10 @@ while [[ $# -gt 0 ]]; do
     -skipu|--skip-update)
       INPUT="$2"
       SKIP_UPDATE=true
+      shift # past argument
+      ;;
+    -v|--verbose)
+      VERBOSE=true
       shift # past argument
       ;;
     --default)
@@ -307,7 +314,7 @@ if [ ! -f $INPUT ]; then
   echo "$INPUT file not found";
   exit 99;
 fi
-while read ID Category Name AssessmentStatus Method MethodOption SudoUser RegistryPath RegistryItem DefaultValue RecommendedValue TypeValue Operator Severity Level
+while read ID Category Name AssessmentStatus Method MethodOption GetCommand	SetCommand SudoUser RegistryPath RegistryItem DefaultValue RecommendedValue TypeValue Operator Severity Level
 do
   ## We will not take the first row
   if [[ $ID != "ID" ]]; then
@@ -378,6 +385,17 @@ do
           ReturnedValue="disable"
         fi
       #
+      # systemsetup
+      #
+      elif [[ $Method == "systemsetup" ]]; then
+
+        if [[ "$VERBOSE" == true ]]; then
+          echo "systemsetup -$GetCommand"
+        fi
+        ReturnedValue=$(systemsetup -$GetCommand 2>/dev/null)
+        ReturnedValue=${ReturnedValue##*( )} # get last string
+        echo $ReturnedValue
+      #
       # fdesetup (FileVault)
       #
       elif [[ $Method == "fdesetup" ]]; then
@@ -430,7 +448,9 @@ do
         fi
 
         # command
-        echo "sudo -u $SudoUser defaults $MethodOption write $RegistryPath $RegistryItem -$TypeValue $RecommendedValue"
+        if [[ "$VERBOSE" == true ]]; then
+          echo "sudo -u $SudoUser defaults $MethodOption write $RegistryPath $RegistryItem -$TypeValue $RecommendedValue"
+        fi
         ReturnedValue=$(sudo -u $SudoUser defaults $MethodOption write $RegistryPath $RegistryItem -$TypeValue $RecommendedValue)
         ReturnedExit=$?
 

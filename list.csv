@@ -8,7 +8,7 @@ ID,Category,Name,AssessmentStatus,Method,MethodOption,GetCommand,SetCommand,User
 2000,Login,Console : Disable console logon from the logon screen,,Registry,,,,,/Library/Preferences/com.apple.loginwindow,DisableConsoleAccess,,true,bool,=,Medium,
 2100,Login,Screen Saver : Enable prompt for a password on screen saver,,Registry,,,,,com.apple.screensaver,askForPassword,false,true,bool,=,Hight,
 2101,Login,Screen Saver : Set password delay,,Registry,,,,,com.apple.screensaver,askForPasswordDelay,,0,int,<=,Hight,
-2102,Login,Screen Saver : Set an inactivity interval for the screen saver,Automatically,Registry,-currentHost,,,username,,idleTime,,1200,int,<=,Medium,1
+2102,Login,Screen Saver : Set an inactivity interval for the screen saver,Automatically,Registry,-currentHost,,,username,com.apple.screensaver,idleTime,,1200,int,<=,Medium,1
 2200,Login,Policy Banner : Enable Policy Banner,,,,,,,,,,,,=,Low,
 2300,Login,Logout : Set Logout delay,,Registry,,,,,/Library/Preferences/.GlobalPreferences,com.apple.autologout.AutoLogOutDelay,,3600,int,<=,Hight,
 3000,User Preferences,iCloud : Disable the iCloud password for local accounts,,Registry,,,,,/Library/Preferences/com.apple.preference.users,DisableUsingiCloudPassword,false,true,bool,=,Hight,

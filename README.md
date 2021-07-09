@@ -238,7 +238,7 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
   - RecommendedValue : 0
   - source : https://developer.apple.com/documentation/devicemanagement/screensaver
 
-- Automatically keep apps up to date from app store
+- Set an inactivity interval for the screen saver
   - ID : 2102
   - Level : 1
   - Method : Registry

@@ -469,6 +469,7 @@ do
 
         # clean retuned value
         ReturnedValue="${ReturnedValue##*:}" # get content after ":"
+        ReturnedValue=$(echo $ReturnedValue | tr '[:upper:]' '[:lower:]') # convert to lowercase
         ReturnedValue="${ReturnedValue:1}" # remove first char (space)
 
 

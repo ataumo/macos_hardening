@@ -557,7 +557,7 @@ do
       elif [[ $Method == "PlistBuddy" ]]; then
 
         # command
-        COMMAND="/usr/libexec/PlistBuddy $MethodOption \"Set $RegistryItem $RecommendedValue\" $RegistryPath"
+        COMMAND="sudo /usr/libexec/PlistBuddy $MethodOption \"Set $RegistryItem $RecommendedValue\" $RegistryPath"
 
         # print command in verbose mode
         if [[ "$VERBOSE" == true ]]; then

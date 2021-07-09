@@ -208,6 +208,22 @@ infos : https://developer.apple.com/documentation/devicemanagement/softwareupdat
 
 source : https://developer.apple.com/documentation/devicemanagement/loginwindow
 
+#### Sleep
+
+- AC display sleep timer
+  - ID : 6101
+  - Checking command : `/usr/libexec/PlistBuddy -c "Print 'AC Power':'Display'" /Library/Preferences/com.apple.PowerManagement.plist`
+  - Setting command : `sudo /usr/libexec/PlistBuddy -c "Set 'AC Power':'Wake On LAN' 20" /Library/Preferences/com.apple.PowerManagement.plist`
+  - RecommendedValue : `20`
+  - Consquence : Problemes with FindMyMac
+
+- Battery display sleep timer
+  - ID : 6101
+  - Checking command : `/usr/libexec/PlistBuddy -c "Print 'AC Power':'Display Sleep Timer'" /Library/Preferences/com.apple.PowerManagement.plist`
+  - Setting command : `sudo /usr/libexec/PlistBuddy -c "Set 'AC Power':'Display Sleep Timer' 10" /Library/Preferences/com.apple.PowerManagement.plist`
+  - RecommendedValue : `10`
+  - Consquence : Problemes with FindMyMac
+
 #### Console
 - Disable console logon from the logon screen
   - ID : 2000
@@ -252,6 +268,68 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
     2. Select Desktop & Screen Saver
     3. Select Screen Saver
     4. Verify that Start after is set for 20 minutes of less (≤1200)
+
+##### Set an inactivity interval for the screen saver
+
+- Set an inactivity interval for the screen saver (top-left)
+  - ID : 2103:1
+  - Level : 2
+  - Method : Registry
+  - Assessment Status : Automatically
+  - checking command : `defaults read com.apple.dock wvous-tl-corner`
+  - setting command : `sudo -u <username> defaults write com.apple.dock wvous-tl-corner -int 0`
+  - RecommendedValue : `0`
+  - Type : `int`
+  - Graphical method :
+    1. Open System Preferences
+    2. Select Desktop & Screen Saver
+    3. Select Screen Saver
+    4. Select Hot Corners... and verify that Disable Screen Saver is not set
+
+- Set an inactivity interval for the screen saver (bottom-left)
+  - ID : 2103:1
+  - Level : 2
+  - Method : Registry
+  - Assessment Status : Automatically
+  - checking command : `defaults read com.apple.dock wvous-bl-corner`
+  - setting command : `sudo -u <username> defaults write com.apple.dock wvous-bl-corner -int 0`
+  - RecommendedValue : `0`
+  - Type : `int`
+  - Graphical method :
+    1. Open System Preferences
+    2. Select Desktop & Screen Saver
+    3. Select Screen Saver
+    4. Select Hot Corners... and verify that Disable Screen Saver is not set
+
+- Set an inactivity interval for the screen saver (top-right)
+  - ID : 2103:1
+  - Level : 2
+  - Method : Registry
+  - Assessment Status : Automatically
+  - checking command : `defaults read com.apple.dock wvous-tr-corner`
+  - setting command : `sudo -u <username> defaults write com.apple.dock wvous-tr-corner -int 0`
+  - RecommendedValue : `0`
+  - Type : `int`
+  - Graphical method :
+    1. Open System Preferences
+    2. Select Desktop & Screen Saver
+    3. Select Screen Saver
+    4. Select Hot Corners... and verify that Disable Screen Saver is not set
+
+- Set an inactivity interval for the screen saver (bottom-right)
+  - ID : 2103:1
+  - Level : 2
+  - Method : Registry
+  - Assessment Status : Automatically
+  - checking command : `defaults read com.apple.dock wvous-br-corner`
+  - setting command : `sudo -u <username> defaults write com.apple.dock wvous-br-corner -int 0`
+  - RecommendedValue : `0`
+  - Type : `int`
+  - Graphical method :
+    1. Open System Preferences
+    2. Select Desktop & Screen Saver
+    3. Select Screen Saver
+    4. Select Hot Corners... and verify that Disable Screen Saver is not set
 
 #### Policy banner
 

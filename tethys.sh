@@ -399,10 +399,10 @@ do
       #
       # Sudo checking
       #
-      if [[ $UID -ne 0 ]]; then
-      	AlertMessage "You have to run this script as root (with sudo)"
-      	exit 1
-      fi
+      # if [[ $UID -ne 0 ]]; then
+      # 	AlertMessage "You have to run this script as root (with sudo)"
+      # 	exit 1
+      # fi
 
       #
       # Sudo option filter

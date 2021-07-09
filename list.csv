@@ -24,7 +24,7 @@ ID,Category,Name,AssessmentStatus,Method,MethodOption,GetCommand,SetCommand,User
 3202,User Preferences,Finder : Show status bar,,Registry,,,,,com.apple.finder,ShowStatusBar,false,true,bool,,Low,
 3400,User Preferences,Date and Time : Set time and date automatically,Automatically,systemsetup,,-getnetworktimeserver,-setnetworktimeserver,,,,,time.euro.apple.com,,=,Hight,1
 3500,User Preferences,Sharing : Remote Apple Events,Automatically,systemsetup,,-getremoteappleevents,-setremoteappleevents,,,,,off,,=,Medium,1
-3501,User Preferences,Sharing : Internet Sharing,Automatically,PlistBuddy,-c,,,,/Library/Preferences/com.apple.PowerManagement.plist,NAT:Enabled,,0,,=,Medium,1
+3501,User Preferences,Sharing : Internet Sharing,Automatically,PlistBuddy,-c,,,,/Library/Preferences/SystemConfiguration/com.apple.nat.plist,NAT:Enabled,,0,,=,Medium,1
 4000,Protections,Systeme intergrity protection : Enable Systeme intergrity protection,,csrutil,,status,,,,,enable,enable,,=,Hight,
 4100,Protections,Gatekeeper : Enable Gatekeeper,,spctl,,--status,,,,,enable,enable,,=,Hight,
 5000,Encryption,FileVault : Enable FileVault,,fdesetup,,status,,,,,disable,enable,,=,Medium,

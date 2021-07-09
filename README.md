@@ -507,8 +507,8 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
   - Level : 1
   - Method : PlistBuddy
   - Assessment Status : Automatically
-  - Checking command : `/usr/libexec/PlistBuddy -c "Print NAT:Enabled" /Library/Preferences/com.apple.PowerManagement.plist`
-  - Setting command : `/usr/libexec/PlistBuddy -c "Set NAT:Enabled 0" /Library/Preferences/com.apple.PowerManagement.plist`
+  - Checking command : `/usr/libexec/PlistBuddy -c "Print NAT:Enabled" /Library/Preferences/SystemConfiguration/com.apple.nat.plist`
+  - Setting command : `/usr/libexec/PlistBuddy -c "Set NAT:Enabled 0" /Library/Preferences/SystemConfiguration/com.apple.nat.plist`
   - RecommendedValue : `0`
   - Graphical method :
     1. Open System Preferences

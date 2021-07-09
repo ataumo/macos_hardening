@@ -1,5 +1,5 @@
 #!/bin/bash
-
+CYAN='\033[0;36m'
 RED='\033[0;31m'
 YELLOW='\033[0;33m'
 GREEN='\033[0;32m'
@@ -168,6 +168,13 @@ function PrintReinforce() {
   esac
 }
 
+function PrintVerbose() {
+  echo -e "${CYAN}[v] $ID :"
+  echo -e "    Command       : $COMMAND"
+  echo -e "    ReturnedValue : $ReturnedValue"
+  echo -e "    ReturnedExit  : $ReturnedExit${NC}"
+}
+
 #
 # Test if type is correct
 # INPUT : TYPE
@@ -238,7 +245,6 @@ while [[ $# -gt 0 ]]; do
       shift # past value
       ;;
     -skipu|--skip-update)
-      INPUT="$2"
       SKIP_UPDATE=true
       shift # past argument
       ;;
@@ -351,60 +357,123 @@ do
       #        CASE METHODS             #
       ###################################
 
+
       #
       # Registry
       #
       if [[ $Method == "Registry" ]]; then
 
-        # throw away stderr
-        ReturnedValue=$(defaults $MethodOption read $RegistryPath $RegistryItem 2>/dev/null)
+        # command
+        COMMAND="defaults $MethodOption read $RegistryPath $RegistryItem"
+
+        # print command in verbose mode
+        if [[ "$VERBOSE" == true ]]; then
+          ReturnedValue=$(eval "$COMMAND")
+        else
+          ReturnedValue=$(eval "$COMMAND" 2>/dev/null) # throw away stderr
+        fi
         ReturnedExit=$?
+        
         # if an error occurs, it's caused by non-existance of the couple (file,item)
         # we will not consider this as an error, but as an warning
         if [[ $ReturnedExit == 1 ]]; then
           ReturnedExit=26
         fi
+
+
       #
       # csrutil (Intergrity Protection)
       #
       elif [[ $Method == "csrutil" ]]; then
-        ReturnedValue=$(csrutil status 2>/dev/null)
+
+        # command
+        COMMAND="csrutil $GetCommand"
+
+        # print command in verbose mode
+        if [[ "$VERBOSE" == true ]]; then
+          ReturnedValue=$(eval "$COMMAND")
+        else
+          ReturnedValue=$(eval "$COMMAND" 2>/dev/null)
+        fi
+        ReturnedExit=$?
+
+        # clean retuned value
         if [[ $ReturnedValue == "System Integrity Protection status: enabled." ]]; then
           ReturnedValue="enable"
         else
           ReturnedValue="disable"
         fi
+
+
       #
       # spctl (Gatekeeper)
       #
       elif [[ $Method == "spctl" ]]; then
-        ReturnedValue=$(spctl --status 2>/dev/null)
+
+        # command
+        COMMAND="spctl $GetCommand"
+
+        # print command in verbose mode
+        if [[ "$VERBOSE" == true ]]; then
+          ReturnedValue=$(eval "$COMMAND")
+        else
+          ReturnedValue=$(eval "$COMMAND" 2>/dev/null)
+        fi
+        ReturnedExit=$?
+
+        # clean retuned value
         if [[ $ReturnedValue == "assessments enabled" ]]; then
           ReturnedValue="enable"
         else
           ReturnedValue="disable"
         fi
+
+
       #
       # systemsetup
       #
       elif [[ $Method == "systemsetup" ]]; then
 
+        # command
+        COMMAND="sudo systemsetup $GetCommand"
+
+        # keep alert error in verbose mode
         if [[ "$VERBOSE" == true ]]; then
-          echo "systemsetup -$GetCommand"
+          ReturnedValue=$(eval "$COMMAND")
+        else
+          ReturnedValue=$(eval "$COMMAND" 2>/dev/null)
         fi
-        ReturnedValue=$(systemsetup -$GetCommand 2>/dev/null)
-        ReturnedValue=${ReturnedValue##*( )} # get last string
-        echo $ReturnedValue
+        ReturnedExit=$?
+
+        # clean retuned value
+        ReturnedValue="${ReturnedValue##*:}" # get content after ":"
+        ReturnedValue="${ReturnedValue:1}" # remove first char (space)
+
+
       #
       # fdesetup (FileVault)
       #
       elif [[ $Method == "fdesetup" ]]; then
-        ReturnedValue=$(fdesetup status 2>/dev/null)
+
+        # command
+        COMMAND="fdesetup $GetCommand"
+
+        # keep alert error in verbose mode
+        if [[ "$VERBOSE" == true ]]; then
+          ReturnedValue=$(eval "$COMMAND")
+        else
+          ReturnedValue=$(eval "$COMMAND" 2>/dev/null)
+        fi
+        ReturnedExit=$?
+
+        # clean retuned value
         if [[ $ReturnedValue == "FileVault is Off." ]]; then
           ReturnedValue="disable"
         else
           ReturnedValue="enable"
         fi
+
+
       fi
     fi
 
@@ -486,6 +555,11 @@ do
       PrintAudit "$ID" "$Name" "$ReturnedExit" "$ReturnedValue" "$RecommendedValue" "$Severity"
     elif [[ $MODE == "REINFORCE" ]]; then
       PrintReinforce "$ID" "$Name" "$ReturnedExit"
+    fi
+
+    # print verbose mode
+    if [[ "$VERBOSE" == true ]]; then
+      PrintVerbose
     fi
 
 

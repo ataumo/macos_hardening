@@ -436,7 +436,7 @@ do
 
         # command
         echo "sudo $SudoOption defaults $MethodOption write $RegistryPath $RegistryItem -$TypeValue $RecommendedValue"
-        ReturnedValue=$(sudo $SudoOption defaults $MethodOption write $RegistryPath $RegistryItem -$TypeValue $RecommendedValue 2>/dev/null)
+        ReturnedValue=$(sudo $SudoOption defaults $MethodOption write $RegistryPath $RegistryItem -$TypeValue $RecommendedValue)
         ReturnedExit=$?
 
       #

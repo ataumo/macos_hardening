@@ -546,7 +546,24 @@ do
         if [[ "$VERBOSE" == true ]]; then
           ReturnedValue=$(eval "$COMMAND")
         else
-          ReturnedValue=$(eval "$COMMAND" 2>/dev/null)
+          ReturnedValue=$(eval "$COMMAND" 2>/dev/null) # throw away stderr
+        fi
+        ReturnedExit=$?
+
+      #
+      # PlistBuddy (like Registry with more options)
+      # requirements : $MethodOption, $RegistryItem, $RecommendedValue, $RegistryPath
+      #
+      elif [[ $Method == "PlistBuddy" ]]; then
+
+        # command
+        COMMAND="/usr/libexec/PlistBuddy $MethodOption \"Set $RegistryItem $RecommendedValue\" $RegistryPath"
+
+        # print command in verbose mode
+        if [[ "$VERBOSE" == true ]]; then
+          ReturnedValue=$(eval "$COMMAND")
+        else
+          ReturnedValue=$(eval "$COMMAND" 2>/dev/null) # throw away stderr
         fi
         ReturnedExit=$?
 

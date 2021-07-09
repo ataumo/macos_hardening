@@ -190,6 +190,9 @@ function SudoOptionFilter() {
     "username" )
       SudoOption="$(logname)"
       ;;
+    *)
+      SudoOption="root"
+      ;;
   esac
 }
 

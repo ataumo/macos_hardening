@@ -516,10 +516,14 @@ do
         fi
 
         # command
+        COMMAND="sudo -u $SudoUser defaults $MethodOption write $RegistryPath $RegistryItem -$TypeValue $RecommendedValue"
+
+        # keep alert error in verbose mode
         if [[ "$VERBOSE" == true ]]; then
-          echo "sudo -u $SudoUser defaults $MethodOption write $RegistryPath $RegistryItem -$TypeValue $RecommendedValue"
+          ReturnedValue=$(eval "$COMMAND")
+        else
+          ReturnedValue=$(eval "$COMMAND" 2>/dev/null)
         fi
-        ReturnedValue=$(sudo -u $SudoUser defaults $MethodOption write $RegistryPath $RegistryItem -$TypeValue $RecommendedValue)
         ReturnedExit=$?
 
       #
@@ -534,7 +538,16 @@ do
       # spctl (Gatekeeper)
       #
       elif [[ $Method == "spctl" ]]; then
-        ReturnedValue=$(sudo spctl --$RecommendedValue 2>/dev/null)
+
+        # command
+        COMMAND="sudo spctl --$RecommendedValue"
+
+        # keep alert error in verbose mode
+        if [[ "$VERBOSE" == true ]]; then
+          ReturnedValue=$(eval "$COMMAND")
+        else
+          ReturnedValue=$(eval "$COMMAND" 2>/dev/null)
+        fi
         ReturnedExit=$?
 
 
@@ -542,8 +555,19 @@ do
       # fdesetup (FileVault)
       #
       elif [[ $Method == "fdesetup" ]]; then
-        ReturnedValue=$(sudo fdesetup $RecommendedValue 2>/dev/null)
+
+        # command
+        COMMAND="sudo fdesetup $RecommendedValue"
+
+        # keep alert error in verbose mode
+        if [[ "$VERBOSE" == true ]]; then
+          ReturnedValue=$(eval "$COMMAND")
+        else
+          ReturnedValue=$(eval "$COMMAND" 2>/dev/null)
+        fi
         ReturnedExit=$?
+
+        
       fi
     fi
 

@@ -318,8 +318,8 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
   - Level : 1
   - Method : Registry
   - Assessment Status : Automatically
-  - checking command : `sudo -u <username> defaults -currentHost read com.apple.controlcenter.plist Bluetooth`
-  - setting command : `sudo -u <username> defaults -currentHost write com.apple.controlcenter.plist Bluetooth -int 18`
+  - Checking command : `sudo -u <username> defaults -currentHost read com.apple.controlcenter.plist Bluetooth`
+  - Setting command : `sudo -u <username> defaults -currentHost write com.apple.controlcenter.plist Bluetooth -int 18`
   - RecommendedValue : `18`
   - Type : `int`
   - Graphical method :
@@ -372,12 +372,27 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
   - RecommendedValue : `false`
 
 - Enable suppress search suggestions
-  - ID : 3301
+  - ID : 3302
   - checking command : `defaults read com.apple.Safari SuppressSearchSuggestions`
   - setting command : `defaults write com.apple.Safari SuppressSearchSuggestions -bool true`
   - DefaultValue :
   - TypeValue : `bool`
   - RecommendedValue : `true`
+
+#### Date and Time
+
+- Enable "Set time and date automatically"
+  - ID : 3400
+  - Level : 1
+  - Method : systemsetup
+  - Assessment Status : Automatically
+  - Checking command : `sudo systemsetup -getnetworktimeserver`
+  - Setting command : `sudo systemsetup -setnetworktimeserver time.euro.apple.com`
+  - RecommendedValue : `time.euro.apple.com`
+  - Graphical method :
+    1. Open System Preferences
+    2. Select Date & Time
+    3. Verify that Set date and time automatically is selected
 
 
 ### Protections

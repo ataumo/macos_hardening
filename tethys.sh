@@ -185,13 +185,13 @@ function GoodType() {
 # Transform generic sudo option with correct option
 # Example : -u <usename> -> -u steavejobs
 #
-function SudoOptionFilter() {
-  case $SudoOption in
+function SudoUserFilter() {
+  case $SudoUser in
     "username" )
-      SudoOption="$(logname)"
+      SudoUser="$(logname)"
       ;;
     *)
-      SudoOption="root"
+      SudoUser="root"
       ;;
   esac
 }
@@ -307,7 +307,7 @@ if [ ! -f $INPUT ]; then
   echo "$INPUT file not found";
   exit 99;
 fi
-while read ID Category Name AssessmentStatus Method MethodOption SudoOption RegistryPath RegistryItem DefaultValue RecommendedValue TypeValue Operator Severity Level
+while read ID Category Name AssessmentStatus Method MethodOption SudoUser RegistryPath RegistryItem DefaultValue RecommendedValue TypeValue Operator Severity Level
 do
   ## We will not take the first row
   if [[ $ID != "ID" ]]; then
@@ -400,17 +400,9 @@ do
     if [[ $MODE == "REINFORCE" ]]; then
 
       #
-      # Sudo checking
-      #
-      # if [[ $UID -ne 0 ]]; then
-      # 	AlertMessage "You have to run this script as root (with sudo)"
-      # 	exit 1
-      # fi
-
-      #
       # Sudo option filter
       #
-      SudoOptionFilter
+      SudoUserFilter
 
       #
       # Print category
@@ -438,8 +430,8 @@ do
         fi
 
         # command
-        echo "sudo -u $SudoOption defaults $MethodOption write $RegistryPath $RegistryItem -$TypeValue $RecommendedValue"
-        ReturnedValue=$(sudo -u $SudoOption defaults $MethodOption write $RegistryPath $RegistryItem -$TypeValue $RecommendedValue)
+        echo "sudo -u $SudoUser defaults $MethodOption write $RegistryPath $RegistryItem -$TypeValue $RecommendedValue"
+        ReturnedValue=$(sudo -u $SudoUser defaults $MethodOption write $RegistryPath $RegistryItem -$TypeValue $RecommendedValue)
         ReturnedExit=$?
 
       #

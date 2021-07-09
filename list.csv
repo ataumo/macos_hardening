@@ -1,4 +1,4 @@
-ID,Category,Name,AssessmentStatus,Method,MethodOption,SudoOption,RegistryPath,RegistryItem,DefaultValue,RecommendedValue,TypeValue,Operator,Severity,Level 
+ID,Category,Name,AssessmentStatus,Method,MethodOption,User,RegistryPath,RegistryItem,DefaultValue,RecommendedValue,TypeValue,Operator,Severity,Level 
 1001,Updates,Software Update : Automatically check new software updates,Automatically,Registry,,,/Library/Preferences/com.apple.SoftwareUpdate,AutomaticCheckEnabled,,true,bool,=,Medium,1
 1002,Updates,Software Update : Automatically download new software updates,Automatically,Registry,,,/Library/Preferences/com.apple.SoftwareUpdate,AutomaticDownload,,true,bool,=,Medium,1
 1003,Updates,Software Update : Enable system data files updates install,Automatically,Registry,,,/Library/Preferences/com.apple.SoftwareUpdate,ConfigDataInstall,,true,bool,=,Medium,1

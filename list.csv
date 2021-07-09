@@ -13,7 +13,7 @@ ID,Category,Name,AssessmentStatus,Method,MethodOption,SudoOption,RegistryPath,Re
 3000,User Preferences,iCloud : Disable the iCloud password for local accounts,,Registry,,,/Library/Preferences/com.apple.preference.users,DisableUsingiCloudPassword,false,true,bool,=,Hight,
 3001,User Preferences,iCloud : Enable Find my Mac,,nvram,,,,,false,true,bool,=,Hight,
 3100,User Preferences,Bluetooth : Disable Bluetooth,Automatically,Registry,,,/Library/Preferences/com.apple.Bluetooth,ControllerPowerState,true,false,bool,=,Low,1
-3101,User Preferences,Bluetooth : Show Bluetooth status in menu bar,Automatically,Registry,-currentHost,-u <usename>,com.apple.controlcenter.plist,Bluetooth,,18,int,=,Low,1
+3101,User Preferences,Bluetooth : Show Bluetooth status in menu bar,Automatically,Registry,-currentHost,username,com.apple.controlcenter.plist,Bluetooth,,18,int,=,Low,1
 3200,User Preferences,Finder : Show hidden files in Finder,,Registry,,,/Library/Preferences/com.apple.finder,AppleShowAllFiles,NO,YES,string,=,Medium,
 3201,User Preferences,Finder : Display all files extentions,,Registry,,,NSGlobalDomain,AppleShowAllExtensions,false,true,bool,=,Medium,
 3202,User Preferences,Finder : Show status bar,,Registry,,,com.apple.finder,ShowStatusBar,false,true,bool,,Low,

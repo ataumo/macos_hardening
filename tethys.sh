@@ -187,8 +187,8 @@ function GoodType() {
 #
 function SudoOptionFilter() {
   case $SudoOption in
-    "-u <usename>" )
-      SudoOption="-u $(logname)"
+    "username" )
+      SudoOption="$(logname)"
       ;;
   esac
 }
@@ -435,8 +435,8 @@ do
         fi
 
         # command
-        echo "sudo $SudoOption defaults $MethodOption write $RegistryPath $RegistryItem -$TypeValue $RecommendedValue"
-        ReturnedValue=$(sudo -u cryptonit defaults $MethodOption write $RegistryPath $RegistryItem -$TypeValue $RecommendedValue)
+        echo "sudo -u $SudoOption defaults $MethodOption write $RegistryPath $RegistryItem -$TypeValue $RecommendedValue"
+        ReturnedValue=$(sudo -u $SudoOption defaults $MethodOption write $RegistryPath $RegistryItem -$TypeValue $RecommendedValue)
         ReturnedExit=$?
 
       #

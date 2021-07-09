@@ -238,6 +238,21 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
   - RecommendedValue : 0
   - source : https://developer.apple.com/documentation/devicemanagement/screensaver
 
+- Automatically keep apps up to date from app store
+  - ID : 2102
+  - Level : 1
+  - Method : Registry
+  - Assessment Status : Automatically
+  - checking command : `defaults -currentHost read com.apple.screensaver idleTime`
+  - setting command : `sudo -u <username> defaults -currentHost write com.apple.screensaver idleTime -int <value ≤1200>`
+  - RecommendedValue : `1200`
+  - Type : `int`
+  - Graphical method :
+    1. Open System Preferences
+    2. Select Desktop & Screen Saver
+    3. Select Screen Saver
+    4. Verify that Start after is set for 20 minutes of less (≤1200)
+
 #### Policy banner
 
 - Enable Policy Banner

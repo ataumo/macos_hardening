@@ -502,6 +502,19 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
     2. Select Sharing
     3. Verify that Remote Apple Events is not set
 
+- Internet Sharing
+  - ID : 3501
+  - Level : 1
+  - Method : PlistBuddy
+  - Assessment Status : Automatically
+  - Checking command : `/usr/libexec/PlistBuddy -c "Print NAT:Enabled" /Library/Preferences/com.apple.PowerManagement.plist`
+  - Setting command : `/usr/libexec/PlistBuddy -c "Set NAT:Enabled 0" /Library/Preferences/com.apple.PowerManagement.plist`
+  - RecommendedValue : `0`
+  - Graphical method :
+    1. Open System Preferences
+    2. Select Sharing
+    3. Verify that Internet Sharing is not set
+
 
 ### Protections
 

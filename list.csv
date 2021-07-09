@@ -9,6 +9,10 @@ ID,Category,Name,AssessmentStatus,Method,MethodOption,GetCommand,SetCommand,User
 2100,Login,Screen Saver : Enable prompt for a password on screen saver,,Registry,,,,,com.apple.screensaver,askForPassword,false,true,bool,=,Hight,
 2101,Login,Screen Saver : Set password delay,,Registry,,,,,com.apple.screensaver,askForPasswordDelay,,0,int,<=,Hight,
 2102,Login,Screen Saver : Set an inactivity interval for the screen saver,Automatically,Registry,-currentHost,,,username,com.apple.screensaver,idleTime,,1200,int,<=,Medium,1
+2103:1,Login,Screen Saver : Secure screen saver corners (top-left),Automatically,Registry,,,,username,com.apple.dock,wvous-tl-corner,,0,int,=,Medium,2
+2103:2,Login,Screen Saver : Secure screen saver corners (bottom-left),Automatically,Registry,,,,username,com.apple.dock,wvous-bl-corner,,0,int,=,Medium,2
+2103:3,Login,Screen Saver : Secure screen saver corners (top-right),Automatically,Registry,,,,username,com.apple.dock,wvous-tr-corner,,0,int,=,Medium,2
+2103:4,Login,Screen Saver : Secure screen saver corners (bottom-right),Automatically,Registry,,,,username,com.apple.dock,wvous-br-corner,,0,int,=,Medium,2
 2200,Login,Policy Banner : Enable Policy Banner,,,,,,,,,,,,=,Low,
 2300,Login,Logout : Set Logout delay,,Registry,,,,,/Library/Preferences/.GlobalPreferences,com.apple.autologout.AutoLogOutDelay,,3600,int,<=,Hight,
 3000,User Preferences,iCloud : Disable the iCloud password for local accounts,,Registry,,,,,/Library/Preferences/com.apple.preference.users,DisableUsingiCloudPassword,false,true,bool,=,Hight,

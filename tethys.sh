@@ -381,6 +381,29 @@ do
 
 
       #
+      # PlistBuddy (like Registry with more options)
+      #
+      elif [[ $Method == "PlistBuddy" ]]; then
+
+        # command
+        COMMAND="/usr/libexec/PlistBuddy $MethodOption \"Print $RegistryItem\" $RegistryPath"
+
+        # print command in verbose mode
+        if [[ "$VERBOSE" == true ]]; then
+          ReturnedValue=$(eval "$COMMAND")
+        else
+          ReturnedValue=$(eval "$COMMAND" 2>/dev/null) # throw away stderr
+        fi
+        ReturnedExit=$?
+
+        # if an error occurs, it's caused by non-existance of the couple (file,item)
+        # we will not consider this as an error, but as an warning
+        if [[ $ReturnedExit == 1 ]]; then
+          ReturnedExit=26
+        fi
+
+
+      #
       # csrutil (Intergrity Protection)
       #
       elif [[ $Method == "csrutil" ]]; then

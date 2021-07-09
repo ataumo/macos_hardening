@@ -204,7 +204,7 @@ infos : https://developer.apple.com/documentation/devicemanagement/softwareupdat
     3. Select Advanced
     4. Verify that Install app updates from the App Store is checked
 
-### Login
+### Login/Logout
 
 source : https://developer.apple.com/documentation/devicemanagement/loginwindow
 
@@ -269,9 +269,9 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
     3. Select Screen Saver
     4. Verify that Start after is set for 20 minutes of less (≤1200)
 
-##### Set an inactivity interval for the screen saver
+##### Secure screen saver corners
 
-- Set an inactivity interval for the screen saver (top-left)
+- Secure screen saver corners (top-left)
   - ID : 2103:1
   - Level : 2
   - Method : Registry
@@ -286,7 +286,7 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
     3. Select Screen Saver
     4. Select Hot Corners... and verify that Disable Screen Saver is not set
 
-- Set an inactivity interval for the screen saver (bottom-left)
+- Secure screen saver corners (bottom-left)
   - ID : 2103:1
   - Level : 2
   - Method : Registry
@@ -301,7 +301,7 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
     3. Select Screen Saver
     4. Select Hot Corners... and verify that Disable Screen Saver is not set
 
-- Set an inactivity interval for the screen saver (top-right)
+- Secure screen saver corners (top-right)
   - ID : 2103:1
   - Level : 2
   - Method : Registry
@@ -316,7 +316,7 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
     3. Select Screen Saver
     4. Select Hot Corners... and verify that Disable Screen Saver is not set
 
-- Set an inactivity interval for the screen saver (bottom-right)
+- Secure screen saver corners (bottom-right)
   - ID : 2103:1
   - Level : 2
   - Method : Registry
@@ -486,6 +486,21 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
     1. Open System Preferences
     2. Select Date & Time
     3. Verify that Set date and time automatically is selected
+
+#### Sharing
+
+- Remote Apple Events
+  - ID : 3500
+  - Level : 1
+  - Method : systemsetup
+  - Assessment Status : Automatically
+  - Checking command : `sudo systemsetup -getremoteappleevents`
+  - Setting command : `sudo systemsetup -setremoteappleevents off`
+  - RecommendedValue : `off`
+  - Graphical method :
+    1. Open System Preferences
+    2. Select Sharing
+    3. Verify that Remote Apple Events is not set
 
 
 ### Protections

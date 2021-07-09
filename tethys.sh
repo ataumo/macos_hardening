@@ -140,8 +140,7 @@ function PrintAudit() {
     AlertMessage "[x] $ID : $Name ; Error : The execution caused an error"
       ;;
     26 )#Error exist policy
-    echo -e "${LIGHTGRAY}[!] $ID, $Name${NC}"
-    WarningMessage "-> Warning : $ID policy does not exist yet"
+    WarningMessage "[!] $ID : $Name ; Warning : policy does not exist yet"
       ;;
   esac
 }
@@ -373,7 +372,7 @@ do
           ReturnedValue=$(eval "$COMMAND" 2>/dev/null) # throw away stderr
         fi
         ReturnedExit=$?
-        
+
         # if an error occurs, it's caused by non-existance of the couple (file,item)
         # we will not consider this as an error, but as an warning
         if [[ $ReturnedExit == 1 ]]; then

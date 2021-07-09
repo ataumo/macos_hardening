@@ -436,7 +436,7 @@ do
 
         # command
         echo "sudo $SudoOption defaults $MethodOption write $RegistryPath $RegistryItem -$TypeValue $RecommendedValue"
-        ReturnedValue=$(sudo $SudoOption defaults $MethodOption write $RegistryPath $RegistryItem -$TypeValue $RecommendedValue)
+        ReturnedValue=$(sudo -u cryptonit defaults $MethodOption write $RegistryPath $RegistryItem -$TypeValue $RecommendedValue)
         ReturnedExit=$?
 
       #

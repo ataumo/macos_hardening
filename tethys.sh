@@ -404,6 +404,36 @@ do
 
 
       #
+      # launchctl
+      # intro : Interfaces with launchd to load, unload daemons/agents and generally control launchd.
+      # requirements : $RegistryItem
+      #
+      elif [[ $Method == "launchctl" ]]; then
+
+        # command
+        COMMAND="launchctl print system/$RegistryItem"
+
+        # print command in verbose mode
+        if [[ "$VERBOSE" == true ]]; then
+          ReturnedValue=$(eval "$COMMAND")
+        else
+          ReturnedValue=$(eval "$COMMAND" 2>/dev/null) # throw away stderr
+        fi
+        ReturnedExit=$?
+
+        # if an error occurs (113 code), it's caused by non-existance of the RegistryItem in system
+        # so, it's not enabled
+        if [[ $ReturnedExit == 1 ]]; then
+          ReturnedExit=26
+        elif [[ $ReturnedExit == 113 ]]; then
+          ReturnedExit=0
+          ReturnedValue="disable"
+        else
+          ReturnedValue="enable"
+        fi
+
+
+      #
       # csrutil (Intergrity Protection)
       #
       elif [[ $Method == "csrutil" ]]; then
@@ -530,6 +560,8 @@ do
 
       #
       # Registry
+      # requirements  : $MethodOption, $RegistryPath, $RegistryItem, $TypeValue, $RecommendedValue
+      # optional      : $SudoUser
       #
       if [[ $Method == "Registry" ]]; then
 
@@ -567,6 +599,26 @@ do
         fi
         ReturnedExit=$?
 
+
+      #
+      # launchctl
+      # intro : Interfaces with launchd to load, unload daemons/agents and generally control launchd.
+      # requirements : $RegistryItem
+      #
+      elif [[ $Method == "launchctl" ]]; then
+
+        # command
+        COMMAND="sudo launchctl $RecommendedValue system/$RegistryItem"
+
+        # print command in verbose mode
+        if [[ "$VERBOSE" == true ]]; then
+          ReturnedValue=$(eval "$COMMAND")
+        else
+          ReturnedValue=$(eval "$COMMAND" 2>/dev/null) # throw away stderr
+        fi
+        ReturnedExit=$?
+
+
       #
       # csrutil (Integrity Protection)
       #
@@ -577,6 +629,7 @@ do
 
       #
       # spctl (Gatekeeper)
+      # requirements  : $RecommendedValue
       #
       elif [[ $Method == "spctl" ]]; then
 

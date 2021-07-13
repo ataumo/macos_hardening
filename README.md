@@ -18,11 +18,11 @@ Also, structure is based on [0x6d69636b/windows_hardening](https://github.com/0x
 
 ### Apple Documentation
 
-For setting preferences throught `plist` files (Registry method with `defaults` command), I use this Apple documentation : https://developer.apple.com/documentation/devicemanagement/profile-specific_payload_keys.
+For setting preferences throught `plist` files (Registry method with `defaults` command), I use this [Apple documentation](https://developer.apple.com/documentation/devicemanagement/profile-specific_payload_keys).
 
 ### CIS Apple macOS Benchmark
 
-This project is mainly based on CIS Apple macOS 11.0 Benchmark v1.2.0 (https://downloads.cisecurity.org/#/)
+This project is mainly based on [CIS Apple macOS 11.0 Benchmark v1.2.0](https://downloads.cisecurity.org/#/)
 
 #### Profile Definitions
 

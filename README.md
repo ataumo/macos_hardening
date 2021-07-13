@@ -14,7 +14,7 @@ Also, structure is based on [0x6d69636b/windows_hardening](https://github.com/0x
 
 (Thanks for your good work !)
 
-## Documentation 
+## Documentation
 
 ### Apple Documentation
 
@@ -128,6 +128,7 @@ This Hardening depends on a list :
     - [6101] Disable "Wake for network access"
 
 
+## Details of policies 
 
 ### Updates
 

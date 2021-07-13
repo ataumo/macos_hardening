@@ -287,6 +287,7 @@ echo ""
 #
 # Verify all Apple provided software is current
 #
+ID='1000'
 if [[ "$SKIP_UPDATE" == false ]]; then
   echo "################################################################################"
   EXPECTED_OUTPUT_SOFTWARE_UPDATE="SoftwareUpdateToolFindingavailablesoftware"
@@ -310,7 +311,7 @@ if [[ "$SKIP_UPDATE" == false ]]; then
     fi
 
     ReturnedValue=${ReturnedValue//[[:space:]]/} # we remove all white space
-    
+
     if [[ $ReturnedValue == $EXPECTED_OUTPUT_SOFTWARE_UPDATE ]]; then
       SuccessMessage "Your software is up to date !"
     else
@@ -714,12 +715,10 @@ IFS=$OLDIFS
 
 if [[ $MODE == "AUDIT" ]]; then
   echo ""
-  echo "#############################"
-  echo "########### SCORE ###########"
-  echo "#############################"
+  echo "#################################### SCORE #####################################"
   echo ""
   echo "total points : $MAXIMUMPOINTS"
   echo "points archived : $POINTSARCHIVED"
   VALUE=$(bc -l <<< "($POINTSARCHIVED/$MAXIMUMPOINTS)*5+1")
-  echo "Score : $VALUE"
+  echo "Score : ${VALUE:0:4} / 6"
 fi

@@ -548,8 +548,8 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
   - Level : 1
   - Method : launchctl
   - Assessment Status : Automatically
-  - Checking command : `launchctl print-disabled system | grep -c '"com.apple.screensharing" => true'`
-  - Setting command : `sudo launchctl disable system/com.apple.screensharing`
+  - Checking command : `launchctl print-disabled system | grep -c '"com.apple.smbd" => true'`
+  - Setting command : `sudo launchctl disable system/com.apple.smbd`
   - RecommendedValue : `disable`
   - PossibleValues : `enable/disable`
   - Graphical method :

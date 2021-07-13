@@ -1,7 +1,5 @@
 # Welcome to the macOS Hardening project
 
-**[Work in progess]**
-
 ![Work in progress label](https://img.shields.io/badge/-Work%20in%20progress-yellow)
 
 This project was inspired by

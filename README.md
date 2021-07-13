@@ -1,6 +1,6 @@
 # Welcome to the macOS Hardening project
 
-[Work in progess]
+**[Work in progess]**
 
 This project was inspired by
 - [macOS_Hardening from beerisgood](https://github.com/beerisgood/macOS_Hardening)

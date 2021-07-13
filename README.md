@@ -38,52 +38,87 @@ Before, you have to login to your iCloud account
 This Hardening depends on a list :
 
 - Updates
+
+  - [1000] Verify all Apple provided software is current
   - Software Update
-    - [1000] Automatically check new software updates
-    - [1001] Automatically download new software updates
-    - [1002] Automatically install new critical updates
-    - [1003] Automatically install macOS updates
-    - [1004] Restrict SoftwareUpdate require Admin to install
+    - [1001] Automatically check new software updates
+    - [1002] Automatically download new software updates
+    - [1003] Enable system data files update install
+    - [1004] Enable security updates install
+    - [1005] Automatically install macOS updates
   - AppStore
     - [1100] Automatically keep apps up to date from app store
 - Login
-  - Console
-    - [2000] Disable console logon from the logon screen
+
+  - Sleep
+    - [2000] AC display sleep timer
+    - [2001] Battery display sleep timer
   - Screen saver
     - [2100] Enable prompt for a password on screen saver
     - [2101] Set password delay
+    - [2102] Set inactivity interval for the screen saver
+    - Secure screen saver corners
+      - [2103:1] Secure screen saver corners (top-left)
+      - [2103:2] Secure screen saver corners (bottom-left)
+      - [2103:3] Secure screen saver corners (top-right)
+      - [2103:4] Secure screen saver corners (bottom-right)
   - Policy Banner
     - [2200] Enable Policy Banner
   - Logout
     - [2300] Set Logout delay
   - Windows text
     - [2400] Set Login Window Text
+  - Automatic login
+    - [2500] Disable automatic login
+  - Console
+    - [2600] Disable console logon from the logon screen
+  - Remote Login
+    - [2700] Disable Remote Login
 - User Preferences
+
   - iCloud
     - [3000] Disable the iCloud password for local accounts
     - [3001] Enable Find my mac
-    - Dia
   - Bluetooth
     - [3100] Disable Bluetooth
+    - [3101] Show Bluetooth status in menu bar
   - Finder
     - [3200] Show hidden files in Finder
     - [3201] Display all file extensions
+    - [3202] Show status bar
+  - Safari
+    - [3300] Disable the automatic run of safe files in Safari
+    - [3301] Don't send search queries to Apple
+    - [3302] Enable suppress search suggestions
+  - Date and Time
+    - [3400] Set time and date automatically
+  - Sharing
+    - [3500] Remote Apple Events
+    - [3501] Internet Sharing
+    - [3502] Screen Sharing
+    - [3503] File Sharing
 - Protections
+
   - Systeme intergrity protection
     - [4000] Enable Systeme intergrity protection
   - Gatekeeper
     - [4100] Enable Gatekeeper
 - Encryption
+
   - FileVault
     - [5000] Enable FileVault
 - Network
+
   - Firewall
     - [6000] Enable Firewall
     - [6001] Enable logging
-    - [6003] Enable Stealth Mode
-    - [6004] Disable captive portal
+    - [6002] Enable Stealth Mode
+    - [6003] Disable automatic software whitelisting
+    - [6004] Disable automatic signed software whitelisting
+    - [6005] Disable captive portal
   - Remote Management
     - [6100] Disable remote management
+    - [6101] Disable "Wake for network access"
 
 
 

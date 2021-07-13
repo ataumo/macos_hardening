@@ -292,8 +292,25 @@ if [[ "$SKIP_UPDATE" == false ]]; then
   EXPECTED_OUTPUT_SOFTWARE_UPDATE="SoftwareUpdateToolFindingavailablesoftware"
   if [[ $MODE == "AUDIT" ]]; then
     echo "Verify all Apple provided software is current..."
-    ReturnedValue=$(softwareupdate -l)
+
+    # command
+    COMMAND="softwareupdate -l"
+
+    # print command in verbose mode
+    if [[ "$VERBOSE" == true ]]; then
+      ReturnedValue=$(eval "$COMMAND")
+    else
+      ReturnedValue=$(eval "$COMMAND" 2>/dev/null) # throw away stderr
+    fi
+    ReturnedExit=$?
+
+    # verbose mode
+    if [[ "$VERBOSE" == true ]]; then
+      PrintVerbose
+    fi
+
     ReturnedValue=${ReturnedValue//[[:space:]]/} # we remove all white space
+    
     if [[ $ReturnedValue == $EXPECTED_OUTPUT_SOFTWARE_UPDATE ]]; then
       SuccessMessage "Your software is up to date !"
     else

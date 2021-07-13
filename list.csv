@@ -16,7 +16,7 @@ ID,Category,Name,AssessmentStatus,Method,MethodOption,GetCommand,SetCommand,User
 2103:4,Login/Logout,Screen Saver : Secure screen saver corners (bottom-right),Automatically,Registry,,,,username,com.apple.dock,wvous-br-corner,0,0,int,=,Medium,2
 2200,Login/Logout,Policy Banner : Enable Policy Banner,,,,,,,,,,,,=,Low,
 2300,Login/Logout,Logout : Set Logout delay,,Registry,,,,,/Library/Preferences/.GlobalPreferences,com.apple.autologout.AutoLogOutDelay,,3600,int,<=,Hight,
-2400,Login/Logout,Windows text : Set Login Window Text,Automatically,Registry,,,,,/Library/Preferences/com.apple.loginwindow,LoginwindowText,,'Protected by Cyberlib',string,,Low,
+2400,Login/Logout,Windows text : Set Login Window Text,Automatically,Registry,,,,,/Library/Preferences/com.apple.loginwindow,LoginwindowText,,Protected by Cyberlib,string,,Low,
 2500,Login/Logout,Automatic login : Disable automatic login,Automatically,Registry,,,,,/Library/Preferences/com.apple.loginwindow,autoLoginUser,false,false,bool,,Medium,
 2600,Login/Logout,Console : Disable console logon from the logon screen,,Registry,,,,,/Library/Preferences/com.apple.loginwindow,DisableConsoleAccess,false,true,bool,=,Medium,
 2700,Login/Logout,Remote Login : Disable Remote Login,Automatically,systemsetup,,-getremotelogin,-setremotelogin,,,,off,off,,,,

@@ -130,4 +130,4 @@ This Hardening depends on a list :
 
 ## Details of policies
 
-For more details about policies : 
+For more details about policies read [POLICIES.md](https://github.com/ataumo/macos_hardening/blob/main/POLICIES.md)

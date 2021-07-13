@@ -10,7 +10,7 @@ This project was inspired by
 - [alichtman/stronghold](https://github.com/alichtman/stronghold/blob/master/stronghold.py)
 - [wazuh/cis_apple_macOS_10.13.yml](https://github.com/wazuh/wazuh-ruleset/blob/13925fbe0d0e27f012d3d3f3c492e4d420a104b4/sca/darwin/17/cis_apple_macOS_10.13.yml)
 
-Also, structure is based on [0x6d69636b/windows_hardening](https://github.com/0x6d69636b/windows_hardening) project.
+Also, project structure is based on [0x6d69636b/windows_hardening](https://github.com/0x6d69636b/windows_hardening) work.
 
 (Thanks for your good work !)
 

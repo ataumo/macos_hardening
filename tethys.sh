@@ -571,6 +571,11 @@ do
           exit 1
         fi
 
+        # Add '' around RecommendedValue when type is string
+        if [[ $TypeValue == 'string' ]]; then
+          RecommendedValue="'$RecommendedValue'"
+        fi
+
         # command
         COMMAND="sudo -u $SudoUser defaults $MethodOption write $RegistryPath $RegistryItem -$TypeValue $RecommendedValue"
 

@@ -3,12 +3,14 @@
 **[Work in progess]**
 
 This project was inspired by
-- [macOS_Hardening from beerisgood](https://github.com/beerisgood/macOS_Hardening)
-- [MacOS-Hardening-Script from ayethatsright](https://github.com/ayethatsright/MacOS-Hardening-Script)
-- [awesome-macos-command-line](https://github.com/herrbischoff/awesome-macos-command-line)
-- [Note from MoeClub](https://github.com/MoeClub/Note/blob/81a3651d81c871f2327c3312e090bdca3cabf915/MacInitial.sh)
-- [stronghold from alichtman](https://github.com/alichtman/stronghold/blob/master/stronghold.py)
-- [cis_apple_macOS_10.13.yml from wazuh](https://github.com/wazuh/wazuh-ruleset/blob/13925fbe0d0e27f012d3d3f3c492e4d420a104b4/sca/darwin/17/cis_apple_macOS_10.13.yml)
+- [beerisgood/macOS_Hardening](https://github.com/beerisgood/macOS_Hardening)
+- [ayethatsright/MacOS-Hardening-Script](https://github.com/ayethatsright/MacOS-Hardening-Script)
+- [herrbischoff/awesome-macos-command-line](https://github.com/herrbischoff/awesome-macos-command-line)
+- [MoeClub/Note](https://github.com/MoeClub/Note/blob/81a3651d81c871f2327c3312e090bdca3cabf915/MacInitial.sh)
+- [alichtman/stronghold](https://github.com/alichtman/stronghold/blob/master/stronghold.py)
+- [wazuh/cis_apple_macOS_10.13.yml](https://github.com/wazuh/wazuh-ruleset/blob/13925fbe0d0e27f012d3d3f3c492e4d420a104b4/sca/darwin/17/cis_apple_macOS_10.13.yml)
+
+The structure it's based on [0x6d69636b/windows_hardening](https://github.com/0x6d69636b/windows_hardening) work.
 
 (Thanks for your good work !)
 

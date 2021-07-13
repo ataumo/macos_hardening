@@ -96,8 +96,8 @@ function PrintResult() {
     AlertMessage "[x] $ID : $Name ; Error : The execution caused an error"
       ;;
     26 )#Error exist policy
-    echo -e "${LIGHTGRAY}[!] $ID, $Name${NC}"
-    WarningMessage "-> Warning : $ID policy does not exist yet"
+    # if this policy does not exist, its value is DefaultValue
+    SimpleMessage "[-] $ID : $Name ; ActualValue = $DefaultValue"
       ;;
   esac
 }

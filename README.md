@@ -10,29 +10,32 @@ This project was inspired by
 - [alichtman/stronghold](https://github.com/alichtman/stronghold/blob/master/stronghold.py)
 - [wazuh/cis_apple_macOS_10.13.yml](https://github.com/wazuh/wazuh-ruleset/blob/13925fbe0d0e27f012d3d3f3c492e4d420a104b4/sca/darwin/17/cis_apple_macOS_10.13.yml)
 
-The structure it's based on [0x6d69636b/windows_hardening](https://github.com/0x6d69636b/windows_hardening).
+Also, structure is based on [0x6d69636b/windows_hardening](https://github.com/0x6d69636b/windows_hardening) project.
 
 (Thanks for your good work !)
 
-Also, I use this Apple documentation : https://developer.apple.com/documentation/devicemanagement/profile-specific_payload_keys.
+## Documentation 
 
+### Apple Documentation
 
-And based on CIS Apple macOS 11.0 Benchmark v1.2.0 (https://downloads.cisecurity.org/#/)
+For setting preferences throught `plist` files (Registry method with `defaults` command), I use this Apple documentation : https://developer.apple.com/documentation/devicemanagement/profile-specific_payload_keys.
 
-## CIS Apple macOS Benchmark
+### CIS Apple macOS Benchmark
 
-### Profile Definitions
+This project is mainly based on CIS Apple macOS 11.0 Benchmark v1.2.0 (https://downloads.cisecurity.org/#/)
+
+#### Profile Definitions
 
 1. Level 1 : Items in this profile intend to:
-  - be practical and prudent;
-  - provide a clear security benefit; and
-  - not inhibit the utility of the technology beyond acceptable means.
+    - be practical and prudent;
+    - provide a clear security benefit; and
+    - not inhibit the utility of the technology beyond acceptable means.
 
 2. Level 2 : This profile extends the "Level 1" profile. Items in this profile exhibit one or more of
 the following characteristics:
-  - are intended for environments or use cases where security is paramount
-  - acts as defense in depth measure
-  - may negatively inhibit the utility or performance of the technology.
+    - are intended for environments or use cases where security is paramount
+    - acts as defense in depth measure
+    - may negatively inhibit the utility or performance of the technology.
 
 
 ## List of policies

@@ -1,5 +1,7 @@
 # Welcome to the macOS Hardening project
 
+[Work in progess]
+
 This project was inspired by
 - [macOS_Hardening from beerisgood](https://github.com/beerisgood/macOS_Hardening)
 - [MacOS-Hardening-Script from ayethatsright](https://github.com/ayethatsright/MacOS-Hardening-Script)

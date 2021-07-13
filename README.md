@@ -276,7 +276,7 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
     4. Select Hot Corners... and verify that Disable Screen Saver is not set
 
 - Secure screen saver corners (bottom-left)
-  - ID : 2103:1
+  - ID : 2103:2
   - Level : 2
   - Method : Registry
   - Assessment Status : Automatically
@@ -291,7 +291,7 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
     4. Select Hot Corners... and verify that Disable Screen Saver is not set
 
 - Secure screen saver corners (top-right)
-  - ID : 2103:1
+  - ID : 2103:3
   - Level : 2
   - Method : Registry
   - Assessment Status : Automatically
@@ -306,7 +306,7 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
     4. Select Hot Corners... and verify that Disable Screen Saver is not set
 
 - Secure screen saver corners (bottom-right)
-  - ID : 2103:1
+  - ID : 2103:4
   - Level : 2
   - Method : Registry
   - Assessment Status : Automatically
@@ -359,6 +359,31 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
   - TypeValue : `bool`
   - RecommendedValue : `false`
   - source : https://developer.apple.com/documentation/devicemanagement/globalpreferences
+
+#### Console
+
+- Disable console logon from the logon screen
+  - ID : 2600
+  - checking command : `defaults read /Library/Preferences/com.apple.loginwindow.plist DisableConsoleAccess`
+  - setting command : `defaults write /Library/Preferences/com.apple.loginwindow.plist DisableConsoleAccess -bool true`
+  - DefaultValue : `false`
+  - RecommendedValue : `true`
+  - source :
+
+#### Remote Login
+
+- Disable Remote Login
+  - ID : 2700
+  - Level : 1
+  - Method : Registry
+  - Assessment Status : Automatically
+  - Checking command : `sudo systemsetup -getremotelogin`
+  - Setting command : `sudo systemsetup -setremotelogin`
+  - RecommendedValue : `off`
+  - Graphical method :
+    1. Open System Preferences
+    2. Select Sharing
+    3. Uncheck Remote Login
 
 
 ### User Preferences

@@ -211,27 +211,16 @@ source : https://developer.apple.com/documentation/devicemanagement/loginwindow
 #### Sleep
 
 - AC display sleep timer
-  - ID : 6101
-  - Checking command : `/usr/libexec/PlistBuddy -c "Print 'AC Power':'Display'" /Library/Preferences/com.apple.PowerManagement.plist`
-  - Setting command : `sudo /usr/libexec/PlistBuddy -c "Set 'AC Power':'Wake On LAN' 20" /Library/Preferences/com.apple.PowerManagement.plist`
+  - ID : 2000
+  - Checking command : `/usr/libexec/PlistBuddy -c "Print 'AC Power':'Display Sleep Timer'" /Library/Preferences/com.apple.PowerManagement.plist`
+  - Setting command : `sudo /usr/libexec/PlistBuddy -c "Set 'AC Power':'Display Sleep Timer' 20" /Library/Preferences/com.apple.PowerManagement.plist`
   - RecommendedValue : `20`
-  - Consquence : Problemes with FindMyMac
 
 - Battery display sleep timer
-  - ID : 6101
-  - Checking command : `/usr/libexec/PlistBuddy -c "Print 'AC Power':'Display Sleep Timer'" /Library/Preferences/com.apple.PowerManagement.plist`
-  - Setting command : `sudo /usr/libexec/PlistBuddy -c "Set 'AC Power':'Display Sleep Timer' 10" /Library/Preferences/com.apple.PowerManagement.plist`
+  - ID : 2001
+  - Checking command : `/usr/libexec/PlistBuddy -c "Print 'Battery Power':'Display Sleep Timer'" /Library/Preferences/com.apple.PowerManagement.plist`
+  - Setting command : `sudo /usr/libexec/PlistBuddy -c "Set 'Battery Power':'Display Sleep Timer' 10" /Library/Preferences/com.apple.PowerManagement.plist`
   - RecommendedValue : `10`
-  - Consquence : Problemes with FindMyMac
-
-#### Console
-- Disable console logon from the logon screen
-  - ID : 2000
-  - checking command : `defaults read /Library/Preferences/com.apple.loginwindow.plist DisableConsoleAccess`
-  - setting command : `defaults write /Library/Preferences/com.apple.loginwindow.plist DisableConsoleAccess -bool true`
-  - DefaultValue : `false`
-  - RecommendedValue : `true`
-  - source :
 
 #### Screen saver
 https://developer.apple.com/documentation/devicemanagement/screensaver

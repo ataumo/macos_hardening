@@ -5,16 +5,21 @@ ID,Category,Name,AssessmentStatus,Method,MethodOption,GetCommand,SetCommand,User
 1004,Updates,Software Update : Enable security updates install,Automatically,Registry,,,,,/Library/Preferences/com.apple.SoftwareUpdate,CriticalUpdateInstall,,true,bool,=,Medium,1
 1005,Updates,Software Update : Automatically install macOS updates,Automatically,Registry,,,,,/Library/Preferences/com.apple.SoftwareUpdate,AutomaticallyInstallMacOSUpdates,,true,bool,=,Medium,1
 1100,Updates,AppStore : Automatically keep apps up to date from app store,Automatically,Registry,,,,,/Library/Preferences/com.apple.commerce,AutoUpdate,,true,bool,=,Medium,1
-2000,Login/Logout,Console : Disable console logon from the logon screen,,Registry,,,,,/Library/Preferences/com.apple.loginwindow,DisableConsoleAccess,,true,bool,=,Medium,
+2000,Login/Logout,Sleep : AC display sleep timer,Automatically,PlistBuddy,-c,,,,/Library/Preferences/com.apple.PowerManagement.plist,'AC Power':'Display Sleep Timer',10,5,,=,Medium,
+2001,Login/Logout,Sleep : Battery display sleep timer,Automatically,PlistBuddy,-c,,,,/Library/Preferences/com.apple.PowerManagement.plist,'Battery Power':'Display Sleep Timer',2,2,,=,Medium,
 2100,Login/Logout,Screen Saver : Enable prompt for a password on screen saver,,Registry,,,,,com.apple.screensaver,askForPassword,false,true,bool,=,Hight,
 2101,Login/Logout,Screen Saver : Set password delay,,Registry,,,,,com.apple.screensaver,askForPasswordDelay,,0,int,<=,Hight,
 2102,Login/Logout,Screen Saver : Set an inactivity interval for the screen saver,Automatically,Registry,-currentHost,,,username,com.apple.screensaver,idleTime,,1200,int,<=,Medium,1
-2103:1,Login/Logout,Screen Saver : Secure screen saver corners (top-left),Automatically,Registry,,,,username,com.apple.dock,wvous-tl-corner,,0,int,=,Medium,2
-2103:2,Login/Logout,Screen Saver : Secure screen saver corners (bottom-left),Automatically,Registry,,,,username,com.apple.dock,wvous-bl-corner,,0,int,=,Medium,2
-2103:3,Login/Logout,Screen Saver : Secure screen saver corners (top-right),Automatically,Registry,,,,username,com.apple.dock,wvous-tr-corner,,0,int,=,Medium,2
-2103:4,Login/Logout,Screen Saver : Secure screen saver corners (bottom-right),Automatically,Registry,,,,username,com.apple.dock,wvous-br-corner,,0,int,=,Medium,2
+2103:1,Login/Logout,Screen Saver : Secure screen saver corners (top-left),Automatically,Registry,,,,username,com.apple.dock,wvous-tl-corner,0,0,int,=,Medium,2
+2103:2,Login/Logout,Screen Saver : Secure screen saver corners (bottom-left),Automatically,Registry,,,,username,com.apple.dock,wvous-bl-corner,0,0,int,=,Medium,2
+2103:3,Login/Logout,Screen Saver : Secure screen saver corners (top-right),Automatically,Registry,,,,username,com.apple.dock,wvous-tr-corner,0,0,int,=,Medium,2
+2103:4,Login/Logout,Screen Saver : Secure screen saver corners (bottom-right),Automatically,Registry,,,,username,com.apple.dock,wvous-br-corner,0,0,int,=,Medium,2
 2200,Login/Logout,Policy Banner : Enable Policy Banner,,,,,,,,,,,,=,Low,
 2300,Login/Logout,Logout : Set Logout delay,,Registry,,,,,/Library/Preferences/.GlobalPreferences,com.apple.autologout.AutoLogOutDelay,,3600,int,<=,Hight,
+2400,Login/Logout,Windows text : Set Login Window Text,Automatically,Registry,,,,,/Library/Preferences/com.apple.loginwindow,LoginwindowText,,Ce Mac est protégé par Cyberlib ,,,Low,
+2500,Login/Logout,Automatic login : Disable automatic login,Automatically,Registry,,,,,/Library/Preferences/com.apple.loginwindow,autoLoginUser,false,false,bool,,Medium,
+2600,Login/Logout,Console : Disable console logon from the logon screen,,Registry,,,,,/Library/Preferences/com.apple.loginwindow,DisableConsoleAccess,false,true,bool,=,Medium,
+2700,Login/Logout,Remote Login : Disable Remote Login,Automatically,systemsetup,,-getremotelogin,-setremotelogin,,,,off,off,,,,
 3000,User Preferences,iCloud : Disable the iCloud password for local accounts,,Registry,,,,,/Library/Preferences/com.apple.preference.users,DisableUsingiCloudPassword,false,true,bool,=,Hight,
 3001,User Preferences,iCloud : Enable Find my Mac,,nvram,,,,,,,false,true,bool,=,Hight,
 3100,User Preferences,Bluetooth : Disable Bluetooth,Automatically,Registry,,,,,/Library/Preferences/com.apple.Bluetooth,ControllerPowerState,true,false,bool,=,Low,1
@@ -23,12 +28,12 @@ ID,Category,Name,AssessmentStatus,Method,MethodOption,GetCommand,SetCommand,User
 3201,User Preferences,Finder : Display all files extentions,,Registry,,,,,NSGlobalDomain,AppleShowAllExtensions,false,true,bool,=,Medium,
 3202,User Preferences,Finder : Show status bar,,Registry,,,,,com.apple.finder,ShowStatusBar,false,true,bool,,Low,
 3400,User Preferences,Date and Time : Set time and date automatically,Automatically,systemsetup,,-getnetworktimeserver,-setnetworktimeserver,,,,,time.euro.apple.com,,=,Hight,1
-3500,User Preferences,Sharing : Remote Apple Events,Automatically,systemsetup,,-getremoteappleevents,-setremoteappleevents,,,,,off,,=,Medium,1
+3500,User Preferences,Sharing : Remote Apple Events,Automatically,systemsetup,,-getremoteappleevents,-setremoteappleevents,,,,off,off,,=,Medium,1
 3501,User Preferences,Sharing : Internet Sharing,Automatically,PlistBuddy,-c,,,,/Library/Preferences/SystemConfiguration/com.apple.nat.plist,NAT:Enabled,,0,,=,Medium,1
-3502,User Preferences,Sharing : Disable Screen Sharing,Automatically,launchctl,,,,,,com.apple.screensharing,disable,disable,,=,Medium,1
-4000,Protections,Systeme intergrity protection : Enable Systeme intergrity protection,,csrutil,,status,,,,,enable,enable,,=,Hight,
-4100,Protections,Gatekeeper : Enable Gatekeeper,,spctl,,--status,,,,,enable,enable,,=,Hight,
-5000,Encryption,FileVault : Enable FileVault,,fdesetup,,status,,,,,disable,enable,,=,Medium,
+3502,User Preferences,Sharing : Disable Screen Sharing,Automatically,launchctl,,,,,,com.apple.screensharing,disable,disable,enable/disable,=,Medium,1
+4000,Protections,Systeme intergrity protection : Enable Systeme intergrity protection,,csrutil,,status,,,,,enable,enable,enable/disable,=,Hight,
+4100,Protections,Gatekeeper : Enable Gatekeeper,,spctl,,--status,,,,,enable,enable,enable/disable,=,Hight,
+5000,Encryption,FileVault : Enable FileVault,,fdesetup,,status,,,,,disable,enable,enable/disable,=,Medium,
 6000,Network,Firewall : Enable Firewall,,Registry,,,,,/Library/Preferences/com.apple.alf,globalstate,0,1,int,>=,Hight,
 6001,Network,Firewall : Enable logging,,Registry,,,,,/Library/Preferences/com.apple.alf,loggingenabled,,true,bool,=,Low,
 6002,Network,Firewall : Enable Enable Stealth Mode,,Registry,,,,,/Library/Preferences/com.apple.alf,stealthenabled,,true,bool,=,Medium,

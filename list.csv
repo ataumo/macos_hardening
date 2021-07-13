@@ -31,6 +31,7 @@ ID,Category,Name,AssessmentStatus,Method,MethodOption,GetCommand,SetCommand,User
 3500,User Preferences,Sharing : Remote Apple Events,Automatically,systemsetup,,-getremoteappleevents,-setremoteappleevents,,,,off,off,,=,Medium,1
 3501,User Preferences,Sharing : Internet Sharing,Automatically,PlistBuddy,-c,,,,/Library/Preferences/SystemConfiguration/com.apple.nat.plist,NAT:Enabled,,0,,=,Medium,1
 3502,User Preferences,Sharing : Disable Screen Sharing,Automatically,launchctl,,,,,,com.apple.screensharing,disable,disable,enable/disable,=,Medium,1
+3503,User Preferences,Sharing : Disable File Sharing,Automatically,launchctl,,,,,,com.apple.smbd,disable,disable,enable/disable,=,Medium,1
 4000,Protections,Systeme intergrity protection : Enable Systeme intergrity protection,,csrutil,,status,,,,,enable,enable,enable/disable,=,Hight,
 4100,Protections,Gatekeeper : Enable Gatekeeper,,spctl,,--status,,,,,enable,enable,enable/disable,=,Hight,
 5000,Encryption,FileVault : Enable FileVault,,fdesetup,,status,,,,,disable,enable,enable/disable,=,Medium,

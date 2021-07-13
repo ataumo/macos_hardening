@@ -543,6 +543,20 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
     2. Select Sharing
     3. Verify that Screen Sharing is not set
 
+- Disable File Sharing
+  - ID : 3503
+  - Level : 1
+  - Method : launchctl
+  - Assessment Status : Automatically
+  - Checking command : `launchctl print-disabled system | grep -c '"com.apple.screensharing" => true'`
+  - Setting command : `sudo launchctl disable system/com.apple.screensharing`
+  - RecommendedValue : `disable`
+  - PossibleValues : `enable/disable`
+  - Graphical method :
+    1. Open System Preferences
+    2. Select Sharing
+    3. Verify that File Sharing is not set
+
 
 ### Protections
 

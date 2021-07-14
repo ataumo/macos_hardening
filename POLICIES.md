@@ -585,17 +585,16 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
 
 ## Cache
 
-- Configurer les réglages avancés de la mise en cache de contenu sur Mac
-  - checking command :
-  - setting command :
-  - DefaultValue :
-  - RecommendedValue :
-  - source : https://support.apple.com/fr-fr/guide/mac-help/mchl91e7141a/mac
-
-
-
-  - checking command :
-  - setting command :
-  - DefaultValue :
-  - RecommendedValue :
-  - source :
+- Disable Content Caching
+  - ID : 7000
+  - Level : 2
+  - Method : Registry
+  - Assessment Status : Automatically
+  - Checking command : `defaults read /Library/Preferences/com.apple.AssetCache.plist Activated`
+  - Setting command : `sudo -u <username> defaults -currentHost write com.apple.controlcenter.plist Bluetooth -int 18`
+  - RecommendedValue : `18`
+  - Type : `int`
+  - Graphical method :
+    1. Open System Preferences
+    2. Select Sharing
+    3. Uncheck Content Caching

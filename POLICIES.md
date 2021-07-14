@@ -597,4 +597,4 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
   - Graphical method :
     1. Open System Preferences
     2. Select Sharing
-    3. Uncheck Content Caching
+    3. Uncheck Content Caching  

@@ -564,9 +564,9 @@ do
         # when this command return 1 it's not an error, it's just beacause cache saervice is deactivated
         if [[ "$ReturnedExit" == '1' ]]; then
           ReturnedExit=0
-          ReturnedValue='deactivated'
+          ReturnedValue='deactivate'
         else
-          ReturnedValue='activated'
+          ReturnedValue='activate'
         fi
 
 

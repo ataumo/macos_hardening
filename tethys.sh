@@ -337,8 +337,6 @@ do
   ## We will not take the first row
   if [[ $ID != "ID" ]]; then
 
-    PARAMETER=$1
-
     #
     ############################################################################
     #                           STATUS AND AUDIT MODE                          #

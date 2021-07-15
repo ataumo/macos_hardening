@@ -42,3 +42,4 @@ ID,Category,Name,AssessmentStatus,Method,MethodOption,GetCommand,SetCommand,User
 6004,Network,Firewall : Disable automatic signed software whitelisting,,Registry,,,,,/Library/Preferences/com.apple.alf,allowdownloadsignedenabled,,false,bool,=,Medium,
 6005,Network,Firewall : Disable captive portal,,Registry,,,,,/Library/Preferences/SystemConfiguration/com.apple.captive.control,Active,true,false,bool,=,Medium,
 6100,Network,Remote Management : Disable Remote Management,,kickstart,,,,,,,,disable,bool,=,Medium,
+7000,Cache,Disable Content Caching,,AssetCacheManagerUtil,,isActivated,,,,,,deactivated,,,,

@@ -590,11 +590,11 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
   - Level : 2
   - Method : Registry
   - Assessment Status : Automatically
-  - Checking command : `defaults read /Library/Preferences/com.apple.AssetCache.plist Activated`
-  - Setting command : `sudo -u <username> defaults -currentHost write com.apple.controlcenter.plist Bluetooth -int 18`
-  - RecommendedValue : `18`
-  - Type : `int`
+  - Checking command : `sudo AssetCacheManagerUtil isActivated`
+  - Setting command : `sudo AssetCacheManagerUtil deactivated`
+  - PossibleValues : `deactivated/activated`
   - Graphical method :
     1. Open System Preferences
     2. Select Sharing
     3. Uncheck Content Caching  
+  - Comment : when this command return 1 it's not an error, it's just beacause cache saervice is deactivated

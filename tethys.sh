@@ -344,7 +344,7 @@ do
     #                           STATUS AND AUDIT MODE                          #
     ############################################################################
     #
-    if [[ $MODE == "STATUS" || $MODE == "AUDIT" ]]; then
+    if [[ "$MODE" == "STATUS" || "$MODE" == "AUDIT" ]]; then
 
       #
       # RecommendedValue filter
@@ -373,7 +373,7 @@ do
       #
       # Registry
       #
-      if [[ $Method == "Registry" ]]; then
+      if [[ "$Method" == "Registry" ]]; then
 
         # command
         COMMAND="defaults $MethodOption read $RegistryPath $RegistryItem"
@@ -388,7 +388,7 @@ do
 
         # if an error occurs, it's caused by non-existance of the couple (file,item)
         # we will not consider this as an error, but as an warning
-        if [[ $ReturnedExit == 1 ]]; then
+        if [[ "$ReturnedExit" == 1 ]]; then
           ReturnedExit=26
         fi
 
@@ -421,7 +421,7 @@ do
       # intro : Interfaces with launchd to load, unload daemons/agents and generally control launchd.
       # requirements : $RegistryItem
       #
-      elif [[ $Method == "launchctl" ]]; then
+      elif [[ "$Method" == "launchctl" ]]; then
 
         # command
         COMMAND="launchctl print system/$RegistryItem"
@@ -512,14 +512,14 @@ do
 
         # clean retuned value
         ReturnedValue="${ReturnedValue##*:}" # get content after ":"
-        ReturnedValue=$(echo $ReturnedValue | tr '[:upper:]' '[:lower:]') # convert to lowercase
+        ReturnedValue=$(echo "$ReturnedValue" | tr '[:upper:]' '[:lower:]') # convert to lowercase
         ReturnedValue="${ReturnedValue:1}" # remove first char (space)
 
 
       #
       # fdesetup (FileVault)
       #
-      elif [[ $Method == "fdesetup" ]]; then
+      elif [[ "$Method" == "fdesetup" ]]; then
 
         # command
         COMMAND="fdesetup $GetCommand"
@@ -533,7 +533,7 @@ do
         ReturnedExit=$?
 
         # clean retuned value
-        if [[ $ReturnedValue == "FileVault is Off." ]]; then
+        if [[ "$ReturnedValue" == "FileVault is Off." ]]; then
           ReturnedValue="disable"
         else
           ReturnedValue="enable"
@@ -543,7 +543,7 @@ do
       #
       # AssetCacheManagerUtil
       #
-      elif [[ $Method == "AssetCacheManagerUtil" ]]; then
+      elif [[ "$Method" == "AssetCacheManagerUtil" ]]; then
 
         # command
         COMMAND="sudo AssetCacheManagerUtil $GetCommand"
@@ -575,7 +575,7 @@ do
     #                             REINFORCE METHOD                             #
     ############################################################################
     #
-    if [[ $MODE == "REINFORCE" ]]; then
+    if [[ "$MODE" == "REINFORCE" ]]; then
 
       #
       # Sudo option filter
@@ -585,7 +585,7 @@ do
       #
       # Print category
       #
-      if [[ $PRECEDENT_CATEGORY != $Category ]]; then
+      if [[ "$PRECEDENT_CATEGORY" != "$Category" ]]; then
         echo #new line
         DateValue=$(date +"%D %X")
         echo "[*] $DateValue Starting Category $Category"
@@ -601,16 +601,16 @@ do
       # requirements  : $MethodOption, $RegistryPath, $RegistryItem, $TypeValue, $RecommendedValue
       # optional      : $SudoUser
       #
-      if [[ $Method == "Registry" ]]; then
+      if [[ "$Method" == "Registry" ]]; then
 
         # Type filter
-        if GoodType $TypeValue; then
+        if GoodType "$TypeValue"; then
           AlertMessage "this type is not correct"
           exit 1
         fi
 
         # Add '' around RecommendedValue when type is string
-        if [[ $TypeValue == 'string' ]]; then
+        if [[ "$TypeValue" == 'string' ]]; then
           RecommendedValue="'$RecommendedValue'"
         fi
 

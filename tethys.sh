@@ -689,6 +689,23 @@ do
 
 
       #
+      # systemsetup
+      #
+      elif [[ $Method == "systemsetup" ]]; then
+
+        # command
+        COMMAND="sudo systemsetup $SetCommand"
+
+        # keep alert error in verbose mode
+        if [[ "$VERBOSE" == true ]]; then
+          ReturnedValue=$(eval "$COMMAND")
+        else
+          ReturnedValue=$(eval "$COMMAND" 2>/dev/null)
+        fi
+        ReturnedExit=$?
+
+
+      #
       # fdesetup (FileVault)
       #
       elif [[ $Method == "fdesetup" ]]; then

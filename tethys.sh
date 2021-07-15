@@ -131,15 +131,15 @@ function PrintAudit() {
         POINTSARCHIVED=$((POINTSARCHIVED+2))
           ;;
       esac
-      AlertMessage "[x] $ID : $Name ; AssessmentStatus= $AssessmentStatus ; ActualValue = $ReturnedValue ; RecommendedValue = $RecommendedValue"
+      AlertMessage "[x] $ID : $Name ; AssessmentStatus = $AssessmentStatus ; Level = $Level ; ActualValue = $ReturnedValue ; RecommendedValue = $RecommendedValue"
     fi
 
       ;;
     1 )#Error Exec
-    AlertMessage "[x] $ID : $Name ; AssessmentStatus= $AssessmentStatus ; Error : The execution caused an error"
+    AlertMessage "[x] $ID : $Name ; AssessmentStatus = $AssessmentStatus ; Level = $Level ; Error : The execution caused an error"
       ;;
     26 )#Error exist policy
-    WarningMessage "[!] $ID : $Name ; AssessmentStatus= $AssessmentStatus ; Warning : policy does not exist yet"
+    WarningMessage "[!] $ID : $Name ; AssessmentStatus = $AssessmentStatus ; Level = $Level ; Warning : policy does not exist yet"
       ;;
   esac
 }
@@ -169,6 +169,8 @@ function PrintReinforce() {
 function PrintVerbose() {
   echo -e "${CYAN}[v] $ID :"
   echo -e "    Command       : $COMMAND"
+  echo -e "    Level         : $Level"
+  echo -e "    Operator      : $Operator"
   echo -e "    ReturnedValue : $ReturnedValue"
   echo -e "    ReturnedExit  : $ReturnedExit${NC}"
 }

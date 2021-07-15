@@ -307,7 +307,7 @@ if [[ "$SKIP_UPDATE" == false ]]; then
 
     ReturnedValue=${ReturnedValue//[[:space:]]/} # we remove all white space
 
-    if [ $ReturnedValue == $EXPECTED_OUTPUT_SOFTWARE_UPDATE ]; then
+    if [[ "$ReturnedValue" == "$EXPECTED_OUTPUT_SOFTWARE_UPDATE" ]]; then
       SuccessMessage "Your software is up to date !"
     else
       AlertMessage "You have to update your software."
@@ -358,7 +358,7 @@ do
       #
       # Print category
       #
-      if [[ $PRECEDENT_CATEGORY != $Category ]]; then
+      if [[ "$PRECEDENT_CATEGORY" != "$Category" ]]; then
         echo #new line
         DateValue=$(date +"%D %X")
         echo "[*] $DateValue Starting Category $Category"

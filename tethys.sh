@@ -307,7 +307,7 @@ if [[ "$SKIP_UPDATE" == false ]]; then
 
     ReturnedValue=${ReturnedValue//[[:space:]]/} # we remove all white space
 
-    if [[ $ReturnedValue == $EXPECTED_OUTPUT_SOFTWARE_UPDATE ]]; then
+    if [ $ReturnedValue == $EXPECTED_OUTPUT_SOFTWARE_UPDATE ]; then
       SuccessMessage "Your software is up to date !"
     else
       AlertMessage "You have to update your software."

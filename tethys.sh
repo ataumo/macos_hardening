@@ -544,6 +544,31 @@ do
           ReturnedValue="enable"
         fi
 
+      #
+      # AssetCacheManagerUtil
+      #
+      elif [[ $Method == "AssetCacheManagerUtil" ]]; then
+
+        # command
+        COMMAND="sudo AssetCacheManagerUtil $GetCommand"
+
+        # keep alert error in verbose mode
+        if [[ "$VERBOSE" == true ]]; then
+          ReturnedValue=$(eval "$COMMAND")
+        else
+          ReturnedValue=$(eval "$COMMAND" 2>/dev/null)
+        fi
+        ReturnedExit=$?
+
+        # when this command return 1 it's not an error, it's just beacause cache saervice is deactivated
+        if [[ "$ReturnedExit" == '1' ]]; then
+          ReturnedExit=0
+          ReturnedValue='deactivated'
+        else
+          ReturnedValue='activated'
+        fi
+        echo $ReturnedValue
+
 
       fi
     fi

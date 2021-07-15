@@ -1,6 +1,7 @@
 # Welcome to the macOS Hardening project
 
 ![Work in progress label](https://img.shields.io/badge/-Work%20in%20progress-yellow)
+[![CI](https://github.com/ataumo/macos_hardening/actions/workflows/lint.yml/badge.svg)](https://github.com/ataumo/macos_hardening/actions/workflows/lint.yml)
 
 This project was inspired by
 - [beerisgood/macOS_Hardening](https://github.com/beerisgood/macOS_Hardening)

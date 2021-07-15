@@ -544,6 +544,7 @@ do
           ReturnedValue="enable"
         fi
 
+
       #
       # AssetCacheManagerUtil
       #
@@ -567,7 +568,6 @@ do
         else
           ReturnedValue='activated'
         fi
-        echo $ReturnedValue
 
 
       fi
@@ -700,6 +700,23 @@ do
 
         # command
         COMMAND="sudo fdesetup $RecommendedValue"
+
+        # keep alert error in verbose mode
+        if [[ "$VERBOSE" == true ]]; then
+          ReturnedValue=$(eval "$COMMAND")
+        else
+          ReturnedValue=$(eval "$COMMAND" 2>/dev/null)
+        fi
+        ReturnedExit=$?
+
+
+      #
+      # AssetCacheManagerUtil
+      #
+      elif [[ $Method == "AssetCacheManagerUtil" ]]; then
+
+        # command
+        COMMAND="sudo AssetCacheManagerUtil $RecommendedValue"
 
         # keep alert error in verbose mode
         if [[ "$VERBOSE" == true ]]; then

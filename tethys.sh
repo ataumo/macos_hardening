@@ -118,7 +118,7 @@ function PrintAudit() {
     0 )#No Error
     if [[ "$RecommendedValue" == "$ReturnedValue" ]]; then
       POINTSARCHIVED=$((POINTSARCHIVED+4))
-      SuccessMessage "[-] $ID : $Name ; ActualValue = $ReturnedValue ; RecommendedValue = $RecommendedValue"
+      SuccessMessage "[-] $ID : $Name ; AssessmentStatus= $AssessmentStatus ; ActualValue = $ReturnedValue ; RecommendedValue = $RecommendedValue"
     else
       case $Severity in
         "Hight" )
@@ -131,15 +131,15 @@ function PrintAudit() {
         POINTSARCHIVED=$((POINTSARCHIVED+2))
           ;;
       esac
-      AlertMessage "[x] $ID : $Name ; ActualValue = $ReturnedValue ; RecommendedValue = $RecommendedValue"
+      AlertMessage "[x] $ID : $Name ; AssessmentStatus= $AssessmentStatus ; ActualValue = $ReturnedValue ; RecommendedValue = $RecommendedValue"
     fi
 
       ;;
     1 )#Error Exec
-    AlertMessage "[x] $ID : $Name ; Error : The execution caused an error"
+    AlertMessage "[x] $ID : $Name ; AssessmentStatus= $AssessmentStatus ; Error : The execution caused an error"
       ;;
     26 )#Error exist policy
-    WarningMessage "[!] $ID : $Name ; Warning : policy does not exist yet"
+    WarningMessage "[!] $ID : $Name ; AssessmentStatus= $AssessmentStatus ; Warning : policy does not exist yet"
       ;;
   esac
 }

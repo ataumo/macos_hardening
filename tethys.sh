@@ -250,10 +250,6 @@ while [[ $# -gt 0 ]]; do
       VERBOSE=true
       shift # past argument
       ;;
-    --default)
-      DEFAULT=YES
-      shift # past argument
-      ;;
     *)    # unknown option
       POSITIONAL+=("$1") # save it in an array for later
       shift # past argument

@@ -118,7 +118,7 @@ function PrintAudit() {
     0 )#No Error
     if [[ "$RecommendedValue" == "$ReturnedValue" ]]; then
       POINTSARCHIVED=$((POINTSARCHIVED+4))
-      SuccessMessage "[-] $ID : $Name ; AssessmentStatus= $AssessmentStatus ; ActualValue = $ReturnedValue ; RecommendedValue = $RecommendedValue"
+      SuccessMessage "[-] $ID : $Name ; ActualValue = $ReturnedValue ; RecommendedValue = $RecommendedValue"
     else
       case $Severity in
         "Hight" )
@@ -131,15 +131,33 @@ function PrintAudit() {
         POINTSARCHIVED=$((POINTSARCHIVED+2))
           ;;
       esac
-      AlertMessage "[x] $ID : $Name ; AssessmentStatus = $AssessmentStatus ; Level = $Level ; ActualValue = $ReturnedValue ; RecommendedValue = $RecommendedValue"
+      AlertMessage "[x] $ID : $Name ; ActualValue = $ReturnedValue ; RecommendedValue = $RecommendedValue"
     fi
 
       ;;
     1 )#Error Exec
-    AlertMessage "[x] $ID : $Name ; AssessmentStatus = $AssessmentStatus ; Level = $Level ; Error : The execution caused an error"
+    AlertMessage "[x] $ID : $Name ; Error : The execution caused an error"
       ;;
     26 )#Error exist policy
-    WarningMessage "[!] $ID : $Name ; AssessmentStatus = $AssessmentStatus ; Level = $Level ; Warning : policy does not exist yet"
+    #In this case, we verify the DefaultValue
+    if [[ "$DefaultValue" == "$RecommendedValue" ]]; then
+      POINTSARCHIVED=$((POINTSARCHIVED+4))
+      SuccessMessage "[-] $ID : $Name ; ActualValue = $DefaultValue ; RecommendedValue = $RecommendedValue"
+    else
+      case $Severity in
+        "Hight" )
+        POINTSARCHIVED=$((POINTSARCHIVED+0))
+          ;;
+        "Medium" )
+        POINTSARCHIVED=$((POINTSARCHIVED+1))
+          ;;
+        "Low" )
+        POINTSARCHIVED=$((POINTSARCHIVED+2))
+          ;;
+      esac
+      WarningMessage "[!] $ID : $Name ; Warning : policy does not exist yet"
+    fi
+
       ;;
   esac
 }
@@ -168,11 +186,12 @@ function PrintReinforce() {
 
 function PrintVerbose() {
   echo -e "${CYAN}[v] $ID :"
-  echo -e "    Command       : $COMMAND"
-  echo -e "    Level         : $Level"
-  echo -e "    Operator      : $Operator"
-  echo -e "    ReturnedValue : $ReturnedValue"
-  echo -e "    ReturnedExit  : $ReturnedExit${NC}"
+  echo -e "    Command          : $COMMAND"
+  echo -e "    Level            : $Level"
+  echo -e "    Operator         : $Operator"
+  echo -e "    AssessmentStatus : $AssessmentStatus"
+  echo -e "    ReturnedValue    : $ReturnedValue"
+  echo -e "    ReturnedExit     : $ReturnedExit${NC}"
 }
 
 #

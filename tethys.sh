@@ -155,7 +155,13 @@ function PrintAudit() {
         POINTSARCHIVED=$((POINTSARCHIVED+2))
           ;;
       esac
-      WarningMessage "[!] $ID : $Name ; Warning : policy does not exist yet"
+      # if DefaultValue is empty (not defined)
+      if [[ -z "$DefaultValue" ]]; then
+        WarningMessage "[!] $ID : $Name ; Warning : policy does not exist yet"
+      # if DefaultValue is defined, we consider that is not the RecommendedValue
+      else
+        AlertMessage "[!] $ID : $Name ; ActualValue = $DefaultValue ; RecommendedValue = $RecommendedValue"
+      fi
     fi
 
       ;;
@@ -372,6 +378,15 @@ do
         RecommendedValue=1
       elif [[ $RecommendedValue == "false" ]]; then
         RecommendedValue=0
+      fi
+
+      #
+      # DefaultValue filter
+      #
+      if [[ $DefaultValue == "true" ]]; then
+        DefaultValue=1
+      elif [[ $DefaultValue == "false" ]]; then
+        DefaultValue=0
       fi
 
       #

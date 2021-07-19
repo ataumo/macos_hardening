@@ -306,6 +306,20 @@ echo "##########################################################################
 FirstPrint
 echo "################################################################################"
 echo ""
+
+#
+# Confirm part
+#
+if [[ "$MODE" == "REINFORCE" ]]; then
+  read -p "Are you sure to run REINFORCE mode ? [y/N] " -n 1 -r
+  echo    # (optional) move to a new line
+  if [[ ! $REPLY =~ ^[Yy]$ ]]
+  then
+      exit 1
+  fi
+fi
+
+
 #
 # Verify all Apple provided software is current
 #
@@ -747,12 +761,8 @@ do
         # command
         COMMAND="sudo fdesetup $RecommendedValue"
 
-        # keep alert error in verbose mode
-        if [[ "$VERBOSE" == true ]]; then
-          ReturnedValue=$(eval "$COMMAND")
-        else
-          ReturnedValue=$(eval "$COMMAND" 2>/dev/null)
-        fi
+        # in REINFORCE mode and with this fdesetup moethod, we have to keep stdout
+        ReturnedValue=$(eval "$COMMAND")
         ReturnedExit=$?
 
 

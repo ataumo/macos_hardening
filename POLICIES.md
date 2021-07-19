@@ -541,11 +541,18 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
 
 - Enable FileVault
   - ID : 5000
-  - checking command : `fdesetup status`
-  - setting command : `sudo fdesetup enable`
+  - Level : 1
+  - Method : fdsetup
+  - Assessment Status : Automatically
+  - Checking command : `fdesetup status`
+  - Setting command : `sudo fdesetup enable`
   - DefaultValue : disable
   - RecommendedValue : enable
-  - source :
+  - Graphical Method :
+    1. Open System Preferences
+    2. Select Security & Privacy
+    3. Select FileVault
+    4. Verify that FileVault is on
 
 ## Network
 

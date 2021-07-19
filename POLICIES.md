@@ -529,6 +529,58 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
     3. Select Privacy
     4. Verify Location Services is enabled
 
+### Diagnostic
+
+- Disable sending diagnostic and usage data to Apple
+  - ID : 3700
+  - Level : 2
+  - Method : Registry
+  - Assessment Status : Automatically
+  - Checking command : `defaults read /Library/Application\ Support/CrashReporter/DiagnosticMessagesHistory.plist AutoSubmit`
+  - Setting command : `sudo defaults write /Library/Application\ Support/CrashReporter/DiagnosticMessagesHistory.plist AutoSubmit -bool false`
+  - RecommendedValue : `false`
+  - Type : `bool`
+  - Graphical method :
+    1. Open System Preferences
+    2. Select Security & Privacy
+    3. Select Privacy
+    4. Select Analytics & Improvements
+    5. Verify that "Share Mac Analytics" is not selected
+    6. Verify that "Share with App Developers" is not selected
+
+- Disable "Share with App Developers"
+  - ID : 3701
+  - Method : Registry
+  - Assessment Status : Automatically
+  - Checking command : `defaults read /Library/Application\ Support/CrashReporter/DiagnosticMessagesHistory.plist ThirdPartyDataSubmit`
+  - Setting command : `sudo defaults write /Library/Application\ Support/CrashReporter/DiagnosticMessagesHistory.plist ThirdPartyDataSubmit -bool false`
+  - RecommendedValue : `false`
+  - Type : `bool`
+  - Graphical method :
+    1. Open System Preferences
+    2. Select Security & Privacy
+    3. Select Privacy
+    4. Select Analytics & Improvements
+    5. Verify that "Share with App Developers" is not selected
+
+## Advertisements
+
+- Limit Ad tracking and personalized Ads
+  - ID : 3800
+  - Level : 1
+  - Method : Registry
+  - Assessment Status : Automatically
+  - Checking command : `sudo -u <username> defaults -currentHost read /Users/<username>/Library/Preferences/com.apple.AdLib.plist allowApplePersonalizedAdvertising`
+  - Setting command : `sudo -u <username> defaults -currentHost write /Users/<username>/Library/Preferences/com.apple.Adlib.plist allowApplePersonalizedAdvertising -bool false`
+  - RecommendedValue : `false`
+  - Type : `bool`
+  - Graphical method :
+    1. Open System Preferences
+    2. Select Security & Privacy
+    3. Select Privacy
+    4. Select Advertising
+    5. Verify that Limit Ad Tracking is set
+
 
 ## Protections
 

@@ -36,6 +36,9 @@ ID,Category,Name,AssessmentStatus,Method,MethodOption,GetCommand,SetCommand,User
 3504,User Preferences,Sharing : Disable DVD or CD Sharing,Automatically,launchctl,,,,,,com.apple.ODSAgent,disable,disable,enable/disable,=,Medium,1
 3505,User Preferences,Sharing : Disable Media Sharing,Automatically,Registry,,,,username,com.apple.amp.mediasharingd,home-sharing-enabled,0,0,int,=,Medium,1
 3600,User Preferences,Location : Enable Location Services,Automatically,launchctl,,,,,,com.apple.locationd,disable,enable,enable/disable,=,Medium,2
+3700,User Preferences,Diagnostic : Disable sending diagnostic and usage data to Apple,Automatically,Registry,,,,,/Library/Application\ Support/CrashReporter/DiagnosticMessagesHistory,AutoSubmit,,false,bool,=,Medium,2
+3701,User Preferences,Diagnostic : Share with App Developers,Automatically,Registry,,,,,/Library/Application\ Support/CrashReporter/DiagnosticMessagesHistory,ThirdPartyDataSubmit,,false,bool,=,Medium,ND
+3800,User Preferences,Advertisements : Limit Ad tracking and personalized Ads,Automatically,Registry,,,,,~/Library/Preferences/com.apple.AdLib,allowApplePersonalizedAdvertising,,false,bool,=,Medium,
 4000,Protections,Systeme intergrity protection : Enable Systeme intergrity protection,,csrutil,,status,,,,,enable,enable,enable/disable,=,Hight,ND
 4100,Protections,Gatekeeper : Enable Gatekeeper,,spctl,,--status,,,,,enable,enable,enable/disable,=,Hight,ND
 5000,Encryption,FileVault : Enable FileVault,,fdesetup,,status,,,,,disable,enable,enable/disable,=,Medium,ND

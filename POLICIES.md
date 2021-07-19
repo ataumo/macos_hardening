@@ -512,6 +512,23 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
     2. Select Sharing
     3. Verify that DVD or CD sharing is not set
 
+### Location
+
+- Enable Location Services
+  - ID : 3600
+  - Level : 2
+  - Method : launchctl
+  - Assessment Status : Automatically
+  - Checking command : `sudo launchctl list | grep -c com.apple.locationd`
+  - Setting command : `sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.locationd.plist`
+  - RecommendedValue : `disable`
+  - PossibleValues : `enable/disable`
+  - Graphical method :
+    1. Open System Preferences
+    2. Select Security & Privacy
+    3. Select Privacy
+    4. Verify Location Services is enabled
+
 
 ## Protections
 
@@ -529,11 +546,18 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
 
 - Enable Gatekeeper
   - ID : 4100
-  - checking command : `spctl --status`
-  - setting command : `sudo spctl --master-enable`
+  - Level : 1
+  - Method : `spctl`
+  - Checking command : `spctl --status`
+  - Setting command : `sudo spctl --master-enable`
   - DefaultValue : --master-enable
   - RecommendedValue : --master-enable
-  - source :
+  - Graphical Method :
+    1. Open System Preferences
+    2. Select Security & Privacy
+    3. Select General
+    4. Verify that Allow apps downloaded from is set to App Store and identified
+    developers
 
 ## Encryption
 
@@ -560,12 +584,20 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
 
 - Enable Firewall
   - ID : 6000
+  - Level : 1
+  - Method : Registry
+  - Assessment Status : Automatically
   - checking command : `defaults read /Library/Preferences/com.apple.alf globalstate`
   - setting command : `defaults write /Library/Preferences/com.apple.alf globalstate -int 1`
   - type = `int`
   - DefaultValue : `0`
   - RecommendedValue : `1`
   - PossibleValues : `0,1,2`
+  - Graphical Method :
+    1. Open System Preferences
+    2. Select Security & Privacy
+    3. Select Firewall
+    4. Verify that the firewall is turned on
   - source : https://raymii.org/s/snippets/OS_X_-_Turn_firewall_on_or_off_from_the_command_line.html
 
 - Enable logging
@@ -579,12 +611,20 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
 
 - Enable Stealth Mode
   - ID : 6002
-  - checking command : `defaults read /Library/Preferences/com.apple.alf stealthenabled`
-  - setting command : `defaults write /Library/Preferences/com.apple.alf loggingenabled -bool true`
-  - type = `bool`
+  - Level : 1
+  - Method : Registry
+  - Assessment Status : Automatically
+  - Checking command : `defaults read /Library/Preferences/com.apple.alf stealthenabled`
+  - Setting command : `defaults write /Library/Preferences/com.apple.alf loggingenabled -bool true`
+  - Type = `bool`
   - DefaultValue : `false`
   - RecommendedValue : `true`
-  - source :
+  - Graphical Method :
+    1. Open System Preferences
+    2. Select Security & Privacy
+    3. Select Firewall Options
+    4. Verify that Enable stealth mode is set
+  - Alternative : `sudo /usr/libexec/ApplicationFirewall/socketfilterfw --getstealthmode`
 
 - Disable automatic software whitelisting
   - ID : 6003

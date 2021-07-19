@@ -164,6 +164,7 @@ function PrintAudit() {
       fi
     fi
 
+
       ;;
   esac
 }
@@ -463,6 +464,15 @@ do
           ReturnedExit=26
         fi
 
+        #
+        # ReturnedExit filter
+        #
+        if [[ $ReturnedValue == "true" ]]; then
+          ReturnedValue=1
+        elif [[ $ReturnedValue == "false" ]]; then
+          ReturnedValue=0
+        fi
+
 
       #
       # launchctl
@@ -587,6 +597,21 @@ do
           ReturnedValue="enable"
         fi
 
+      #
+      # nvram
+      #
+      elif [[ "$Method" == "nvram" ]]; then
+
+        # command
+        COMMAND="nvram -p | grep -c '$RegistryItem'"
+
+        # keep alert error in verbose mode
+        if [[ "$VERBOSE" == true ]]; then
+          ReturnedValue=$(eval "$COMMAND")
+        else
+          ReturnedValue=$(eval "$COMMAND" 2>/dev/null)
+        fi
+        ReturnedExit=$?
 
       #
       # AssetCacheManagerUtil

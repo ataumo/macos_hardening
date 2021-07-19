@@ -160,7 +160,7 @@ function PrintAudit() {
         WarningMessage "[!] $ID : $Name ; Warning : policy does not exist yet"
       # if DefaultValue is defined, we consider that is not the RecommendedValue
       else
-        AlertMessage "[!] $ID : $Name ; ActualValue = $DefaultValue ; RecommendedValue = $RecommendedValue"
+        AlertMessage "[x] $ID : $Name ; ActualValue = $DefaultValue ; RecommendedValue = $RecommendedValue"
       fi
     fi
 

@@ -347,6 +347,20 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
     2. Select Bluetooth
     3. Verify the Show Bluetooth in menu bar is selected
 
+- Disable Bluetooth Sharing
+  - ID : 3102
+  - Level : 1
+  - Method : Registry
+  - Assessment Status : Automatically
+  - Checking command : `sudo -u <username> defaults -currentHost read com.apple.Bluetooth PrefKeyServicesEnabled`
+  - Setting command : `sudo -u <username> defaults -currentHost write com.apple.Bluetooth PrefKeyServicesEnabled -int false`
+  - RecommendedValue : `false`
+  - Type : `bool`
+  - Graphical method :
+    1. Open System Preferences
+    2. Select Sharing
+    3. Verify that Bluetooth Sharing is not set
+
 ### Finder
 
 - Show hidden files in Finder

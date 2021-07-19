@@ -470,6 +470,20 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
     2. Select Sharing
     3. Verify that File Sharing is not set
 
+- Disable DVD or CD Sharing
+  - ID : 3504
+  - Level : 1
+  - Method : launchctl
+  - Assessment Status : Automatically
+  - Checking command : `launchctl print-disabled system | grep -c '"com.apple.ODSAgent" => true'`
+  - Setting command : `sudo launchctl disable system/com.apple.ODSAgent`
+  - RecommendedValue : `disable`
+  - PossibleValues : `enable/disable`
+  - Graphical method :
+    1. Open System Preferences
+    2. Select Sharing
+    3. Verify that DVD or CD sharing is not set
+
 
 ## Protections
 

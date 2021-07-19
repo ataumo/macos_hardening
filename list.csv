@@ -34,6 +34,7 @@ ID,Category,Name,AssessmentStatus,Method,MethodOption,GetCommand,SetCommand,User
 3502,User Preferences,Sharing : Disable Screen Sharing,Automatically,launchctl,,,,,,com.apple.screensharing,disable,disable,enable/disable,=,Medium,1
 3503,User Preferences,Sharing : Disable File Sharing,Automatically,launchctl,,,,,,com.apple.smbd,disable,disable,enable/disable,=,Medium,1
 3504,User Preferences,Sharing : Disable DVD or CD Sharing,Automatically,launchctl,,,,,,com.apple.ODSAgent,disable,disable,enable/disable,=,Medium,1
+3505,User Preferences,Sharing : Disable Media Sharing,Automatically,Registry,,,,username,com.apple.amp.mediasharingd,home-sharing-enabled,0,0,int,=,Medium,1
 4000,Protections,Systeme intergrity protection : Enable Systeme intergrity protection,,csrutil,,status,,,,,enable,enable,enable/disable,=,Hight,ND
 4100,Protections,Gatekeeper : Enable Gatekeeper,,spctl,,--status,,,,,enable,enable,enable/disable,=,Hight,ND
 5000,Encryption,FileVault : Enable FileVault,,fdesetup,,status,,,,,disable,enable,enable/disable,=,Medium,ND

@@ -498,6 +498,20 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
     2. Select Sharing
     3. Verify that DVD or CD sharing is not set
 
+- Disable Media Sharing
+  - ID : 3505
+  - Level : 1
+  - Method : Registry
+  - Assessment Status : Automatically
+  - Checking command : `sudo -u <username> defaults read com.apple.amp.mediasharingd home-sharing-enabled`
+  - Setting command : `sudo -u <username> defaults write com.apple.amp.mediasharingd home-sharing-enabled -int 0`
+  - RecommendedValue : `0`
+  - TypeValue : `int`
+  - Graphical method :
+    1. Open System Preferences
+    2. Select Sharing
+    3. Verify that DVD or CD sharing is not set
+
 
 ## Protections
 
@@ -625,4 +639,4 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
     1. Open System Preferences
     2. Select Sharing
     3. Uncheck Content Caching  
-  - Comment : when this command return 1 it's not an error, it's just beacause cache saervice is deactivated
+  - Comment : when this command return 1 it's not an error, it's just because cache saervice is deactivated

@@ -29,17 +29,17 @@ ID,Category,Name,AssessmentStatus,Method,MethodOption,GetCommand,SetCommand,User
 3202,User Preferences,Finder : Show status bar,,Registry,,,,,com.apple.finder,ShowStatusBar,false,true,bool,,Low,ND
 3400,User Preferences,Date and Time : Set time and date automatically,Automatically,systemsetup,,-getnetworktimeserver,-setnetworktimeserver,,,,,time.euro.apple.com,,=,Hight,1
 3500,User Preferences,Sharing : Remote Apple Events,Automatically,systemsetup,,-getremoteappleevents,-setremoteappleevents,,,,off,off,,=,Medium,1
-3501,User Preferences,Sharing : Internet Sharing,Automatically,PlistBuddy,-c,,,,/Library/Preferences/SystemConfiguration/com.apple.nat.plist,NAT:Enabled,,0,,=,Medium,1
+3501,User Preferences,Sharing : Internet Sharing,Automatically,PlistBuddy,-c,,,,/Library/Preferences/SystemConfiguration/com.apple.nat.plist,NAT:Enabled,0,0,,=,Medium,1
 3502,User Preferences,Sharing : Disable Screen Sharing,Automatically,launchctl,,,,,,com.apple.screensharing,disable,disable,enable/disable,=,Medium,1
 3503,User Preferences,Sharing : Disable File Sharing,Automatically,launchctl,,,,,,com.apple.smbd,disable,disable,enable/disable,=,Medium,1
 4000,Protections,Systeme intergrity protection : Enable Systeme intergrity protection,,csrutil,,status,,,,,enable,enable,enable/disable,=,Hight,ND
 4100,Protections,Gatekeeper : Enable Gatekeeper,,spctl,,--status,,,,,enable,enable,enable/disable,=,Hight,ND
 5000,Encryption,FileVault : Enable FileVault,,fdesetup,,status,,,,,disable,enable,enable/disable,=,Medium,ND
 6000,Network,Firewall : Enable Firewall,,Registry,,,,,/Library/Preferences/com.apple.alf,globalstate,0,1,int,>=,Hight,ND
-6001,Network,Firewall : Enable logging,,Registry,,,,,/Library/Preferences/com.apple.alf,loggingenabled,,true,bool,=,Low,ND
-6002,Network,Firewall : Enable Enable Stealth Mode,,Registry,,,,,/Library/Preferences/com.apple.alf,stealthenabled,,true,bool,=,Medium,ND
-6003,Network,Firewall : Disable automatic software whitelisting,,Registry,,,,,/Library/Preferences/com.apple.alf,allowsignedenabled,,false,bool,=,Medium,ND
-6004,Network,Firewall : Disable automatic signed software whitelisting,,Registry,,,,,/Library/Preferences/com.apple.alf,allowdownloadsignedenabled,,false,bool,=,Medium,ND
+6001,Network,Firewall : Enable logging,,Registry,,,,,/Library/Preferences/com.apple.alf,loggingenabled,true,true,bool,=,Low,ND
+6002,Network,Firewall : Enable Enable Stealth Mode,,Registry,,,,,/Library/Preferences/com.apple.alf,stealthenabled,false,true,bool,=,Medium,ND
+6003,Network,Firewall : Disable automatic software whitelisting,,Registry,,,,,/Library/Preferences/com.apple.alf,allowsignedenabled,true,false,bool,=,Medium,ND
+6004,Network,Firewall : Disable automatic signed software whitelisting,,Registry,,,,,/Library/Preferences/com.apple.alf,allowdownloadsignedenabled,true,false,bool,=,Medium,ND
 6005,Network,Firewall : Disable captive portal,,Registry,,,,,/Library/Preferences/SystemConfiguration/com.apple.captive.control,Active,true,false,bool,=,Medium,ND
 6100,Network,Remote Management : Disable Remote Management,,kickstart,,,,,,,,disable,bool,=,Medium,ND
 7000,Cache,Disable Content Caching,Automatically,AssetCacheManagerUtil,,isActivated,,,,,deactivate ,deactivate,bool ,=,Medium,2

@@ -302,18 +302,24 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
 ## User Preferences
 
 ### iCloud
-- Disable the iCloud password for local accounts - Hight
+
+- iCloud configuration
   - ID : 3000
-  - checking command : `defaults read com.apple.preference.users DisableUsingiCloudPassword`
-  - setting command : `defaults write com.apple.preference.users DisableUsingiCloudPassword true`
+  - Level : 2
+  - Method : PlistBuddy
+  - Assessment Status : Manually
+  - Checking command : `/usr/libexec/PlistBuddy -c "Print Accounts:0:LoggedIn" ~/Library/Preferences/MobileMeAccounts.plist`
   - DefaultValue : false
-  - RecommendedValue : false
+  - RecommendedValue : true
   - source : https://developer.apple.com/documentation/devicemanagement/userpreferences
 
 - Enable Find my mac
   - ID : 3001
-  - checking command : `nvram -p | grep -c 'fmm-mobileme-token-FMM'`
-  - setting command : ``
+  - Method : nvram
+  - AssessmentStatus : Manually
+  - Checking command : `nvram -p | grep -c 'fmm-mobileme-token-FMM'`
+  - DefaultValue : 0
+  - RecommendedValue : 2
   - source :
 
 ### Bluetooth

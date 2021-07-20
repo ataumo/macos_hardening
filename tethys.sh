@@ -84,6 +84,14 @@ function SuccessMessage() {
 }
 
 #
+# Backup function
+#
+function Save() {
+  local STRING=$1
+  echo $STRING >> $BACKUPFILE
+}
+
+#
 # First print
 #
 function FirstPrint() {
@@ -315,6 +323,17 @@ fi
 
 set -- "${POSITIONAL[@]}" # restore positional parameters
 
+## backup init file
+if [[ "$MODE" == "BACKUP" ]]; then
+  #BACKUPFILE=$(date +"backup-$USER-%y%m%d-%H%M.csv")
+  BACKUPFILE="backup.csv"
+  # remove file if it already exit
+  if [[ -f "$BACKUPFILE" ]]; then
+    rm "$BACKUPFILE"
+  fi
+
+  Save "ID,Category,Name,AssessmentStatus,Method,MethodOption,GetCommand,SetCommand,User,RegistryPath,RegistryItem,DefaultValue,RecommendedValue,TypeValue,Operator,Severity,Level"
+fi
 
 ################################################################################
 #                                                                              #
@@ -835,13 +854,20 @@ do
     fi
 
     ## Result printing
-    if [[ $MODE == "STATUS" ]]; then
-      PrintResult "$ID" "$Name" "$ReturnedExit" "$ReturnedValue"
-    elif [[ $MODE == "AUDIT" ]]; then
-      PrintAudit "$ID" "$Name" "$ReturnedExit" "$ReturnedValue" "$RecommendedValue" "$Severity"
-    elif [[ $MODE == "REINFORCE" ]]; then
-      PrintReinforce "$ID" "$Name" "$ReturnedExit"
-    fi
+    case "$MODE" in
+      "STATUS" )
+        PrintResult "$ID" "$Name" "$ReturnedExit" "$ReturnedValue"
+        ;;
+      "AUDIT" )
+        PrintAudit "$ID" "$Name" "$ReturnedExit" "$ReturnedValue" "$RecommendedValue" "$Severity"
+        ;;
+      "REINFORCE" )
+        PrintReinforce "$ID" "$Name" "$ReturnedExit"
+        ;;
+      "BACKUP" )
+        Save "$ID,$Category,$Name,$AssessmentStatus,$Method,$MethodOption,$GetCommand,$SetCommand,$SudoUser,$RegistryPath,$RegistryItem,$DefaultValue,$ReturnedValue,$TypeValue,$Operator,$Severity,$Level"
+        ;;
+    esac
 
     # print verbose mode
     if [[ "$VERBOSE" == true ]]; then

@@ -312,6 +312,10 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
   - DefaultValue : false
   - RecommendedValue : true
   - source : https://developer.apple.com/documentation/devicemanagement/userpreferences
+  - Graphical method :
+    1. Open System Preferences
+    2. Select Apple ID
+    3. Select iCloud
 
 - Enable Find my mac
   - ID : 3001
@@ -320,7 +324,11 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
   - Checking command : `nvram -p | grep -c 'fmm-mobileme-token-FMM'`
   - DefaultValue : 0
   - RecommendedValue : 2
-  - source :
+  - Graphical method :
+    1. Open System Preferences
+    2. Select Apple ID
+    3. Select iCloud
+    4. Enable "Find my mac"
 
 ### Bluetooth
 
@@ -569,7 +577,7 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
     4. Select Analytics & Improvements
     5. Verify that "Share with App Developers" is not selected
 
-## Advertisements
+### Advertisements
 
 - Limit Ad tracking and personalized Ads
   - ID : 3800
@@ -587,6 +595,22 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
     4. Select Advertising
     5. Verify that Limit Ad Tracking is set
 
+### Backups
+
+- Time Machine Auto-Backup
+  - ID : 3900
+  - Level : 2
+  - Method : Registry
+  - Assessment Status : Manually
+  - Checking command : `sudo defaults read /Library/Preferences/com.apple.TimeMachine.plist AutoBackup`
+  - Setting command : `sudo sudo tmutil setdestination -a /Volumes/<volumename>`
+  - RecommendedValue : `true`
+  - Type : `bool`
+  - Graphical method :
+    1. Open System Preferences
+    2. Select Time Machine
+    3. Verify that Back Up Automatically is set
+    >To set this policy, we have to configure a volume
 
 ## Protections
 

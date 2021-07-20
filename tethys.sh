@@ -88,7 +88,7 @@ function SuccessMessage() {
 #
 function Save() {
   local STRING=$1
-  echo $STRING >> $BACKUPFILE
+  echo "$STRING" >> $BACKUPFILE
 }
 
 #

@@ -20,7 +20,7 @@ ID,Category,Name,AssessmentStatus,Method,MethodOption,GetCommand,SetCommand,User
 2500,Login/Logout,Automatic login : Disable automatic login,Automatically,Registry,,,,,/Library/Preferences/com.apple.loginwindow,autoLoginUser,false,false,bool,,Medium,ND
 2600,Login/Logout,Console : Disable console logon from the logon screen,,Registry,,,,,/Library/Preferences/com.apple.loginwindow,DisableConsoleAccess,false,true,bool,=,Medium,ND
 2700,Login/Logout,Remote Login : Disable Remote Login,Automatically,systemsetup,,-getremotelogin,-setremotelogin,,,,off,off,,,,ND
-3000,User Preferences,iCloud : iCloud configuration,Manually,PlistBuddy,-c,,,,~/Library/Preferences/MobileMeAccounts.plist,Accounts:0:LoggedIn,,1,,=,Hight,2
+3000,User Preferences,iCloud : iCloud configuration,Manually,PlistBuddy,-c,,,,~/Library/Preferences/MobileMeAccounts.plist,Accounts:0:LoggedIn,ND,1,,=,Hight,2
 3001,User Preferences,iCloud : Enable Find my Mac,,nvram,,,,,,fmm-mobileme-token-FMM,0,2,,=,Hight,ND
 3100,User Preferences,Bluetooth : Disable Bluetooth,Automatically,Registry,,,,,/Library/Preferences/com.apple.Bluetooth,ControllerPowerState,true,false,bool,=,Low,1
 3101,User Preferences,Bluetooth : Show Bluetooth status in menu bar,Automatically,Registry,-currentHost,,,username,com.apple.controlcenter.plist,Bluetooth,24,18,int,=,Low,1

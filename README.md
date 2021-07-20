@@ -15,6 +15,73 @@ Also, project structure is based on [0x6d69636b/windows_hardening](https://githu
 
 (Thanks for your good work !)
 
+## How to use it ?
+
+1. Clone or download this repository
+2. Go to `macos_hardening`
+```bash
+cd macos_hardening
+```
+2. Run this command (audit mode) :
+```bash
+./tethys.sh -a
+```
+
+```
+################################################################################
+User name               : username
+Mode to apply           : AUDIT
+Hostname                : hostname
+CSV File configuration  : list.csv
+################################################################################
+
+################################################################################
+Verify all Apple provided software is current...
+Your software is up to date !
+################################################################################
+
+[*] 07/20/21 15:54:59 Starting Category Updates
+[-] 1001 : Software Update : Automatically check new software updates ; ActualValue = 1 ; RecommendedValue = 1
+[-] 1002 : Software Update : Automatically download new software updates ; ActualValue = 1 ; RecommendedValue = 1
+.
+.
+.
+
+[*] 07/20/21 15:54:59 Starting Category Login/Logout
+[x] 2000 : Sleep : AC display sleep timer ; ActualValue = 10 ; RecommendedValue = 5
+[-] 2001 : Sleep : Battery display sleep timer ; ActualValue = 2 ; RecommendedValue = 2
+.
+.
+.
+
+[*] 07/20/21 15:55:02 Starting Category Cache
+[-] 7000 : Disable Content Caching ; ActualValue = deactivate ; RecommendedValue = deactivate
+
+#################################### SCORE #####################################
+
+total points : 204
+points archived : 135
+Score : 4.30 / 6
+```
+
+### Usages
+
+1. Status Mode
+```bash
+./tethys.sh -s
+```
+
+2. Audit Mode
+```bash
+./tethys.sh -a
+```
+> You can skip Software Update verification with `-skipu`
+
+3. Reinforce Mode
+```bash
+./tethys.sh -r
+```
+
 ## Documentation
 
 ### Apple Documentation

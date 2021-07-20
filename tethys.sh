@@ -441,7 +441,7 @@ do
       ###################################
 
 
-      #
+      # STATUS/AUDIT
       # Registry
       #
       if [[ "$Method" == "Registry" ]]; then
@@ -464,7 +464,7 @@ do
         fi
 
 
-      #
+      # STATUS/AUDIT
       # PlistBuddy (like Registry with more options)
       #
       elif [[ $Method == "PlistBuddy" ]]; then
@@ -496,7 +496,7 @@ do
         fi
 
 
-      #
+      # STATUS/AUDIT
       # launchctl
       # intro : Interfaces with launchd to load, unload daemons/agents and generally control launchd.
       # requirements : $RegistryItem
@@ -526,7 +526,7 @@ do
         fi
 
 
-      #
+      # STATUS/AUDIT
       # csrutil (Intergrity Protection)
       #
       elif [[ $Method == "csrutil" ]]; then
@@ -550,7 +550,7 @@ do
         fi
 
 
-      #
+      # STATUS/AUDIT
       # spctl (Gatekeeper)
       #
       elif [[ $Method == "spctl" ]]; then
@@ -574,7 +574,7 @@ do
         fi
 
 
-      #
+      # STATUS/AUDIT
       # systemsetup
       #
       elif [[ $Method == "systemsetup" ]]; then
@@ -596,7 +596,7 @@ do
         ReturnedValue="${ReturnedValue:1}" # remove first char (space)
 
 
-      #
+      # STATUS/AUDIT
       # fdesetup (FileVault)
       #
       elif [[ "$Method" == "fdesetup" ]]; then
@@ -619,13 +619,14 @@ do
           ReturnedValue="enable"
         fi
 
-      #
+      # STATUS/AUDIT
       # nvram
       #
       elif [[ "$Method" == "nvram" ]]; then
 
         # command
-        COMMAND="nvram -p | grep -c '$RegistryItem'"
+        # we add '|| true' because grep return 1 when it does not find RegistryItem
+        COMMAND="nvram -p | grep -c '$RegistryItem' || true"
 
         # keep alert error in verbose mode
         if [[ "$VERBOSE" == true ]]; then
@@ -635,7 +636,7 @@ do
         fi
         ReturnedExit=$?
 
-      #
+      # STATUS/AUDIT
       # AssetCacheManagerUtil
       #
       elif [[ "$Method" == "AssetCacheManagerUtil" ]]; then

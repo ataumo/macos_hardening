@@ -66,18 +66,22 @@ Score : 4.30 / 6
 
 ### Usages
 
-1. Status Mode
+1. Status Mode : To just read a configuration.
 ```bash
 ./tethys.sh -s
 ```
 
-2. Audit Mode
+2. Audit Mode : It will read and audit a configuration with colors.
+  - Color code :
+    - `Purple` : Appears when a policy with `Hight` severity is not set to the recommended value.
+    - `Red`    : Appears when a policy with `Medium` severity is not set to the recommended value.
+    - `Yellow` : It's when a policy with `Low` severity is not set to the recommended value. It can be ignored.
 ```bash
 ./tethys.sh -a
 ```
 > You can skip Software Update verification with `-skipu`
 
-3. Reinforce Mode
+3. Reinforce Mode : This function will apply all policies with `Automatically` assessment status.
 ```bash
 ./tethys.sh -r
 ```

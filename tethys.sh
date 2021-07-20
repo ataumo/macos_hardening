@@ -4,7 +4,7 @@ RED='\033[0;31m'
 REDBOLD='\033[1;31m'
 YELLOWBOLD='\033[1;33m'
 YELLOW='\033[0;33m'
-PURPLE='\033[0;35m'
+#PURPLE='\033[0;35m'
 PURPLEBOLD='\033[1;35m'
 GREEN='\033[0;32m'
 NC='\033[0m' # No Color
@@ -140,15 +140,15 @@ function PrintAudit() {
       case $Severity in
         "Hight" )
         POINTSARCHIVED=$((POINTSARCHIVED+0))
-        AlertHightMessage $MESSAGE
+        AlertHightMessage "$MESSAGE"
           ;;
         "Medium" )
         POINTSARCHIVED=$((POINTSARCHIVED+1))
-        AlertMediumMessage $MESSAGE
+        AlertMediumMessage "$MESSAGE"
           ;;
         "Low" )
         POINTSARCHIVED=$((POINTSARCHIVED+2))
-        AlertLowMessage $MESSAGE
+        AlertLowMessage "$MESSAGE"
           ;;
       esac
     fi
@@ -172,15 +172,15 @@ function PrintAudit() {
         case $Severity in
           "Hight" )
           POINTSARCHIVED=$((POINTSARCHIVED+0))
-          AlertHightMessage $MESSAGE
+          AlertHightMessage "$MESSAGE"
             ;;
           "Medium" )
           POINTSARCHIVED=$((POINTSARCHIVED+1))
-          AlertMediumMessage $MESSAGE
+          AlertMediumMessage "$MESSAGE"
             ;;
           "Low" )
           POINTSARCHIVED=$((POINTSARCHIVED+2))
-          AlertLowMessage $MESSAGE
+          AlertLowMessage "$MESSAGE"
             ;;
         esac
       fi

@@ -142,6 +142,7 @@ function PrintAudit() {
     0 )#No Error
     if [[ "$RecommendedValue" == "$ReturnedValue" ]]; then
       POINTSARCHIVED=$((POINTSARCHIVED+4))
+      # APPLYREINFORCE=0
       SuccessMessage "[-] $ID : $Name ; ActualValue = $ReturnedValue ; RecommendedValue = $RecommendedValue"
     else
       MESSAGE="[x] $ID : $Name ; ActualValue = $ReturnedValue ; RecommendedValue = $RecommendedValue"
@@ -196,6 +197,58 @@ function PrintAudit() {
 
 
       ;;
+  esac
+}
+
+#
+# Audit all returned values to know what policies need to be apply in REINFORCE (REINFORCE mode)
+# INPUT : ID, Name, ReturnedExit, ReturnedValue, RecommendedValue, Severity
+#
+function AuditBeforeReinforce() {
+  case $ReturnedExit in
+    0 )#No Error
+    if [[ "$RecommendedValue" == "$ReturnedValue" ]]; then
+      APPLYREINFORCE=0
+    else
+      case $Severity in
+        "Hight" )
+        APPLYREINFORCE=1
+          ;;
+        "Medium" )
+        APPLYREINFORCE=2
+          ;;
+        "Low" )
+        APPLYREINFORCE=3
+          ;;
+      esac
+    fi
+      ;;
+
+    1 )#Error Exec
+    APPLYREINFORCE=0
+      ;;
+
+    26 )#Error exist policy
+    # Update ActualValue
+    ReturnedValue="$DefaultValue"
+    #In this case, we verify the DefaultValue
+    if [[ "$DefaultValue" == "$RecommendedValue" ]]; then
+      APPLYREINFORCE=0
+    else
+      case $Severity in
+        "Hight" )
+        APPLYREINFORCE=1
+          ;;
+        "Medium" )
+        APPLYREINFORCE=2
+          ;;
+        "Low" )
+        APPLYREINFORCE=3
+          ;;
+      esac
+    fi
+      ;;
+
   esac
 }
 
@@ -415,7 +468,7 @@ if [ ! -f $INPUT ]; then
   echo "$INPUT file not found";
   exit 99;
 fi
-while read -r ID Category Name AssessmentStatus Method MethodOption GetCommand	SetCommand SudoUser RegistryPath RegistryItem DefaultValue RecommendedValue TypeValue Operator Severity Level
+while read -r ID Category Name AssessmentStatus Method MethodOption GetCommand SetCommand SudoUser RegistryPath RegistryItem DefaultValue RecommendedValue TypeValue Operator Severity Level
 do
   ## We will not take the first row
   if [[ $ID != "ID" ]]; then
@@ -425,7 +478,7 @@ do
     #                           STATUS AND AUDIT MODE                          #
     ############################################################################
     #
-    if [[ "$MODE" == "STATUS" || "$MODE" == "AUDIT" ]]; then
+    if [[ "$MODE" == "STATUS" || "$MODE" == "AUDIT" || "$MODE" == "REINFORCE" || "$MODE" == "BACKUP" ]]; then
 
       #
       # RecommendedValue filter
@@ -690,6 +743,17 @@ do
     #                             REINFORCE METHOD                             #
     ############################################################################
     #
+
+    #
+    # Get audit before reinforcement
+    # APPLYREINFORCE=0 : policy is already configured to recommended value
+    # APPLYREINFORCE=1 : Hight policy have to be configured
+    # APPLYREINFORCE=2 : Medium policy have to be configured
+    # APPLYREINFORCE=3 : Low policy have to be configured
+    #
+    APPLYREINFORCE=0
+    AuditBeforeReinforce "$ID" "$Name" "$ReturnedExit" "$ReturnedValue" "$RecommendedValue" "$Severity"
+
     if [[ "$MODE" == "REINFORCE" ]]; then
 
       #
@@ -876,6 +940,8 @@ do
 
 
   fi
+
+  # Out of main condition to take first line of csv file
 done < $INPUT
 
 ## Redefine separator with its precedent value

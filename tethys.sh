@@ -88,7 +88,7 @@ function SuccessMessage() {
 #
 function Save() {
   local STRING=$1
-  echo "$STRING" >> $BACKUPFILE
+  echo "$STRING" >> "$BACKUPFILE"
 }
 
 #
@@ -755,7 +755,7 @@ do
       APPLYREINFORCE=0
       AuditBeforeReinforce "$ID" "$Name" "$ReturnedExit" "$ReturnedValue" "$RecommendedValue" "$Severity"
 
-      if [[ "$APPLYREINFORCE"!=0 ]]; then
+      if [[ "$APPLYREINFORCE" != 0 ]]; then
 
         #
         # Sudo option filter

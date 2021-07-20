@@ -142,7 +142,6 @@ function PrintAudit() {
     0 )#No Error
     if [[ "$RecommendedValue" == "$ReturnedValue" ]]; then
       POINTSARCHIVED=$((POINTSARCHIVED+4))
-      # APPLYREINFORCE=0
       SuccessMessage "[-] $ID : $Name ; ActualValue = $ReturnedValue ; RecommendedValue = $RecommendedValue"
     else
       MESSAGE="[x] $ID : $Name ; ActualValue = $ReturnedValue ; RecommendedValue = $RecommendedValue"
@@ -744,178 +743,184 @@ do
     ############################################################################
     #
 
-    #
-    # Get audit before reinforcement
-    # APPLYREINFORCE=0 : policy is already configured to recommended value
-    # APPLYREINFORCE=1 : Hight policy have to be configured
-    # APPLYREINFORCE=2 : Medium policy have to be configured
-    # APPLYREINFORCE=3 : Low policy have to be configured
-    #
-    APPLYREINFORCE=0
-    AuditBeforeReinforce "$ID" "$Name" "$ReturnedExit" "$ReturnedValue" "$RecommendedValue" "$Severity"
-
     if [[ "$MODE" == "REINFORCE" ]]; then
 
       #
-      # Sudo option filter
+      # Get audit before reinforcement
+      # APPLYREINFORCE=0 : policy is already configured to recommended value
+      # APPLYREINFORCE=1 : Hight policy have to be configured
+      # APPLYREINFORCE=2 : Medium policy have to be configured
+      # APPLYREINFORCE=3 : Low policy have to be configured
       #
-      SudoUserFilter
+      APPLYREINFORCE=0
+      AuditBeforeReinforce "$ID" "$Name" "$ReturnedExit" "$ReturnedValue" "$RecommendedValue" "$Severity"
 
-      #
-      # Print category
-      #
-      if [[ "$PRECEDENT_CATEGORY" != "$Category" ]]; then
-        echo #new line
-        DateValue=$(date +"%D %X")
-        echo "[*] $DateValue Starting Category $Category"
-        PRECEDENT_CATEGORY=$Category
+      if [[ "$APPLYREINFORCE"!=0 ]]; then
+
+        #
+        # Sudo option filter
+        #
+        SudoUserFilter
+
+        #
+        # Print category
+        #
+        if [[ "$PRECEDENT_CATEGORY" != "$Category" ]]; then
+          echo #new line
+          DateValue=$(date +"%D %X")
+          echo "[*] $DateValue Starting Category $Category"
+          PRECEDENT_CATEGORY=$Category
+        fi
+
+        ###################################
+        #        CASE METHODS             #
+        ###################################
+
+        #
+        # Registry
+        # requirements  : $MethodOption, $RegistryPath, $RegistryItem, $TypeValue, $RecommendedValue
+        # optional      : $SudoUser
+        #
+        if [[ "$Method" == "Registry" ]]; then
+
+          # Type filter
+          if GoodType "$TypeValue"; then
+            AlertMessage "this type is not correct"
+            exit 1
+          fi
+
+          # Add '' around RecommendedValue when type is string
+          if [[ "$TypeValue" == 'string' ]]; then
+            RecommendedValue="'$RecommendedValue'"
+          fi
+
+          # command
+          COMMAND="sudo -u $SudoUser defaults $MethodOption write $RegistryPath $RegistryItem -$TypeValue $RecommendedValue"
+
+          # keep alert error in verbose mode
+          if [[ "$VERBOSE" == true ]]; then
+            ReturnedValue=$(eval "$COMMAND")
+          else
+            ReturnedValue=$(eval "$COMMAND" 2>/dev/null) # throw away stderr
+          fi
+          ReturnedExit=$?
+
+        #
+        # PlistBuddy (like Registry with more options)
+        # requirements : $MethodOption, $RegistryItem, $RecommendedValue, $RegistryPath
+        #
+        elif [[ $Method == "PlistBuddy" ]]; then
+
+          # command
+          COMMAND="sudo /usr/libexec/PlistBuddy $MethodOption \"Set $RegistryItem $RecommendedValue\" $RegistryPath"
+
+          # print command in verbose mode
+          if [[ "$VERBOSE" == true ]]; then
+            ReturnedValue=$(eval "$COMMAND")
+          else
+            ReturnedValue=$(eval "$COMMAND" 2>/dev/null) # throw away stderr
+          fi
+          ReturnedExit=$?
+
+
+        #
+        # launchctl
+        # intro : Interfaces with launchd to load, unload daemons/agents and generally control launchd.
+        # requirements : $RegistryItem
+        #
+        elif [[ $Method == "launchctl" ]]; then
+
+          # command
+          COMMAND="sudo launchctl $RecommendedValue system/$RegistryItem"
+
+          # print command in verbose mode
+          if [[ "$VERBOSE" == true ]]; then
+            ReturnedValue=$(eval "$COMMAND")
+          else
+            ReturnedValue=$(eval "$COMMAND" 2>/dev/null) # throw away stderr
+          fi
+          ReturnedExit=$?
+
+
+        #
+        # csrutil (Integrity Protection)
+        #
+        elif [[ $Method == "csrutil" ]]; then
+          # "This tool needs to be executed from Recovery OS."
+          ReturnedExit=13
+
+
+        #
+        # spctl (Gatekeeper)
+        # requirements  : $RecommendedValue
+        #
+        elif [[ $Method == "spctl" ]]; then
+
+          # command
+          COMMAND="sudo spctl --$RecommendedValue"
+
+          # keep alert error in verbose mode
+          if [[ "$VERBOSE" == true ]]; then
+            ReturnedValue=$(eval "$COMMAND")
+          else
+            ReturnedValue=$(eval "$COMMAND" 2>/dev/null)
+          fi
+          ReturnedExit=$?
+
+
+        #
+        # systemsetup
+        #
+        elif [[ $Method == "systemsetup" ]]; then
+
+          # command
+          COMMAND="sudo systemsetup $SetCommand"
+
+          # keep alert error in verbose mode
+          if [[ "$VERBOSE" == true ]]; then
+            ReturnedValue=$(eval "$COMMAND")
+          else
+            ReturnedValue=$(eval "$COMMAND" 2>/dev/null)
+          fi
+          ReturnedExit=$?
+
+
+        #
+        # fdesetup (FileVault)
+        #
+        elif [[ $Method == "fdesetup" ]]; then
+
+          # command
+          COMMAND="sudo fdesetup $RecommendedValue"
+
+          # in REINFORCE mode and with this fdesetup moethod, we have to keep stdout
+          ReturnedValue=$(eval "$COMMAND")
+          ReturnedExit=$?
+
+
+        #
+        # AssetCacheManagerUtil
+        #
+        elif [[ $Method == "AssetCacheManagerUtil" ]]; then
+
+          # command
+          COMMAND="sudo AssetCacheManagerUtil $RecommendedValue"
+
+          # keep alert error in verbose mode
+          if [[ "$VERBOSE" == true ]]; then
+            ReturnedValue=$(eval "$COMMAND")
+          else
+            ReturnedValue=$(eval "$COMMAND" 2>/dev/null)
+          fi
+          ReturnedExit=$?
+
+
+        fi
+
       fi
-
-      ###################################
-      #        CASE METHODS             #
-      ###################################
-
-      #
-      # Registry
-      # requirements  : $MethodOption, $RegistryPath, $RegistryItem, $TypeValue, $RecommendedValue
-      # optional      : $SudoUser
-      #
-      if [[ "$Method" == "Registry" ]]; then
-
-        # Type filter
-        if GoodType "$TypeValue"; then
-          AlertMessage "this type is not correct"
-          exit 1
-        fi
-
-        # Add '' around RecommendedValue when type is string
-        if [[ "$TypeValue" == 'string' ]]; then
-          RecommendedValue="'$RecommendedValue'"
-        fi
-
-        # command
-        COMMAND="sudo -u $SudoUser defaults $MethodOption write $RegistryPath $RegistryItem -$TypeValue $RecommendedValue"
-
-        # keep alert error in verbose mode
-        if [[ "$VERBOSE" == true ]]; then
-          ReturnedValue=$(eval "$COMMAND")
-        else
-          ReturnedValue=$(eval "$COMMAND" 2>/dev/null) # throw away stderr
-        fi
-        ReturnedExit=$?
-
-      #
-      # PlistBuddy (like Registry with more options)
-      # requirements : $MethodOption, $RegistryItem, $RecommendedValue, $RegistryPath
-      #
-      elif [[ $Method == "PlistBuddy" ]]; then
-
-        # command
-        COMMAND="sudo /usr/libexec/PlistBuddy $MethodOption \"Set $RegistryItem $RecommendedValue\" $RegistryPath"
-
-        # print command in verbose mode
-        if [[ "$VERBOSE" == true ]]; then
-          ReturnedValue=$(eval "$COMMAND")
-        else
-          ReturnedValue=$(eval "$COMMAND" 2>/dev/null) # throw away stderr
-        fi
-        ReturnedExit=$?
-
-
-      #
-      # launchctl
-      # intro : Interfaces with launchd to load, unload daemons/agents and generally control launchd.
-      # requirements : $RegistryItem
-      #
-      elif [[ $Method == "launchctl" ]]; then
-
-        # command
-        COMMAND="sudo launchctl $RecommendedValue system/$RegistryItem"
-
-        # print command in verbose mode
-        if [[ "$VERBOSE" == true ]]; then
-          ReturnedValue=$(eval "$COMMAND")
-        else
-          ReturnedValue=$(eval "$COMMAND" 2>/dev/null) # throw away stderr
-        fi
-        ReturnedExit=$?
-
-
-      #
-      # csrutil (Integrity Protection)
-      #
-      elif [[ $Method == "csrutil" ]]; then
-        # "This tool needs to be executed from Recovery OS."
-        ReturnedExit=13
-
-
-      #
-      # spctl (Gatekeeper)
-      # requirements  : $RecommendedValue
-      #
-      elif [[ $Method == "spctl" ]]; then
-
-        # command
-        COMMAND="sudo spctl --$RecommendedValue"
-
-        # keep alert error in verbose mode
-        if [[ "$VERBOSE" == true ]]; then
-          ReturnedValue=$(eval "$COMMAND")
-        else
-          ReturnedValue=$(eval "$COMMAND" 2>/dev/null)
-        fi
-        ReturnedExit=$?
-
-
-      #
-      # systemsetup
-      #
-      elif [[ $Method == "systemsetup" ]]; then
-
-        # command
-        COMMAND="sudo systemsetup $SetCommand"
-
-        # keep alert error in verbose mode
-        if [[ "$VERBOSE" == true ]]; then
-          ReturnedValue=$(eval "$COMMAND")
-        else
-          ReturnedValue=$(eval "$COMMAND" 2>/dev/null)
-        fi
-        ReturnedExit=$?
-
-
-      #
-      # fdesetup (FileVault)
-      #
-      elif [[ $Method == "fdesetup" ]]; then
-
-        # command
-        COMMAND="sudo fdesetup $RecommendedValue"
-
-        # in REINFORCE mode and with this fdesetup moethod, we have to keep stdout
-        ReturnedValue=$(eval "$COMMAND")
-        ReturnedExit=$?
-
-
-      #
-      # AssetCacheManagerUtil
-      #
-      elif [[ $Method == "AssetCacheManagerUtil" ]]; then
-
-        # command
-        COMMAND="sudo AssetCacheManagerUtil $RecommendedValue"
-
-        # keep alert error in verbose mode
-        if [[ "$VERBOSE" == true ]]; then
-          ReturnedValue=$(eval "$COMMAND")
-        else
-          ReturnedValue=$(eval "$COMMAND" 2>/dev/null)
-        fi
-        ReturnedExit=$?
-
-
-      fi
+      # end of APPLYREINFORCE condition
     fi
+    # end of REINFORCE METHOD
 
     ## Result printing
     case "$MODE" in

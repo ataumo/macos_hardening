@@ -1,7 +1,11 @@
 #!/bin/bash
 CYAN='\033[0;36m'
 RED='\033[0;31m'
+REDBOLD='\033[1;31m'
+YELLOWBOLD='\033[1;33m'
 YELLOW='\033[0;33m'
+PURPLE='\033[0;35m'
+PURPLEBOLD='\033[1;35m'
 GREEN='\033[0;32m'
 NC='\033[0m' # No Color
 MAXIMUMPOINTS=0
@@ -55,10 +59,22 @@ function WarningMessage() {
   echo -e "${YELLOW}$STRING${NC}"
 }
 
-# Alert message
+# Alert messages
 function AlertMessage() {
   local STRING=$1
   echo -e "${RED}$STRING${NC}"
+}
+function AlertHightMessage() {
+  local STRING=$1
+  echo -e "${PURPLEBOLD}$STRING${NC}"
+}
+function AlertMediumMessage() {
+  local STRING=$1
+  echo -e "${REDBOLD}$STRING${NC}"
+}
+function AlertLowMessage() {
+  local STRING=$1
+  echo -e "${YELLOWBOLD}$STRING${NC}"
 }
 
 # Success message
@@ -120,18 +136,21 @@ function PrintAudit() {
       POINTSARCHIVED=$((POINTSARCHIVED+4))
       SuccessMessage "[-] $ID : $Name ; ActualValue = $ReturnedValue ; RecommendedValue = $RecommendedValue"
     else
+      MESSAGE="[x] $ID : $Name ; ActualValue = $ReturnedValue ; RecommendedValue = $RecommendedValue"
       case $Severity in
         "Hight" )
         POINTSARCHIVED=$((POINTSARCHIVED+0))
+        AlertHightMessage $MESSAGE
           ;;
         "Medium" )
         POINTSARCHIVED=$((POINTSARCHIVED+1))
+        AlertMediumMessage $MESSAGE
           ;;
         "Low" )
         POINTSARCHIVED=$((POINTSARCHIVED+2))
+        AlertLowMessage $MESSAGE
           ;;
       esac
-      AlertMessage "[x] $ID : $Name ; ActualValue = $ReturnedValue ; RecommendedValue = $RecommendedValue"
     fi
 
       ;;
@@ -144,23 +163,26 @@ function PrintAudit() {
       POINTSARCHIVED=$((POINTSARCHIVED+4))
       SuccessMessage "[-] $ID : $Name ; ActualValue = $DefaultValue ; RecommendedValue = $RecommendedValue"
     else
-      case $Severity in
-        "Hight" )
-        POINTSARCHIVED=$((POINTSARCHIVED+0))
-          ;;
-        "Medium" )
-        POINTSARCHIVED=$((POINTSARCHIVED+1))
-          ;;
-        "Low" )
-        POINTSARCHIVED=$((POINTSARCHIVED+2))
-          ;;
-      esac
       # if DefaultValue is empty (not defined)
       if [[ -z "$DefaultValue" ]]; then
         WarningMessage "[!] $ID : $Name ; Warning : policy does not exist yet"
       # if DefaultValue is defined, we consider that is not the RecommendedValue
       else
-        AlertMessage "[x] $ID : $Name ; ActualValue = $DefaultValue ; RecommendedValue = $RecommendedValue"
+        MESSAGE="[x] $ID : $Name ; ActualValue = $DefaultValue ; RecommendedValue = $RecommendedValue"
+        case $Severity in
+          "Hight" )
+          POINTSARCHIVED=$((POINTSARCHIVED+0))
+          AlertHightMessage $MESSAGE
+            ;;
+          "Medium" )
+          POINTSARCHIVED=$((POINTSARCHIVED+1))
+          AlertMediumMessage $MESSAGE
+            ;;
+          "Low" )
+          POINTSARCHIVED=$((POINTSARCHIVED+2))
+          AlertLowMessage $MESSAGE
+            ;;
+        esac
       fi
     fi
 
@@ -352,7 +374,7 @@ if [[ "$SKIP_UPDATE" == false ]]; then
     if [[ "$ReturnedValue" == "$EXPECTED_OUTPUT_SOFTWARE_UPDATE" ]]; then
       SuccessMessage "Your software is up to date !"
     else
-      AlertMessage "You have to update your software."
+      AlertHightMessage "You have to update your software."
       SimpleMessage "Remediation 1 : with reinforce mode (-r)"
       SimpleMessage "Remediation 2 : with command 'sudo softwareupdate -ia'"
     fi

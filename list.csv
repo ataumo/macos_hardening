@@ -41,6 +41,7 @@ ID,Category,Name,AssessmentStatus,Method,MethodOption,GetCommand,SetCommand,User
 3800,User Preferences,Advertisements : Limit Ad tracking and personalized Ads,Automatically,Registry,,,,,~/Library/Preferences/com.apple.AdLib,allowApplePersonalizedAdvertising,,false,bool,=,Medium,
 4000,Protections,Systeme intergrity protection : Enable Systeme intergrity protection,,csrutil,,status,,,,,enable,enable,enable/disable,=,Hight,ND
 4100,Protections,Gatekeeper : Enable Gatekeeper,,spctl,,--status,,,,,enable,enable,enable/disable,=,Hight,ND
+4200,Protections,Secure Keyboard Entry : Enable Secure Keyboard Entry in terminal.app,Automatically,Registry,,,,username,-app Terminal,SecureKeyboardEntry,false,true,bool,=,Medium,1
 5000,Encryption,FileVault : Enable FileVault,,fdesetup,,status,,,,,disable,enable,enable/disable,=,Hight,ND
 6000,Network,Firewall : Enable Firewall,,Registry,,,,,/Library/Preferences/com.apple.alf,globalstate,0,1,int,>=,Hight,ND
 6001,Network,Firewall : Enable logging,,Registry,,,,,/Library/Preferences/com.apple.alf,loggingenabled,true,true,bool,=,Low,ND
@@ -49,4 +50,6 @@ ID,Category,Name,AssessmentStatus,Method,MethodOption,GetCommand,SetCommand,User
 6004,Network,Firewall : Disable automatic signed software whitelisting,,Registry,,,,,/Library/Preferences/com.apple.alf,allowdownloadsignedenabled,true,false,bool,=,Medium,ND
 6005,Network,Firewall : Disable captive portal,,Registry,,,,,/Library/Preferences/SystemConfiguration/com.apple.captive.control,Active,true,false,bool,=,Medium,ND
 6100,Network,Remote Management : Disable Remote Management,,kickstart,,,,,,,,disable,bool,=,Medium,ND
+6200,Network,Power Nap : Disable Power Nap,Automatically,pmset,,,,,,womp,0,0,,=,Medium,1
 7000,Cache,Disable Content Caching,Automatically,AssetCacheManagerUtil,,isActivated,,,,,deactivate ,deactivate,bool ,=,Medium,2
+8000,Siri,Disable Siri,Automatically,Registry,,,,username,com.apple.assistant.support.plist,'Assistant Enabled',,false,bool,=,Low,

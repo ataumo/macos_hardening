@@ -641,6 +641,23 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
     4. Verify that Allow apps downloaded from is set to App Store and identified
     developers
 
+### Secure Keyboard Entry
+
+- Enable Secure Keyboard Entry in terminal.app
+  - ID : 4200
+  - Level : 1
+  - Method : Registry
+  - Assessment Status : Automatically
+  - Checking command : `sudo -u <username> defaults read -app Terminal SecureKeyboardEntry`
+  - Setting command : `sudo -u <username> defaults write -app Terminal SecureKeyboardEntry -bool true`
+  - DefaultValue : `false`
+  - RecommendedValue : `true`
+  - Type : `bool`
+  - Graphical method :
+    1. Open Terminal
+    2. Select Terminal
+    3. Select Secure Keyboard Entry
+
 ## Encryption
 
 ### FileVault
@@ -755,7 +772,7 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
     - Setting command : `sudo /usr/libexec/PlistBuddy -c "Set 'AC Power':'Wake On LAN' 0" /Library/Preferences/com.apple.PowerManagement.plist`
   - Method 2 :
     - Method : pmset
-    - Checking command : `pmset -g | grep -e womp`
+    - Checking command : `pmset -g | grep womp`
     - Setting command : `sudo pmset -a womp 0`
   - DefaultValue : `1`
   - RecommendedValue : `0`
@@ -772,9 +789,10 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
   - Level : 1
   - Method : `pmset`
   - Assessment Status : Automatically
-  - Checking command : `pmset -g everything | grep -c 'powernap 1'`
+  - Checking command : `pmset -g | grep powernap`
   - Setting command : `sudo pmset -a powernap 0`
-  - PossibleValues : `deactivated/activated`
+  - DefaultValue : `0`
+  - RecommendedValue : `0`
   - Graphical method :
     1. Open System Preferences
     2. Select Energy Saver
@@ -791,6 +809,21 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
   - Checking command : `sudo AssetCacheManagerUtil isActivated`
   - Setting command : `sudo AssetCacheManagerUtil deactivated`
   - PossibleValues : `deactivated/activated`
+  - Graphical method :
+    1. Open System Preferences
+    2. Select Sharing
+    3. Uncheck Content Caching  
+  - Comment : when this command return 1 it's not an error, it's just because cache saervice is deactivated
+
+## Siri
+
+- Disable Siri
+  - ID : 8000
+  - Method : Registry
+  - Assessment Status : Automatically
+  - Checking command : `sudo -u <username> defaults read com.apple.assistant.support.plist 'Assistant Enabled'`
+  - Setting command : `sudo -u <username> defaults read com.apple.assistant.support.plist 'Assistant Enabled' -bool false`
+  - RecommendedValue : `false`
   - Graphical method :
     1. Open System Preferences
     2. Select Sharing

@@ -57,7 +57,7 @@ function NumToStingBoolean() {
 }
 
 # Convert string boolean to numerical boolean
-function NumToStingBoolean() {
+function StringToNumBoolean() {
   if [[ "$1" == "true" ]]; then
     echo "1"
   else
@@ -448,21 +448,11 @@ do
     if [[ "$MODE" == "STATUS" || "$MODE" == "AUDIT" || "$MODE" == "REINFORCE" || "$MODE" == "BACKUP" ]]; then
 
       #
-      # RecommendedValue filter
+      # RecommendedValue and DefaultValue boolean filter
       #
-      if [[ $RecommendedValue == "true" ]]; then
-        RecommendedValue=1
-      elif [[ $RecommendedValue == "false" ]]; then
-        RecommendedValue=0
-      fi
-
-      #
-      # DefaultValue filter
-      #
-      if [[ $DefaultValue == "true" ]]; then
-        DefaultValue=1
-      elif [[ $DefaultValue == "false" ]]; then
-        DefaultValue=0
+      if [[ "$TypeValue" == "bool" ]]; then
+        RecommendedValue=$(StringToNumBoolean "$RecommendedValue")
+        DefaultValue=$(StringToNumBoolean "$DefaultValue")
       fi
 
       #
@@ -530,11 +520,7 @@ do
         #
         # ReturnedExit filter
         #
-        if [[ $ReturnedValue == "true" ]]; then
-          ReturnedValue=1
-        elif [[ $ReturnedValue == "false" ]]; then
-          ReturnedValue=0
-        fi
+        ReturnedValue=$(StringToNumBoolean "$ReturnedValue")
 
 
       # STATUS/AUDIT

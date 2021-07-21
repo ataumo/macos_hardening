@@ -747,11 +747,23 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
 
 - Disable "Wake for network access"
   - ID : 6101
-  - checking command : `/usr/libexec/PlistBuddy -c "Print 'AC Power':'Wake On LAN'" /Library/Preferences/com.apple.PowerManagement.plist`
-  - setting command : `sudo /usr/libexec/PlistBuddy -c "Set 'AC Power':'Wake On LAN' 0" /Library/Preferences/com.apple.PowerManagement.plist`
+  - Level : 1
+  - Assessment Status : Automatically
+  - Method 1 :
+    - Method : Registry
+    - Checking command : `/usr/libexec/PlistBuddy -c "Print 'AC Power':'Wake On LAN'" /Library/Preferences/com.apple.PowerManagement.plist`
+    - Setting command : `sudo /usr/libexec/PlistBuddy -c "Set 'AC Power':'Wake On LAN' 0" /Library/Preferences/com.apple.PowerManagement.plist`
+  - Method 2 :
+    - Method : pmset
+    - Checking command : `pmset -g | grep -e womp`
+    - Setting command : `sudo pmset -a womp 0`
   - DefaultValue : `1`
   - RecommendedValue : `0`
   - Consquence : Problemes with FindMyMac
+  - Graphical method :
+    1. Open System Preferences
+    2. Select Energy Saver
+    3. Verify that Wake for network access is not set
 
 
 ## Cache

@@ -692,17 +692,6 @@ do
       fi
     fi
 
-    #
-    # Get audit before reinforcement
-    # APPLYREINFORCE=0 : policy is already configured to recommended value
-    # APPLYREINFORCE=1 : Hight policy have to be configured
-    # APPLYREINFORCE=2 : Medium policy have to be configured
-    # APPLYREINFORCE=3 : Low policy have to be configured
-    #
-    APPLYREINFORCE=0
-    AuditBeforeReinforce "$ID" "$Name" "$ReturnedExit" "$ReturnedValue" "$RecommendedValue" "$Severity"
-    echo "$ID, APPLYREINFORCE ===> $APPLYREINFORCE"
-
 
 
     #
@@ -713,7 +702,16 @@ do
 
     if [[ "$MODE" == "REINFORCE" ]]; then
 
-
+      #
+      # Get audit before reinforcement
+      # APPLYREINFORCE=0 : policy is already configured to recommended value
+      # APPLYREINFORCE=1 : Hight policy have to be configured
+      # APPLYREINFORCE=2 : Medium policy have to be configured
+      # APPLYREINFORCE=3 : Low policy have to be configured
+      #
+      APPLYREINFORCE=0
+      AuditBeforeReinforce "$ID" "$Name" "$ReturnedExit" "$ReturnedValue" "$RecommendedValue" "$Severity"
+      # echo "$ID, APPLYREINFORCE ===> $APPLYREINFORCE"
 
       if [[ "$APPLYREINFORCE" != 0 ]]; then
 

@@ -71,46 +71,38 @@ function NumToStingBoolean() {
 
 # Simple message
 function SimpleMessage() {
-  local STRING=$1
-  echo "$STRING"
+  echo "$1"
 }
 
 # Warning message
 function WarningMessage() {
-  local STRING=$1
-  echo -e "${YELLOW}[!] $STRING${NC}"
+  echo -e "${YELLOW}[!] $1${NC}"
 }
 
 # Alert messages
 function AlertMessage() {
-  local STRING=$1
-  echo -e "${RED}[x] $STRING${NC}"
+  echo -e "${RED}[x] $1${NC}"
 }
 function AlertHightMessage() {
-  local STRING=$1
-  echo -e "${PURPLEBOLD}[X] $STRING${NC}"
+  echo -e "${PURPLEBOLD}[X] $1${NC}"
 }
 function AlertMediumMessage() {
-  local STRING=$1
-  echo -e "${REDBOLD}[/] $STRING${NC}"
+  echo -e "${REDBOLD}[/] $1${NC}"
 }
 function AlertLowMessage() {
-  local STRING=$1
-  echo -e "${YELLOWBOLD}[~] $STRING${NC}"
+  echo -e "${YELLOWBOLD}[~] $1${NC}"
 }
 
 # Success message
 function SuccessMessage() {
-  local STRING=$1
-  echo -e "${GREEN}[-] $STRING${NC}"
+  echo -e "${GREEN}[-] $1${NC}"
 }
 
 #
 # Backup function
 #
 function Save() {
-  local STRING=$1
-  echo "$STRING" >> "$BACKUPFILE"
+  echo "$1" >> "$BACKUPFILE"
 }
 
 #

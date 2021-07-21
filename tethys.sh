@@ -56,31 +56,31 @@ function SimpleMessage() {
 # Warning message
 function WarningMessage() {
   local STRING=$1
-  echo -e "${YELLOW}$STRING${NC}"
+  echo -e "${YELLOW}[!] $STRING${NC}"
 }
 
 # Alert messages
 function AlertMessage() {
   local STRING=$1
-  echo -e "${RED}$STRING${NC}"
+  echo -e "${RED}[x] $STRING${NC}"
 }
 function AlertHightMessage() {
   local STRING=$1
-  echo -e "${PURPLEBOLD}$STRING${NC}"
+  echo -e "${PURPLEBOLD}[X] $STRING${NC}"
 }
 function AlertMediumMessage() {
   local STRING=$1
-  echo -e "${REDBOLD}$STRING${NC}"
+  echo -e "${REDBOLD}[/] $STRING${NC}"
 }
 function AlertLowMessage() {
   local STRING=$1
-  echo -e "${YELLOWBOLD}$STRING${NC}"
+  echo -e "${YELLOWBOLD}[~] $STRING${NC}"
 }
 
 # Success message
 function SuccessMessage() {
   local STRING=$1
-  echo -e "${GREEN}$STRING${NC}"
+  echo -e "${GREEN}[-] $STRING${NC}"
 }
 
 #
@@ -139,44 +139,17 @@ function PrintAudit() {
   MAXIMUMPOINTS=$((MAXIMUMPOINTS+4))
 
   case $ReturnedExit in
-    0 )#No Error
-    if [[ "$RecommendedValue" == "$ReturnedValue" ]]; then
-      POINTSARCHIVED=$((POINTSARCHIVED+4))
-      SuccessMessage "[-] $ID : $Name ; ActualValue = $ReturnedValue ; RecommendedValue = $RecommendedValue"
-    else
-      MESSAGE="[x] $ID : $Name ; ActualValue = $ReturnedValue ; RecommendedValue = $RecommendedValue"
-      case $Severity in
-        "Hight" )
-        POINTSARCHIVED=$((POINTSARCHIVED+0))
-        AlertHightMessage "$MESSAGE"
-          ;;
-        "Medium" )
-        POINTSARCHIVED=$((POINTSARCHIVED+1))
-        AlertMediumMessage "$MESSAGE"
-          ;;
-        "Low" )
-        POINTSARCHIVED=$((POINTSARCHIVED+2))
-        AlertLowMessage "$MESSAGE"
-          ;;
-      esac
-    fi
-
-      ;;
-    1 )#Error Exec
-    AlertMessage "[x] $ID : $Name ; Error : The execution caused an error"
-      ;;
-    26 )#Error exist policy
-      #In this case, we verify the DefaultValue
-      if [[ "$DefaultValue" == "$RecommendedValue" ]]; then
-        POINTSARCHIVED=$((POINTSARCHIVED+4))
-        SuccessMessage "[-] $ID : $Name ; ActualValue = $DefaultValue ; RecommendedValue = $RecommendedValue"
+    0 | 26 )#No Error or proplem with existance
+      # if RecommendedValue is empty (not defined)
+      if [[ -z "$RecommendedValue" ]]; then
+        WarningMessage "[!] $ID : $Name ; Warning : policy does not exist yet"
+      # if RecommendedValue is defined
       else
-        # if DefaultValue is empty (not defined)
-        if [[ -z "$DefaultValue" ]]; then
-          WarningMessage "[!] $ID : $Name ; Warning : policy does not exist yet"
-        # if DefaultValue is defined, we consider that is not the RecommendedValue
+        MESSAGE="$ID : $Name ; ActualValue = $ReturnedValue ; RecommendedValue = $RecommendedValue"
+        if [[ "$RecommendedValue" == "$ReturnedValue" ]]; then
+          POINTSARCHIVED=$((POINTSARCHIVED+4))
+          SuccessMessage "$MESSAGE"
         else
-          MESSAGE="[x] $ID : $Name ; ActualValue = $DefaultValue ; RecommendedValue = $RecommendedValue"
           case $Severity in
             "Hight" )
             POINTSARCHIVED=$((POINTSARCHIVED+0))
@@ -193,8 +166,10 @@ function PrintAudit() {
           esac
         fi
       fi
+      ;;
 
-
+    1 )#Error Exec
+    AlertMessage "[x] $ID : $Name ; Error : The execution caused an error"
       ;;
   esac
 }
@@ -933,6 +908,9 @@ do
   fi
 
   # Out of main condition to take first line of csv file
+  # reset some values
+  ReturnedExit=""
+  ReturnedValue=""
 done < $INPUT
 
 ## Redefine separator with its precedent value

@@ -713,7 +713,7 @@ do
       AuditBeforeReinforce "$ID" "$Name" "$ReturnedExit" "$ReturnedValue" "$RecommendedValue" "$Severity"
       # echo "$ID, APPLYREINFORCE ===> $APPLYREINFORCE"
 
-      if [[ "$APPLYREINFORCE" != 0 && "$AssessmentStatus" == "Automatically" ]]; then
+      if [[ "$APPLYREINFORCE" != 0 && "$AssessmentStatus" != "Manually" ]]; then
 
         #
         # Sudo option filter

@@ -625,6 +625,27 @@ do
 
 
       # STATUS/AUDIT
+      # pmset
+      #
+    elif [[ $Method == "pmset" ]]; then
+
+        # command
+        COMMAND="pmset -g | grep $RegistryItem"
+
+        # keep alert error in verbose mode
+        if [[ "$VERBOSE" == true ]]; then
+          ReturnedValue=$(eval "$COMMAND")
+        else
+          ReturnedValue=$(eval "$COMMAND" 2>/dev/null)
+        fi
+        ReturnedExit=$?
+
+        # clean returned value
+        ReturnedValue="${ReturnedValue//[[:space:]]/}" # we remove all white space
+        ReturnedValue="${ReturnedValue#"$RegistryItem"}" # get content after RegistryItem
+
+
+      # STATUS/AUDIT
       # fdesetup (FileVault)
       #
       elif [[ "$Method" == "fdesetup" ]]; then

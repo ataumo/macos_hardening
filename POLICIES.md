@@ -765,6 +765,21 @@ https://developer.apple.com/documentation/devicemanagement/screensaver
     2. Select Energy Saver
     3. Verify that Wake for network access is not set
 
+### PowerNap
+
+- Disable Power Nap
+  - ID : 6200
+  - Level : 1
+  - Method : `pmset`
+  - Assessment Status : Automatically
+  - Checking command : `pmset -g everything | grep -c 'powernap 1'`
+  - Setting command : `sudo pmset -a powernap 0`
+  - PossibleValues : `deactivated/activated`
+  - Graphical method :
+    1. Open System Preferences
+    2. Select Energy Saver
+    3. Verify that Power Nap is not set
+
 
 ## Cache
 

@@ -532,6 +532,7 @@ do
         # we will not consider this as an error, but as an warning
         if [[ "$ReturnedExit" == 1 ]]; then
           ReturnedExit=26
+          ReturnedValue="$DefaultValue"
         fi
 
 
@@ -555,6 +556,7 @@ do
         # we will not consider this as an error, but as an warning
         if [[ $ReturnedExit == 1 ]]; then
           ReturnedExit=26
+          ReturnedValue="$DefaultValue"
         fi
 
         #
@@ -589,6 +591,7 @@ do
         # so, it's not enabled
         if [[ $ReturnedExit == 1 ]]; then
           ReturnedExit=26
+          ReturnedValue="$DefaultValue"
         elif [[ $ReturnedExit == 113 ]]; then
           ReturnedExit=0
           ReturnedValue="disable"
@@ -934,6 +937,7 @@ do
         PrintReinforce "$ID" "$Name" "$ReturnedExit"
         ;;
       "BACKUP" )
+        #echo "$ID, $ReturnedValue"
         Save "$ID,$Category,$Name,$AssessmentStatus,$Method,$MethodOption,$GetCommand,$SetCommand,$SudoUser,$RegistryPath,$RegistryItem,$DefaultValue,$ReturnedValue,$TypeValue,$Operator,$Severity,$Level"
         ;;
     esac

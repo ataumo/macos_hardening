@@ -166,33 +166,33 @@ function PrintAudit() {
     AlertMessage "[x] $ID : $Name ; Error : The execution caused an error"
       ;;
     26 )#Error exist policy
-    #In this case, we verify the DefaultValue
-    if [[ "$DefaultValue" == "$RecommendedValue" ]]; then
-      POINTSARCHIVED=$((POINTSARCHIVED+4))
-      SuccessMessage "[-] $ID : $Name ; ActualValue = $DefaultValue ; RecommendedValue = $RecommendedValue"
-    else
-      # if DefaultValue is empty (not defined)
-      if [[ -z "$DefaultValue" ]]; then
-        WarningMessage "[!] $ID : $Name ; Warning : policy does not exist yet"
-      # if DefaultValue is defined, we consider that is not the RecommendedValue
+      #In this case, we verify the DefaultValue
+      if [[ "$DefaultValue" == "$RecommendedValue" ]]; then
+        POINTSARCHIVED=$((POINTSARCHIVED+4))
+        SuccessMessage "[-] $ID : $Name ; ActualValue = $DefaultValue ; RecommendedValue = $RecommendedValue"
       else
-        MESSAGE="[x] $ID : $Name ; ActualValue = $DefaultValue ; RecommendedValue = $RecommendedValue"
-        case $Severity in
-          "Hight" )
-          POINTSARCHIVED=$((POINTSARCHIVED+0))
-          AlertHightMessage "$MESSAGE"
-            ;;
-          "Medium" )
-          POINTSARCHIVED=$((POINTSARCHIVED+1))
-          AlertMediumMessage "$MESSAGE"
-            ;;
-          "Low" )
-          POINTSARCHIVED=$((POINTSARCHIVED+2))
-          AlertLowMessage "$MESSAGE"
-            ;;
-        esac
+        # if DefaultValue is empty (not defined)
+        if [[ -z "$DefaultValue" ]]; then
+          WarningMessage "[!] $ID : $Name ; Warning : policy does not exist yet"
+        # if DefaultValue is defined, we consider that is not the RecommendedValue
+        else
+          MESSAGE="[x] $ID : $Name ; ActualValue = $DefaultValue ; RecommendedValue = $RecommendedValue"
+          case $Severity in
+            "Hight" )
+            POINTSARCHIVED=$((POINTSARCHIVED+0))
+            AlertHightMessage "$MESSAGE"
+              ;;
+            "Medium" )
+            POINTSARCHIVED=$((POINTSARCHIVED+1))
+            AlertMediumMessage "$MESSAGE"
+              ;;
+            "Low" )
+            POINTSARCHIVED=$((POINTSARCHIVED+2))
+            AlertLowMessage "$MESSAGE"
+              ;;
+          esac
+        fi
       fi
-    fi
 
 
       ;;
@@ -205,7 +205,7 @@ function PrintAudit() {
 #
 function AuditBeforeReinforce() {
   case $ReturnedExit in
-    0 )#No Error
+    0|26 )#No Error
     if [[ "$RecommendedValue" == "$ReturnedValue" ]]; then
       APPLYREINFORCE=0
     else
@@ -225,27 +225,6 @@ function AuditBeforeReinforce() {
 
     1 )#Error Exec
     APPLYREINFORCE=0
-      ;;
-
-    26 )#Error exist policy
-    # Update ActualValue
-    ReturnedValue="$DefaultValue"
-    #In this case, we verify the DefaultValue
-    if [[ "$DefaultValue" == "$RecommendedValue" ]]; then
-      APPLYREINFORCE=0
-    else
-      case $Severity in
-        "Hight" )
-        APPLYREINFORCE=1
-          ;;
-        "Medium" )
-        APPLYREINFORCE=2
-          ;;
-        "Low" )
-        APPLYREINFORCE=3
-          ;;
-      esac
-    fi
       ;;
 
   esac
@@ -738,6 +717,17 @@ do
       fi
     fi
 
+    #
+    # Get audit before reinforcement
+    # APPLYREINFORCE=0 : policy is already configured to recommended value
+    # APPLYREINFORCE=1 : Hight policy have to be configured
+    # APPLYREINFORCE=2 : Medium policy have to be configured
+    # APPLYREINFORCE=3 : Low policy have to be configured
+    #
+    APPLYREINFORCE=0
+    AuditBeforeReinforce "$ID" "$Name" "$ReturnedExit" "$ReturnedValue" "$RecommendedValue" "$Severity"
+    echo "$ID, APPLYREINFORCE ===> $APPLYREINFORCE"
+
 
 
     #
@@ -748,15 +738,7 @@ do
 
     if [[ "$MODE" == "REINFORCE" ]]; then
 
-      #
-      # Get audit before reinforcement
-      # APPLYREINFORCE=0 : policy is already configured to recommended value
-      # APPLYREINFORCE=1 : Hight policy have to be configured
-      # APPLYREINFORCE=2 : Medium policy have to be configured
-      # APPLYREINFORCE=3 : Low policy have to be configured
-      #
-      APPLYREINFORCE=0
-      AuditBeforeReinforce "$ID" "$Name" "$ReturnedExit" "$ReturnedValue" "$RecommendedValue" "$Severity"
+
 
       if [[ "$APPLYREINFORCE" != 0 ]]; then
 

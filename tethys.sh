@@ -156,7 +156,7 @@ function PrintAudit() {
     0 | 26 )#No Error or proplem with existance
       # if RecommendedValue is empty (not defined)
       if [[ -z "$RecommendedValue" ]]; then
-        WarningMessage "[!] $ID : $Name ; Warning : policy does not exist yet"
+        WarningMessage "$ID : $Name ; Warning : policy does not exist yet"
       # if RecommendedValue is defined
       else
         MESSAGE="$ID : $Name ; ActualValue = $ReturnedValue ; RecommendedValue = $RecommendedValue"
@@ -183,7 +183,7 @@ function PrintAudit() {
       ;;
 
     1 )#Error Exec
-    AlertMessage "[x] $ID : $Name ; Error : The execution caused an error"
+    AlertMessage "$ID : $Name ; Error : The execution caused an error"
       ;;
   esac
 }

@@ -44,6 +44,28 @@ function Usage() {
 }
 
 #
+# Convertor functions
+#
+
+# Convert numerical boolean to string boolean
+function NumToStingBoolean() {
+  if [[ "$1" == 1 ]]; then
+    echo "true"
+  else
+    echo "false"
+  fi
+}
+
+# Convert string boolean to numerical boolean
+function NumToStingBoolean() {
+  if [[ "$1" == "true" ]]; then
+    echo "1"
+  else
+    echo "0"
+  fi
+}
+
+#
 # Messages functions
 #
 
@@ -750,6 +772,11 @@ do
           # Add '' around RecommendedValue when type is string
           if [[ "$TypeValue" == 'string' ]]; then
             RecommendedValue="'$RecommendedValue'"
+          fi
+
+          # Convert numerical boolean to string boolean
+          if [[ "$TypeValue" == 'bool' ]]; then
+            RecommendedValue=$(NumToStingBoolean "$RecommendedValue")
           fi
 
           # command

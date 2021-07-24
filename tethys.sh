@@ -338,7 +338,7 @@ done
 
 ## Define default CSV File configuration ##
 if [[ -z $INPUT ]]; then #if INPUT is empty
-  INPUT='list.csv'
+  INPUT='finding_list.csv'
 fi
 
 set -- "${POSITIONAL[@]}" # restore positional parameters

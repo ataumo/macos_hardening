@@ -71,7 +71,7 @@ function StringToNumBoolean() {
 
 # Simple message
 function SimpleMessage() {
-  echo "$1"
+  echo "[ ] $1"
 }
 
 # Warning message

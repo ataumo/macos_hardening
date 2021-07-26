@@ -164,7 +164,8 @@ function PrintAudit() {
         WarningMessage "$ID : $Name ; Warning : policy does not exist yet"
       # if RecommendedValue is defined
       else
-        MESSAGE="$ID : $Name ; ActualValue = $ReturnedValue ; RecommendedValue = $RecommendedValue"
+        #MESSAGE="$ID : $Name ; ActualValue = $ReturnedValue ; RecommendedValue = $RecommendedValue"
+        MESSAGE=$(printf "%-6s %-55s %-11s %s \n" $ID $Name $ReturnedValue $RecommendedValue)
         if [[ "$RecommendedValue" == "$ReturnedValue" ]]; then
           POINTSARCHIVED=$((POINTSARCHIVED+4))
           SuccessMessage "$MESSAGE"

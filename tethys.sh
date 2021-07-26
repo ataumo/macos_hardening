@@ -430,6 +430,7 @@ fi
 
 ### Global varibles
 PRECEDENT_CATEGORY=''
+PRECEDENT_SUBCATEGORY=''
 
 ## Save old separator
 OLDIFS=$IFS
@@ -443,8 +444,14 @@ if [ ! -f $INPUT ]; then
 fi
 while read -r ID Category Name AssessmentStatus Method MethodOption GetCommand SetCommand SudoUser RegistryPath RegistryItem DefaultValue RecommendedValue TypeValue Operator Severity Level
 do
+  ## Print first raw with categories
+  if [[ $ID == "ID" ]]; then
+    ActualValue="Actual"
+    RecommendedValue="Recommended"
+    FIRSTROW=$(printf "%6s %9s %55s %s \n" $ID $Name $ActualValue $RecommendedValue)
+    echo -ne $FIRSTROW
   ## We will not take the first row
-  if [[ $ID != "ID" ]]; then
+  else
 
     #
     ############################################################################
@@ -466,9 +473,20 @@ do
       #
       if [[ "$PRECEDENT_CATEGORY" != "$Category" ]]; then
         echo #new line
+        echo "--------------------------------------------------------------------------------"
         DateValue=$(date +"%D %X")
         echo "[*] $DateValue Starting Category $Category"
         PRECEDENT_CATEGORY=$Category
+      fi
+
+      #
+      # Print subcategory
+      #
+      SubCategory=${Name%:*} # retain the part before the colon
+      Name=${Name##*:} # retain the part after the colon
+      if [[ "$PRECEDENT_SUBCATEGORY" != "$SubCategory" ]]; then
+        echo "------------$SubCategory"
+        PRECEDENT_SUBCATEGORY=$SubCategory
       fi
 
       ###################################

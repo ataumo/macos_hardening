@@ -126,15 +126,20 @@ function PrintResult() {
   local ReturnedValue=$4
 
   case $ReturnedExit in
-    0 )#No Error
-    SimpleMessage "[-] $ID : $Name ; ActualValue = $ReturnedValue"
+    0 | 26 )#No Error or proplem with existance
+      # if RecommendedValue is empty (not defined)
+      if [[ -z "$RecommendedValue" ]]; then
+        WarningMessage "$ID : $Name ; Warning : policy does not exist yet"
+      # if RecommendedValue is defined
+      else
+        #MESSAGE="$ID : $Name ; ActualValue = $ReturnedValue ; RecommendedValue = $RecommendedValue"
+        MESSAGE=$(printf "%-6s %-55s %-11s %s \n" $ID $Name $ReturnedValue $RecommendedValue)
+        SimpleMessage "$MESSAGE"
+      fi
       ;;
+
     1 )#Error Exec
-    AlertMessage "[x] $ID : $Name ; Error : The execution caused an error"
-      ;;
-    26 )#Error exist policy
-    # if this policy does not exist, its value is DefaultValue
-    SimpleMessage "[-] $ID : $Name ; ActualValue = $DefaultValue"
+    AlertMessage "$ID : $Name ; Error : The execution caused an error"
       ;;
   esac
 }

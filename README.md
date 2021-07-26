@@ -40,28 +40,38 @@ Verify all Apple provided software is current...
 Your software is up to date !
 ################################################################################
 
-[*] 07/20/21 15:54:59 Starting Category Updates
-[-] 1001 : Software Update : Automatically check new software updates ; ActualValue = 1 ; RecommendedValue = 1
-[-] 1002 : Software Update : Automatically download new software updates ; ActualValue = 1 ; RecommendedValue = 1
+    ID      Name                                                  Actual Recommended
+--------------------------------------------------------------------------------
+[*] 07/26/21 16:14:07 Starting Category Updates
+------------Software Update
+[-] 1001    Automatically check new software updates               1           1
+[-] 1002    Automatically download new software updates            1           1
 .
 .
 .
 
-[*] 07/20/21 15:54:59 Starting Category Login/Logout
-[x] 2000 : Sleep : AC display sleep timer ; ActualValue = 10 ; RecommendedValue = 5
-[-] 2001 : Sleep : Battery display sleep timer ; ActualValue = 2 ; RecommendedValue = 2
+--------------------------------------------------------------------------------
+[*] 07/26/21 16:14:07 Starting Category Login/Logout
+------------Sleep
+[/] 2000    AC display sleep timer                                 0           5
+[/] 2001    Battery display sleep timer                            0           2
+------------Screen Saver
+[X] 2100    Enable prompt for a password on screen saver           0           1
+[X] 2101    Set password delay                                     0          
 .
 .
 .
 
-[*] 07/20/21 15:55:02 Starting Category Cache
-[-] 7000 : Disable Content Caching ; ActualValue = deactivate ; RecommendedValue = deactivate
+--------------------------------------------------------------------------------
+[*] 07/26/21 16:14:08 Starting Category Cache
+------------Disable Content Caching
+[-] 7000    Disable Content Caching                                deactivate  deactivate
 
 #################################### SCORE #####################################
 
-total points : 204
-points archived : 135
-Score : 4.30 / 6
+total points : 216
+points archived : 140
+Score : 4.24 / 6
 ```
 
 ### Usages

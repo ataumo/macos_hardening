@@ -133,7 +133,7 @@ function PrintResult() {
       # if RecommendedValue is defined
       else
         #MESSAGE="$ID : $Name ; ActualValue = $ReturnedValue ; RecommendedValue = $RecommendedValue"
-        MESSAGE=$(printf "%-6s %-55s %-11s %s \n" $ID $Name $ReturnedValue $RecommendedValue)
+        MESSAGE=$(printf "%-6s %-55s %-11s %s \n" "$ID" "$Name" "$ReturnedValue" "$RecommendedValue")
         SimpleMessage "$MESSAGE"
       fi
       ;;
@@ -165,7 +165,7 @@ function PrintAudit() {
       # if RecommendedValue is defined
       else
         #MESSAGE="$ID : $Name ; ActualValue = $ReturnedValue ; RecommendedValue = $RecommendedValue"
-        MESSAGE=$(printf "%-6s %-55s %-11s %s \n" $ID $Name $ReturnedValue $RecommendedValue)
+        MESSAGE=$(printf "%-6s %-55s %-11s %s \n" "$ID" "$Name" "$ReturnedValue" "$RecommendedValue")
         if [[ "$RecommendedValue" == "$ReturnedValue" ]]; then
           POINTSARCHIVED=$((POINTSARCHIVED+4))
           SuccessMessage "$MESSAGE"
@@ -448,7 +448,7 @@ do
   if [[ $ID == "ID" ]]; then
     ActualValue="Actual"
     RecommendedValue="Recommended"
-    FIRSTROW=$(printf "%6s %9s %55s %s \n" $ID $Name $ActualValue $RecommendedValue)
+    FIRSTROW=$(printf "%6s %9s %55s %s \n" "$ID" "$Name" "$ActualValue" "$RecommendedValue")
     echo -ne "$FIRSTROW"
   ## We will not take the first row
   else

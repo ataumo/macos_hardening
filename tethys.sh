@@ -35,7 +35,7 @@ function Usage() {
   echo "    -a | --audit                : audit configuration"
   echo "    options :"
   echo "        -skipu | --skip-update     : to skip software update verification in audit mode"
-  echo "    -r | --reinforce            : reinforce a configuration"
+  echo "    -H | --harden            : to harden a configuration"
   echo "  file :"
   echo "    -f | --file                 : csv file containing list of policies"
   echo "  global options :"
@@ -195,38 +195,38 @@ function PrintAudit() {
 }
 
 #
-# Audit all returned values to know what policies need to be apply in REINFORCE (REINFORCE mode)
+# Audit all returned values to know what policies need to be apply in HARDEN (HARDEN mode)
 # INPUT : ID, Name, ReturnedExit, ReturnedValue, RecommendedValue, Severity
 #
 function AuditBeforeReinforce() {
   case $ReturnedExit in
     0|26 )#No Error
     if [[ "$RecommendedValue" == "$ReturnedValue" ]]; then
-      APPLYREINFORCE=0
+      APPLYHARDEN=0
     else
       case $Severity in
         "Hight" )
-        APPLYREINFORCE=1
+        APPLYHARDEN=1
           ;;
         "Medium" )
-        APPLYREINFORCE=2
+        APPLYHARDEN=2
           ;;
         "Low" )
-        APPLYREINFORCE=3
+        APPLYHARDEN=3
           ;;
       esac
     fi
       ;;
 
     1 )#Error Exec
-    APPLYREINFORCE=0
+    APPLYHARDEN=0
       ;;
 
   esac
 }
 
 #
-# State result of reinforcement (REINFORCE mode)
+# State result of hardening (HARDEN mode)
 # INPUT : ID, Name, ReturnedExit
 #
 function PrintReinforce() {
@@ -313,8 +313,8 @@ while [[ $# -gt 0 ]]; do
       MODE="STATUS"
       shift # past argument
       ;;
-    -r|--reinforce)
-      MODE="REINFORCE"
+    -H|--harden)
+      MODE="HARDEN"
       shift # past argument
       ;;
     -b|--backup)
@@ -378,8 +378,8 @@ echo ""
 #
 # Confirm part
 #
-if [[ "$MODE" == "REINFORCE" ]]; then
-  read -p "Are you sure to run REINFORCE mode ? [y/N] " -n 1 -r
+if [[ "$MODE" == "HARDEN" ]]; then
+  read -p "Are you sure to run HARDEN mode ? [y/N] " -n 1 -r
   echo    # (optional) move to a new line
   if [[ ! $REPLY =~ ^[Yy]$ ]]
   then
@@ -420,7 +420,7 @@ if [[ "$SKIP_UPDATE" == false ]]; then
       SuccessMessage "Your software is up to date !"
     else
       AlertHightMessage "You have to update your software."
-      SimpleMessage "Remediation 1 : with reinforce mode (-r)"
+      SimpleMessage "Remediation 1 : with hadening mode (-H|--harden)"
       SimpleMessage "Remediation 2 : with command 'sudo softwareupdate -ia'"
     fi
   fi
@@ -449,7 +449,7 @@ do
     ActualValue="Actual"
     RecommendedValue="Recommended"
     FIRSTROW=$(printf "%6s %9s %55s %s \n" $ID $Name $ActualValue $RecommendedValue)
-    echo -ne $FIRSTROW
+    echo -ne "$FIRSTROW"
   ## We will not take the first row
   else
 
@@ -458,7 +458,7 @@ do
     #                           STATUS AND AUDIT MODE                          #
     ############################################################################
     #
-    if [[ "$MODE" == "STATUS" || "$MODE" == "AUDIT" || "$MODE" == "REINFORCE" || "$MODE" == "BACKUP" ]]; then
+    if [[ "$MODE" == "STATUS" || "$MODE" == "AUDIT" || "$MODE" == "HARDEN" || "$MODE" == "BACKUP" ]]; then
 
       #
       # RecommendedValue and DefaultValue boolean filter
@@ -741,24 +741,24 @@ do
 
     #
     ############################################################################
-    #                             REINFORCE METHOD                             #
+    #                             HARDEN METHOD                             #
     ############################################################################
     #
 
-    if [[ "$MODE" == "REINFORCE" ]]; then
+    if [[ "$MODE" == "HARDEN" ]]; then
 
       #
-      # Get audit before reinforcement
-      # APPLYREINFORCE=0 : policy is already configured to recommended value
-      # APPLYREINFORCE=1 : Hight policy have to be configured
-      # APPLYREINFORCE=2 : Medium policy have to be configured
-      # APPLYREINFORCE=3 : Low policy have to be configured
+      # Get audit before hardening
+      # APPLYHARDEN=0 : policy is already configured to recommended value
+      # APPLYHARDEN=1 : Hight policy have to be configured
+      # APPLYHARDEN=2 : Medium policy have to be configured
+      # APPLYHARDEN=3 : Low policy have to be configured
       #
-      APPLYREINFORCE=0
+      APPLYHARDEN=0
       AuditBeforeReinforce "$ID" "$Name" "$ReturnedExit" "$ReturnedValue" "$RecommendedValue" "$Severity"
-      # echo "$ID, APPLYREINFORCE ===> $APPLYREINFORCE"
+      # echo "$ID, APPLYHARDEN ===> $APPLYHARDEN"
 
-      if [[ "$APPLYREINFORCE" != 0 && "$AssessmentStatus" != "Manually" ]]; then
+      if [[ "$APPLYHARDEN" != 0 && "$AssessmentStatus" != "Manually" ]]; then
 
         #
         # Sudo option filter
@@ -901,7 +901,7 @@ do
           # command
           COMMAND="sudo fdesetup $RecommendedValue"
 
-          # in REINFORCE mode and with this fdesetup moethod, we have to keep stdout
+          # in HARDEN mode and with this fdesetup moethod, we have to keep stdout
           ReturnedValue=$(eval "$COMMAND")
           ReturnedExit=$?
 
@@ -926,9 +926,9 @@ do
         fi
 
       fi
-      # end of APPLYREINFORCE condition
+      # end of APPLYHARDEN condition
     fi
-    # end of REINFORCE METHOD
+    # end of HARDEN METHOD
 
     ## Result printing
     case "$MODE" in
@@ -938,7 +938,7 @@ do
       "AUDIT" )
         PrintAudit "$ID" "$Name" "$ReturnedExit" "$ReturnedValue" "$RecommendedValue" "$Severity"
         ;;
-      "REINFORCE" )
+      "HARDEN" )
         PrintReinforce "$ID" "$Name" "$ReturnedExit"
         ;;
       "BACKUP" )

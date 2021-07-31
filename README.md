@@ -15,19 +15,31 @@ Also, project structure is based on [0x6d69636b/windows_hardening](https://githu
 
 (Thanks for your good work !)
 
-## How to use it ?
+## HardeningDoggy
+
+_HardeningDoggy_ supports hardening of a macOS system. The configuration of the system is retrieved and assessed using a finding list. In addition, the system can be hardened according to predefined values. _HardeningDoggy_ reads settings from the registry (`defaults` command) and uses other modules to read configurations outside the registry.
+
+### How to run
 
 1. Clone or download this repository
 2. Go to `macos_hardening`
 ```bash
 cd macos_hardening
 ```
-2. Run this command (audit mode) :
+2. Run this command :
 ```bash
-./tethys.sh -a
+./doggy.sh
 ```
 
 ```
+username@hostname ~/macos_hardening % ./doggy.sh 
+
+
+                             ^. .^                                   
+                             (=°=)                                   
+                             (n  n )/  HardeningDoggy                
+
+
 ################################################################################
 User name               : username
 Mode to apply           : AUDIT
@@ -78,7 +90,7 @@ Score : 4.24 / 6
 
 1. Status Mode : To just read a configuration.
 ```bash
-./tethys.sh -s
+./doggy.sh -s
 ```
 
 2. Audit Mode : It will read and audit a configuration with colors.
@@ -87,13 +99,13 @@ Score : 4.24 / 6
     - `Red`    : Appears when a policy with `Medium` severity is not set to the recommended value.
     - `Yellow` : It's when a policy with `Low` severity is not set to the recommended value. It can be ignored.
 ```bash
-./tethys.sh -a
+./doggy.sh -a
 ```
 > You can skip Software Update verification with `-skipu`
 
-3. Reinforce Mode : This function will apply all policies with `Automatically` assessment status.
+3. Hardening Mode : This function will apply all policies with `Automatically` assessment status.
 ```bash
-./tethys.sh -r
+./doggy.sh -H
 ```
 
 ## Documentation

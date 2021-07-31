@@ -1,4 +1,12 @@
 #!/bin/bash
+
+#
+#  ^. .^
+#  (=°=)
+#  (n  n )/  HardeningDoggy
+#
+
+
 CYAN='\033[0;36m'
 RED='\033[0;31m'
 REDBOLD='\033[1;31m'
@@ -108,6 +116,19 @@ function Save() {
 #
 # First print
 #
+
+# Intro
+function Intro() {
+  echo ""
+  echo ""
+  echo "                             ^. .^                                   "
+  echo "                             (=°=)                                   "
+  echo "                             (n  n )/  HardeningDoggy                "
+  echo ""
+  echo ""
+}
+
+# Config
 function FirstPrint() {
   echo "User name               : $USER"
   echo "Mode to apply           : $MODE"
@@ -297,6 +318,7 @@ function SudoUserFilter() {
 POSITIONAL=()
 SKIP_UPDATE=false
 VERBOSE=false
+MODE="AUDIT"
 while [[ $# -gt 0 ]]; do
   key="$1"
 
@@ -366,6 +388,11 @@ fi
 #                                 MAIN CODE                                    #
 #                                                                              #
 ################################################################################
+
+#
+# Print Intro
+#
+Intro
 
 #
 # First print with some caracteritics environnement

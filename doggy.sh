@@ -31,11 +31,11 @@ POINTSARCHIVED=0
 #
 function Usage() {
   echo "Usages: "
-  echo "  ./tethys.sh -h"
-  echo "  ./tethys.sh [mode]"
-  echo "  ./tethys.sh [mode [options]]"
-  echo "  ./tethys.sh [mode] [file <file.csv>]"
-  echo "  ./tethys.sh [mode [options]] [global options] [file <file.csv>]"
+  echo "  ./doggy.sh -h"
+  echo "  ./doggy.sh [mode]"
+  echo "  ./doggy.sh [mode [options]]"
+  echo "  ./doggy.sh [mode] [file <file.csv>]"
+  echo "  ./doggy.sh [mode [options]] [global options] [file <file.csv>]"
   echo ""
   echo "  -h | --help                   : help method"
   echo "  mode :"

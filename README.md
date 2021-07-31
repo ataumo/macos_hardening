@@ -101,11 +101,17 @@ Score : 4.24 / 6
 ```bash
 ./doggy.sh -a
 ```
-> You can skip Software Update verification with `-skipu`
+> You can skip Software Update verification with `-skipu`.
 
 3. Hardening Mode : This function will apply all policies with `Automatically` assessment status.
 ```bash
 ./doggy.sh -H
+```
+> Hardening Mode will ask your confirmation.
+
+4. Backup option : You can save your configuration in csv file before the Hardening Mode.
+```bash
+./doggy -b
 ```
 
 ## Documentation

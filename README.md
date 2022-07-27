@@ -95,7 +95,7 @@ Score : 4.24 / 6
 
 2. Audit Mode : It will read and audit a configuration with colors.
   - Color code :
-    - `Purple` : Appears when a policy with `Hight` severity is not set to the recommended value.
+    - `Purple` : Appears when a policy with `High` severity is not set to the recommended value.
     - `Red`    : Appears when a policy with `Medium` severity is not set to the recommended value.
     - `Yellow` : It's when a policy with `Low` severity is not set to the recommended value. It can be ignored.
 ```bash

@@ -10,6 +10,8 @@ This project was inspired by
 - [MoeClub/Note](https://github.com/MoeClub/Note/blob/81a3651d81c871f2327c3312e090bdca3cabf915/MacInitial.sh)
 - [alichtman/stronghold](https://github.com/alichtman/stronghold/blob/master/stronghold.py)
 - [wazuh/cis_apple_macOS_10.13.yml](https://github.com/wazuh/wazuh-ruleset/blob/13925fbe0d0e27f012d3d3f3c492e4d420a104b4/sca/darwin/17/cis_apple_macOS_10.13.yml)
+- [mathiasbynens/dotfiles](https://github.com/mathiasbynens/dotfiles/blob/master/.macos)
+- [pathikrit/mac-setup-script](https://github.com/pathikrit/mac-setup-script/blob/master/defaults.sh)
 
 **(Thanks for your good work !)**
 

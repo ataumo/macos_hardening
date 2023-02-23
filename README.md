@@ -15,11 +15,11 @@ This project was inspired by
 
 **(Thanks for your good work !)**
 
-Also, project structure is based on [HardeningKitty](https://github.com/0x6d69636b/windows_hardening) work and, because Windows and macOS are like cats and dogs, this project is called _HardeningDoggy_.
+Also, project structure is based on [HardeningKitty](https://github.com/0x6d69636b/windows_hardening) work and, because Windows and macOS are like cats and dogs, this project is called _HardeningPuppy_.
 
-## HardeningDoggy
+## HardeningPuppy
 
-_HardeningDoggy_ supports hardening of a macOS system. The configuration of the system is retrieved and assessed using a finding list. In addition, the system can be hardened according to predefined values. _HardeningDoggy_ reads settings from the registry (`defaults` command) and uses other modules to read configurations outside the registry.
+_HardeningPuppy_ supports hardening of a macOS system. The configuration of the system is retrieved and assessed using a finding list. In addition, the system can be hardened according to predefined values. _HardeningPuppy_ reads settings from the registry (`defaults` command) and uses other modules to read configurations outside the registry.
 
 ### How to run
 
@@ -30,16 +30,16 @@ cd macos_hardening
 ```
 2. Run this command :
 ```bash
-./doggy.sh
+./puppy.sh
 ```
 
 ```
-username@hostname ~/macos_hardening % ./doggy.sh
+username@hostname ~/macos_hardening % ./puppy.sh
 
 
                              ^. .^                                   
                              (=°=)                                   
-                             (n  n )/  HardeningDoggy                
+                             (n  n )/  HardeningPuppy                
 
 
 ################################################################################
@@ -92,7 +92,7 @@ Score : 4.24 / 6
 
 1. Status Mode : To just read a configuration.
 ```bash
-./doggy.sh -s
+./puppy.sh -s
 ```
 
 2. Audit Mode : It will read and audit a configuration with colors.
@@ -101,19 +101,19 @@ Score : 4.24 / 6
     - `Red`    : Appears when a policy with `Medium` severity is not set to the recommended value.
     - `Yellow` : It's when a policy with `Low` severity is not set to the recommended value. It can be ignored.
 ```bash
-./doggy.sh -a
+./puppy.sh -a
 ```
 > You can skip Software Update verification with `-skipu`.
 
 3. Hardening Mode : This function will apply all policies with `Automatically` assessment status.
 ```bash
-./doggy.sh -H
+./puppy.sh -H
 ```
 > Hardening Mode will ask your confirmation.
 
 4. Backup option : You can save your configuration in csv file before the Hardening Mode.
 ```bash
-./doggy.sh -b
+./puppy.sh -b
 ```
 
 ## Documentation

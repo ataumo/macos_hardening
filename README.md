@@ -113,7 +113,7 @@ Score : 4.24 / 6
 
 4. Backup option : You can save your configuration in csv file before the Hardening Mode.
 ```bash
-./doggy -b
+./doggy.sh -b
 ```
 
 ## Documentation

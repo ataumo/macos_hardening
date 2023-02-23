@@ -3,7 +3,7 @@
 #
 #  ^. .^
 #  (=°=)
-#  (n  n )/  HardeningDoggy
+#  (n  n )/  HardeningPuppy
 #
 
 
@@ -31,11 +31,11 @@ POINTSARCHIVED=0
 #
 function Usage() {
   echo "Usages: "
-  echo "  ./doggy.sh -h"
-  echo "  ./doggy.sh [mode]"
-  echo "  ./doggy.sh [mode [options]]"
-  echo "  ./doggy.sh [mode] [file <file.csv>]"
-  echo "  ./doggy.sh [mode [options]] [global options] [file <file.csv>]"
+  echo "  ./puppy.sh -h"
+  echo "  ./puppy.sh [mode]"
+  echo "  ./puppy.sh [mode [options]]"
+  echo "  ./puppy.sh [mode] [file <file.csv>]"
+  echo "  ./puppy.sh [mode [options]] [global options] [file <file.csv>]"
   echo ""
   echo "  -h | --help                   : help method"
   echo "  mode :"
@@ -124,7 +124,7 @@ function Intro() {
   echo ""
   echo "                             ^. .^                                   "
   echo "                             (=°=)                                   "
-  echo "                             (n  n )/  HardeningDoggy                "
+  echo "                             (n  n )/  HardeningPuppy                "
   echo ""
   echo ""
 }

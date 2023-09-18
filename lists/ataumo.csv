@@ -45,7 +45,7 @@ ID,Category,Name,AssessmentStatus,Method,MethodOption,GetCommand,SetCommand,User
 5000,Encryption,FileVault : Enable FileVault,,fdesetup,,status,,,,,disable,enable,enable/disable,=,High,ND
 6000,Network,Firewall : Enable Firewall,,Registry,,,,,/Library/Preferences/com.apple.alf,globalstate,0,1,int,>=,High,ND
 6001,Network,Firewall : Enable logging,,Registry,,,,,/Library/Preferences/com.apple.alf,loggingenabled,true,true,bool,=,Low,ND
-6002,Network,Firewall : Enable Enable Stealth Mode,,Registry,,,,,/Library/Preferences/com.apple.alf,stealthenabled,false,true,bool,=,Medium,ND
+6002,Network,Firewall : Enable Stealth Mode,,Registry,,,,,/Library/Preferences/com.apple.alf,stealthenabled,false,true,bool,=,Medium,ND
 6003,Network,Firewall : Disable automatic software whitelisting,,Registry,,,,,/Library/Preferences/com.apple.alf,allowsignedenabled,true,false,bool,=,Medium,ND
 6004,Network,Firewall : Disable automatic signed software whitelisting,,Registry,,,,,/Library/Preferences/com.apple.alf,allowdownloadsignedenabled,true,false,bool,=,Medium,ND
 6005,Network,Firewall : Disable captive portal,,Registry,,,,,/Library/Preferences/SystemConfiguration/com.apple.captive.control,Active,true,false,bool,=,Medium,ND

@@ -1,0 +1,2 @@
+ID,Category,Name,AssessmentStatus,Method,MethodOption,GetCommand,SetCommand,User,RegistryPath,RegistryItem,DefaultValue,RecommendedValue,TypeValue,Operator,Severity,Level
+1.2,"Install Updates, Patches and Additional Security Software",Ensure Auto Update Is Enabled,Automatically,Registry,,,,,/Library/Preferences/com.apple.SoftwareUpdate,AutomaticCheckEnabled,true,true,bool,=,Medium,1

@@ -1,0 +1,3 @@
+ID,Category,Name,AssessmentStatus,Method,MethodOption,GetCommand,SetCommand,User,RegistryPath,RegistryItem,DefaultValue,RecommendedValue,TypeValue,Operator,Severity,Level
+1001,Updates,Software Update : Automatically check new software updates,Automatically,Registry,,,,,/Library/Preferences/com.apple.SoftwareUpdate,AutomaticCheckEnabled,true,true,bool,=,Medium,1
+1002,Updates,Software Update : Automatically download new software updates,Automatically,Registry,,,,,/Library/Preferences/com.apple.SoftwareUpdate,AutomaticDownload,true,true,bool,=,Medium,1

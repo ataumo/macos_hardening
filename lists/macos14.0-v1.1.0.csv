@@ -1,0 +1,4 @@
+ID,Category,Name,AssessmentStatus,Method,MethodOption,GetCommand,SetCommand,User,RegistryPath,RegistryItem,DefaultValue,RecommendedValue,TypeValue,Operator,Severity,Level
+1.2,Updates,Ensure Auto Update Is Enabled,Automatically,Registry,,,,,/Library/Preferences/com.apple.SoftwareUpdate,AutomaticCheckEnabled,true,true,bool,=,Medium,1
+2.3.1.2,System Settings,Ensure AirPlay Receiver Is Disabled,Automatically,Registry,-currentHost,,,username,com.apple.controlcenter.plist,AirplayRecieverEnabled,true,false,bool,=,Medium,1
+4.1,Networks Configurations,Ensure Bonjour Advertising Services Is Disabled,Automatically,Registry,,,,,/Library/Preferences/com.apple.mDNSResponder.plist,NoMulticastAdvertisements,,true,bool,=,Medium,2

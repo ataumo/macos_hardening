@@ -20,6 +20,8 @@ ID,Category,Name,AssessmentStatus,Method,MethodOption,GetCommand,SetCommand,User
 2500,Login/Logout,Automatic login : Disable automatic login,Automatically,Registry,,,,,/Library/Preferences/com.apple.loginwindow,autoLoginUser,false,false,bool,,Medium,ND
 2600,Login/Logout,Console : Disable console logon from the logon screen,,Registry,,,,,/Library/Preferences/com.apple.loginwindow,DisableConsoleAccess,false,true,bool,=,Medium,ND
 2700,Login/Logout,Remote Login : Disable Remote Login,Automatically,systemsetup,,-getremotelogin,-setremotelogin,,,,off,off,,,,ND
+2800,Login/Logout,Disable password hint,Automatically,Registry,,,,,/Library/Preferences/com.apple.loginwindow,RetriesUntilHint,1,0,int,=,Low,1
+2800,Login/Logout,Disable the guest account,Automatically,Registry,,,,,/Library/Preferences/com.apple.loginwindow,GuestEnabled,true,false,bool,=,Low,1
 3000,User Preferences,iCloud : iCloud configuration,Manually,PlistBuddy,-c,,,,~/Library/Preferences/MobileMeAccounts.plist,Accounts:0:LoggedIn,ND,1,,=,High,2
 3001,User Preferences,iCloud : Enable Find my Mac,Manually,nvram,,,,,,fmm-mobileme-token-FMM,0,2,,=,High,ND
 3100,User Preferences,Bluetooth : Disable Bluetooth,Automatically,Registry,,,,,/Library/Preferences/com.apple.Bluetooth,ControllerPowerState,true,false,bool,=,Low,1
@@ -28,17 +30,21 @@ ID,Category,Name,AssessmentStatus,Method,MethodOption,GetCommand,SetCommand,User
 3200,User Preferences,Finder : Show hidden files in Finder,,Registry,,,,,/Library/Preferences/com.apple.finder,AppleShowAllFiles,NO,YES,string,=,Medium,ND
 3201,User Preferences,Finder : Display all files extentions,,Registry,,,,,NSGlobalDomain,AppleShowAllExtensions,false,true,bool,=,Medium,ND
 3202,User Preferences,Finder : Show status bar,,Registry,,,,,com.apple.finder,ShowStatusBar,false,true,bool,,Low,ND
+3300,User Preferences,Backup : Enable AutoBackup,Automatocally,Registry,,,,,/Library/Preferences/com.apple.TimeMachine.plist,AutoBackup,false,true,bool,=,Medium,2
 3400,User Preferences,Date and Time : Set time and date automatically,Automatically,systemsetup,,-getnetworktimeserver,-setnetworktimeserver,,,,,time.apple.com,,=,High,1
 3500,User Preferences,Sharing : Remote Apple Events,Automatically,systemsetup,,-getremoteappleevents,-setremoteappleevents,,,,off,off,,=,Medium,1
 3501,User Preferences,Sharing : Internet Sharing,Automatically,PlistBuddy,-c,,,,/Library/Preferences/SystemConfiguration/com.apple.nat.plist,NAT:Enabled,0,0,,=,Medium,1
 3502,User Preferences,Sharing : Disable Screen Sharing,Automatically,launchctl,,,,,,com.apple.screensharing,disable,disable,enable/disable,=,Medium,1
 3503,User Preferences,Sharing : Disable File Sharing,Automatically,launchctl,,,,,,com.apple.smbd,disable,disable,enable/disable,=,Medium,1
 3504,User Preferences,Sharing : Disable DVD or CD Sharing,Automatically,launchctl,,,,,,com.apple.ODSAgent,disable,disable,enable/disable,=,Medium,1
-3505,User Preferences,Sharing : Disable Media Sharing,Automatically,Registry,,,,username,com.apple.amp.mediasharingd,home-sharing-enabled,0,0,int,=,Medium,1
+3505,User Preferences,Sharing : Disable Media Sharing,Automatically,Registry,,,,username,com.apple.amp.mediasharingd,home-sharing-enabled,0,0,int,=,Medium,2
 3600,User Preferences,Location : Enable Location Services,Automatically,launchctl,,,,,,com.apple.locationd,disable,enable,enable/disable,=,Medium,2
+3601,User Preferences,Location : Enable Location Services by host,Automatically,Registry,,,,,/var/db/locationd/Library/Preferences/ByHost/com.apple.locationd,LocationServicesEnabled,,true,bool,=,Medium,2
+3602,User Preferences,Location : Show location icon in menu bar,Automatically,Registry,,,,,/Library/Preferences/com.apple.locationmenu.plist,ShowSystemServices,,true,bool,=,Medium,2
 3700,User Preferences,Diagnostic : Disable sending diagnostic and usage data to Apple,Automatically,Registry,,,,,/Library/Application\ Support/CrashReporter/DiagnosticMessagesHistory,AutoSubmit,,false,bool,=,Medium,2
 3701,User Preferences,Diagnostic : Share with App Developers,Automatically,Registry,,,,,/Library/Application\ Support/CrashReporter/DiagnosticMessagesHistory,ThirdPartyDataSubmit,,false,bool,=,Medium,ND
-3800,User Preferences,Advertisements : Limit Ad tracking and personalized Ads,Automatically,Registry,,,,,~/Library/Preferences/com.apple.AdLib,allowApplePersonalizedAdvertising,,false,bool,=,Medium,
+3800,User Preferences,Advertisements : Limit Ad tracking and personalized Ads,Automatically,Registry,,,,username,~/Library/Preferences/com.apple.AdLib,allowApplePersonalizedAdvertising,,false,bool,=,Medium,1
+3900,User Preferences,Show Wi-Fi status in the menu bar,Automatically,Registry,-currentHost,,,username,com.apple.controlcenter.plist,WiFi,,2,int,=,Low,1
 4000,Protections,Systeme intergrity protection : Enable Systeme intergrity protection,,csrutil,,status,,,,,enable,enable,enable/disable,=,High,ND
 4100,Protections,Gatekeeper : Enable Gatekeeper,,spctl,,--status,,,,,enable,enable,enable/disable,=,High,ND
 4200,Protections,Secure Keyboard Entry : Enable Secure Keyboard Entry in terminal.app,Automatically,Registry,,,,username,-app Terminal,SecureKeyboardEntry,false,true,bool,=,Medium,1
@@ -51,5 +57,19 @@ ID,Category,Name,AssessmentStatus,Method,MethodOption,GetCommand,SetCommand,User
 6005,Network,Firewall : Disable captive portal,,Registry,,,,,/Library/Preferences/SystemConfiguration/com.apple.captive.control,Active,true,false,bool,=,Medium,ND
 6100,Network,Remote Management : Disable Remote Management,,kickstart,,,,,,,,disable,bool,=,Medium,ND
 6200,Network,Power Nap : Disable Power Nap,Automatically,pmset,,,,,,womp,0,0,,=,Medium,1
+6300,Network,AirDrop : Disable AirDrop,Automatically,Registry,,,,,com.apple.NetworkBrowser,DisableAirDrop,false,true,bool,=,Low,1
+6400,Network,Airplay : Disable Airplay receiver,Automatically,Registry,-currentHost,,,username,com.apple.controlcenter.plist,AirplayRecieverEnabled,true,false,bool,=,Medium,1
+6500,Network,Disable password hint,Automatically,Registry,,,,,/Library/Preferences/com.apple.mDNSResponder.plist,NoMulticastAdvertisements,,true,bool,=,Medium,2
 7000,Cache,Disable Content Caching,Automatically,AssetCacheManagerUtil,,isActivated,,,,,deactivate ,deactivate,bool ,=,Medium,2
-8000,Siri,Disable Siri,Automatically,Registry,,,,username,com.apple.assistant.support.plist,'Assistant Enabled',,false,bool,=,Low,
+8000,Siri,Disable Siri,Automatically,Registry,,,,username,com.apple.assistant.support.plist,'Assistant Enabled',true,false,bool,=,Low,1
+8001,Siri,Disable Siri on Lockscreen,Automatically,Registry,,,,username,com.apple.Siri.plist,LockscreenEnabled,true,false,bool,=,Low,1
+8002,Siri,Show Siri on status bar,Automatically,Registry,,,,username,com.apple.Siri.plist,StatusMenuVisible,true,true,bool,=,Low,1
+8003,Siri,Disable voice trigger,Automatically,Registry,,,,username,com.apple.Siri.plist,VoiceTriggerUserEnabled,true,false,bool,=,Low,1
+8003,Siri,Disable type to Siri,Automatically,Registry,,,,username,com.apple.Siri.plist,TypeToSiriEnabled,true,false,bool,=,Low,1
+8004,Siri,Disable Siri diagnostics,Automatically,Registry,,,,username,com.apple.assistant.support.plist,'Siri Data Sharing Opt-In Status',,2,int,=,Low,1
+9000,Application,Safari: Disable auto-open safe files,Automatically,Registry,,,,,~/Library/Containers/com.apple.Safari/Data/Library/Preferences/com.apple.Safari,AutoOpenSafeDownloads,true,false,bool,=,Medium,1
+9001,Application,Safari: Warn when visiting a fraudulent site,Automatically,Registry,,,,username,~/Library/Containers/com.apple.Safari/Data/Library/Preferences/com.apple.Safari,WarnAboutFraudulentWebsites,true,true,bool,=,Medium,1
+9002,Application,Safari: Enable SafeBrowsing mode,Automatically,Registry,,,,,com.apple.Safari.SafeBrowsing.plist,SafeBrowsingEnabled,true,true,bool,=,Medium,1
+9003:1,Application,Safari: Block cross-site tracking,Automatically,Registry,,,,username,~/Library/Containers/com.apple.Safari/Data/Library/Preferences/com.apple.Safari,BlockStoragePolicy,,2,int,=,Medium,1
+9003:2,Application,Safari: Block cross-site tracking,Automatically,Registry,,,,username,~/Library/Containers/com.apple.Safari/Data/Library/Preferences/com.apple.Safari,WebKitPreferences.storageBlockingPolicy,,1,int,=,Medium,1
+9003:3,Application,Safari: Block cross-site tracking,Automatically,Registry,,,,username,~/Library/Containers/com.apple.Safari/Data/Library/Preferences/com.apple.Safari,WebKitStorageBlockingPolicy,,1,int,=,Medium,1

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>allow-root</key>
+	<true/>
+	<key>authenticate-user</key>
+	<true/>
+	<key>class</key>
+	<string>user</string>
+	<key>comment</key>
+	<string>Checked by the Admin framework when making changes to certain System Preferences.</string>
+	<key>created</key>
+	<real>660342698.57592201</real>
+	<key>group</key>
+	<string>admin</string>
+	<key>modified</key>
+	<real>660342698.57592201</real>
+	<key>session-owner</key>
+	<false/>
+	<key>shared</key>
+	<true/>
+	<key>timeout</key>
+	<integer>2147483647</integer>
+	<key>tries</key>
+	<integer>10000</integer>
+	<key>version</key>
+	<integer>0</integer>
+</dict>
+</plist>

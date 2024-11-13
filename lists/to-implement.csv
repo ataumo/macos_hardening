@@ -1,0 +1,1 @@
+9000,Security,User cannot log into another user's active and/or locked session,Automatically,Security,authorizationdb,read,write,,system.login.screensaver,authenticate-session-owner,,true,,=,Medium,1

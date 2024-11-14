@@ -1,0 +1,300 @@
+install_updates:
+  - title: "Install Updates, Patches and Additional Security Software"
+    sections:
+      - id: "1.1"
+        title: "Verify all Apple-provided software is current (Automated)"
+        profile_applicability: 
+          - "Level 1"
+        description: |
+          Software vendors release security patches and software updates for their products when security vulnerabilities are discovered. There is no simple way to complete this action without a network connection to an Apple software repository. Please ensure appropriate access for this control. This check is only for what Apple provides through software update. Software updates should be run at minimum every 30 days. Run the following command to verify when software update was previously run: 
+          $ sudo defaults read /Library/Preferences/com.apple.SoftwareUpdate | grep -e LastFullSuccessfulDate. 
+          The response should be in the last 30 days (Example): LastFullSuccessfulDate = "2020-07-30 12:45:25 +0000";
+        rationale: "It is important that these updates be applied in a timely manner to prevent unauthorized persons from exploiting the identified vulnerabilities."
+        impact: "Missing patches can lead to more exploit opportunities."
+        audit:
+          methods:
+            - type: "Graphical"
+              steps:
+                - "Open System Preferences"
+                - "Select Software Update"
+                - "Select Automatically check for updates to allow Software Update to check with Apple's servers for any outstanding updates"
+                - "Select Show Updates to verify that there are no software updates available"
+            - type: "Terminal"
+              command: "$ sudo softwareupdate -l"
+              response: "Software Update Tool Finding available software No new software available."
+        remediation:
+          methods:
+            - type: "Graphical"
+              steps:
+                - "Open System Preferences"
+                - "Select Software Update"
+                - "Select Show Updates"
+                - "Select Update All"
+            - type: "Terminal"
+              command:
+                - "$ sudo softwareupdate -l"
+                - "$ sudo softwareupdate -i -a"
+                - "$ sudo softwareupdate -i '<package name>'"
+                - example: |
+                    $ sudo softwareupdate -l 
+                    Software Update Tool
+                    Finding available software
+                    Software Update found the following new or updated software:
+                    * iTunesX-12.8.2
+                    iTunes (12.8.2), 273614K [recommended]
+                    $ sudo softwareupdate -i 'iTunesX-12.8.2'
+                    Software Update Tool
+                    Downloaded iTunes
+                    Installing iTunes
+                    Done with iTunes
+                    Done.
+
+      - id: "1.2"
+        title: "Ensure Auto Update Is Enabled (Automated)"
+        profile_applicability: 
+          - "Level 1"
+        description: "Auto Update verifies that your system has the newest security patches and software updates. If 'Automatically check for updates' is not selected, background updates for new malware definition files from Apple for XProtect and Gatekeeper will not occur."
+        rationale: "It is important that a system has the newest updates applied so as to prevent unauthorized persons from exploiting identified vulnerabilities."
+        impact: "Without automatic update, updates may not be made in a timely manner and the system will be exposed to additional risk."
+        audit:
+          methods:
+            - type: "Graphical"
+              steps:
+                - "Open System Preferences"
+                - "Select Software Update"
+                - "Select Advanced"
+                - "Verify that Check for updates is selected"
+            - type: "Terminal"
+              command: "$ sudo /usr/bin/defaults read /Library/Preferences/com.apple.SoftwareUpdate AutomaticCheckEnabled"
+              response: "1"
+        remediation:
+          methods:
+            - type: "Graphical"
+              steps:
+                - "Open System Preferences"
+                - "Select Software Update"
+                - "Select Advanced"
+                - "Select Check for updates"
+            - type: "Terminal"
+              command: "$ sudo /usr/bin/defaults write /Library/Preferences/com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true"
+            - type: "Profile"
+              steps:
+                - "Create or edit a configuration profile with the PayLoadType of com.apple.SoftwareUpdate"
+                - "Add the key AutomaticCheckEnabled"
+                - "Set the key to <true/>"
+
+      - id: "1.3"
+        title: "Ensure Download New Updates When Available is Enabled (Automated)"
+        profile_applicability: 
+          - "Level 1"
+        description: "In the GUI both 'Install macOS updates' and 'Install app updates from the App Store' are dependent on whether 'Download new updates when available' is selected."
+        rationale: "It is important that a system has the newest updates downloaded so that they can be applied."
+        impact: "If 'Download new updates when available' is not selected, updates may not be made in a timely manner and the system will be exposed to additional risk."
+        audit:
+          methods:
+            - type: "Graphical"
+              steps:
+                - "Open System Preferences"
+                - "Select Software Update"
+                - "Select Advanced"
+                - "Verify that Download new updates when available is selected"
+            - type: "Terminal"
+              command: "$ sudo /usr/bin/defaults read /Library/Preferences/com.apple.SoftwareUpdate AutomaticDownload"
+              response: "1"
+        remediation:
+          methods:
+            - type: "Graphical"
+              steps:
+                - "Open System Preferences"
+                - "Select Software Update"
+                - "Select Advanced"
+                - "Select Download new updates when available"
+            - type: "Terminal"
+              command: "$ sudo /usr/bin/defaults write /Library/Preferences/com.apple.SoftwareUpdate AutomaticDownload -bool true"
+            - type: "Profile"
+              steps:
+                - "Create or edit a configuration profile with the PayLoadType of com.apple.SoftwareUpdate"
+                - "Add the key AutomaticDownload"
+                - "Set the key to <true/>"
+
+      - id: "1.4"
+        title: "Ensure Installation of App Update Is Enabled (Automated)"
+        profile_applicability: 
+          - "Level 1"
+        description: "Ensure that application updates are installed after they are available from Apple. These updates do not require reboots or admin privileges for end users."
+        rationale: "Patches need to be applied in a timely manner to reduce the risk of vulnerabilities being exploited."
+        impact: "Unpatched software may be exploited."
+        audit:
+          methods:
+            - type: "Graphical"
+              steps:
+                - "Open System Preferences"
+                - "Select Software Updates"
+                - "Select Advanced"
+                - "Verify that Install app updates from the App Store is checked"
+            - type: "Terminal"
+              command: "$ sudo /usr/bin/defaults read /Library/Preferences/com.apple.commerce AutoUpdate"
+              response: "1"
+        remediation:
+          methods:
+            - type: "Graphical"
+              steps:
+                - "Open System Preferences"
+                - "Select Software Updates"
+                - "Select Advanced"
+                - "Select Install app updates from the App Store"
+            - type: "Terminal"
+              command: "$ sudo /usr/bin/defaults write /Library/Preferences/com.apple.commerce AutoUpdate -bool TRUE"
+            - type: "Profile"
+              steps:
+                - "Create or edit a configuration profile with the PayLoadType of com.apple.SoftwareUpdate"
+                - "Add the key AutomaticallyInstallAppUpdates"
+                - "Set the key to <true/>"
+
+      - id: "1.5"
+        title: "Ensure System Data Files and Security Updates Are Downloaded Automatically Is Enabled (Automated)"
+        profile_applicability: 
+          - "Level 1"
+        description: "Ensure that system and security updates are installed after they are available from Apple. This setting enables definition updates for XProtect and Gatekeeper."
+        rationale: "Patches need to be applied in a timely manner to reduce the risk of vulnerabilities being exploited."
+        impact: "Unpatched software may be exploited."
+        audit:
+          methods:
+            - type: "Graphical"
+              steps:
+                - "Open System Preferences"
+                - "Select Software Updates"
+                - "Select Advanced"
+                - "Verify that Install system data files and security updates is selected"
+            - type: "Terminal"
+              commands:
+                - "$ sudo /usr/bin/defaults read /Library/Preferences/com.apple.SoftwareUpdate ConfigDataInstall"
+                - "$ sudo /usr/bin/defaults read /Library/Preferences/com.apple.SoftwareUpdate CriticalUpdateInstall"
+              responses:
+                - "1"
+                - "1"
+        remediation:
+          methods:
+            - type: "Graphical"
+              steps:
+                - "Open System Preferences"
+                - "Select Software Updates"
+                - "Select Advanced"
+                - "Select Install system data files and security updates"
+            - type: "Terminal"
+              commands:
+                - "$ sudo /usr/bin/defaults write /Library/Preferences/com.apple.SoftwareUpdate ConfigDataInstall -bool true"
+                - "$ sudo /usr/bin/defaults write /Library/Preferences/com.apple.SoftwareUpdate CriticalUpdateInstall -bool true"
+            - type: "Profile"
+              steps:
+                - "Create or edit a configuration profile with the PayLoadType of com.apple.SoftwareUpdate"
+                - "Add the key ConfigDataInstall"
+                - "Set the key to <true/>"
+                - "Add the key CriticalUpdateInstall"
+                - "Set the key to <true/>"
+
+      - id: "1.6"
+        title: "Ensure Install of macOS Updates Is Enabled (Automated)"
+        profile_applicability: 
+          - "Level 1"
+        description: |
+          Ensure that macOS updates are installed automatically when available from Apple. This setting can be found under the Software Update > Advanced options in System Preferences.
+        rationale: "Patches need to be applied in a timely manner to reduce the risk of vulnerabilities being exploited."
+        impact: "Unpatched software may be exploited."
+        audit:
+          methods:
+            - type: "Graphical"
+              steps:
+                - "Open System Preferences"
+                - "Select Software Updates"
+                - "Select Advanced"
+                - "Verify that Install macOS updates is checked"
+            - type: "Terminal"
+              command: "$ sudo /usr/bin/defaults read /Library/Preferences/com.apple.SoftwareUpdate AutomaticDownload"
+              response: "1"
+        remediation:
+          methods:
+            - type: "Graphical"
+              steps:
+                - "Open System Preferences"
+                - "Select Software Updates"
+                - "Select Advanced"
+                - "Select Install macOS updates"
+            - type: "Terminal"
+              command: "$ sudo /usr/bin/defaults write /Library/Preferences/com.apple.SoftwareUpdate AutomaticDownload -bool true"
+            - type: "Profile"
+              steps:
+                - "Create or edit a configuration profile with the PayLoadType of com.apple.SoftwareUpdate"
+                - "Add the key AutomaticDownload"
+                - "Set the key to <true/>"
+System_Preferences:
+  section: "Recommendations related to configurable options in the System Preferences panel"
+
+  Bluetooth:
+    description: |
+      Bluetooth is a short-range, low-power wireless technology commonly integrated into portable computing and communication devices and peripherals. Bluetooth is best used in a secure environment where unauthorized users have no physical access near the Mac. If Bluetooth is used, it should be secured properly.
+    
+    2.1.1:
+      title: "Turn off Bluetooth, if no paired devices exist (Automated)"
+      profile_applicability:
+        - "Level 1"
+      description: |
+        Bluetooth devices use a wireless communications system that replaces the cables used by other peripherals to connect to a system. It is by design a peer-to-peer network technology and typically lacks centralized administration and security enforcement infrastructure.
+      rationale: |
+        Bluetooth is particularly susceptible to a diverse set of security vulnerabilities involving identity detection, location tracking, denial of service, unintended control and access of data and voice channels, and unauthorized device control and data access.
+      impact: |
+        There have been many Bluetooth exploits. While Bluetooth can be hardened, it does create a local wireless network that can be attacked to compromise both devices and information. Apple has emphasized the ease of use in Bluetooth devices so it is generally expected that Bluetooth will be used. Turning off Bluetooth with this control will also disable the Bluetooth sharing capability that is more strongly recommended against in control 2.4.7.
+      audit:
+        method:
+          - type: "Terminal"
+            commands:
+              - command: "$ sudo defaults read /Library/Preferences/com.apple.Bluetooth ControllerPowerState"
+                expected_response: "0"
+              - command: "$ sudo system_profiler SPBluetoothDataType 2>/dev/null | grep -m1 'Paired: Yes'"
+                expected_response: "Paired: Yes"
+      remediation:
+        methods:
+          - type: "Graphical"
+            steps:
+              - "Open System Preferences"
+              - "Select Bluetooth"
+              - "Select Turn Bluetooth Off"
+          - type: "Terminal"
+            commands:
+              - "$ sudo defaults write /Library/Preferences/com.apple.Bluetooth ControllerPowerState -int 0"
+              - "$ sudo killall -HUP bluetoothd"
+            note: "When using the terminal method to disable Bluetooth, the prescribed state will not be properly shown in the GUI. Use the terminal method of the audit to verify if Bluetooth is enabled/disabled."
+
+    2.1.2:
+      title: "Ensure Show Bluetooth Status in Menu Bar Is Enabled (Automated)"
+      profile_applicability:
+        - "Level 1"
+      description: |
+        By showing the Bluetooth status in the menu bar, a small Bluetooth icon is placed in the menu bar. This icon quickly shows the status of Bluetooth, and can allow the user to quickly turn Bluetooth on or off.
+      rationale: |
+        Enabling "Show Bluetooth status in menu bar" is a security awareness method that helps understand the current state of Bluetooth, including whether it is enabled, discoverable, what paired devices exist, and what paired devices are currently active.
+      impact: |
+        Bluetooth is a useful wireless tool that has been widely exploited when configured improperly. The user should have insight into the Bluetooth status.
+      audit:
+        method:
+          - type: "Graphical"
+            steps:
+              - "Open System Preferences"
+              - "Select Bluetooth"
+              - "Verify the Show Bluetooth in menu bar is selected"
+          - type: "Terminal"
+            command: "$ sudo -u <username> defaults read /Users/<username>/Library/Preferences/com.apple.systemuiserver menuExtras | grep Bluetooth.menu"
+            example_command: "$ sudo -u firstuser defaults read /Users/firstuser/Library/Preferences/com.apple.systemuiserver.plist menuExtras | grep Bluetooth.menu"
+            expected_response: '"/System/Library/CoreServices/Menu Extras/Bluetooth.menu"'
+      remediation:
+        methods:
+          - type: "Graphical"
+            steps:
+              - "Open System Preferences"
+              - "Select Bluetooth"
+              - "Select Show Bluetooth in menu bar"
+          - type: "Terminal"
+            command: "$ sudo -u <username> defaults write /Users/<username>/Library/Preferences/com.apple.systemuiserver menuExtras -array-add \"/System/Library/CoreServices/Menu Extras/Bluetooth.menu\""
+            example_command: "$ sudo -u firstuser defaults write /Users/firstuser/Library/Preferences/com.apple.systemuiserver menuExtras -array-add \"/System/Library/CoreServices/Menu Extras/Bluetooth.menu\""
+            note: "If the remediation is run multiple times multiple instances of the Bluetooth status will appear after rebooting the system. Command-click and drag the unwanted icons off the menu bar."
+            reference: "http://osxdaily.com/2012/01/05/remove-icons-menu-bar-mac-os-x/"
